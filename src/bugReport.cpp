@@ -1,6 +1,3 @@
-//
-// Created by emilyu on 2023/3/9.
-//
 #include "bugReport.h"
 
 void bugReport::printMsg(const string &msg) {
