@@ -12,8 +12,6 @@
 #define OP_T 5
 #define OP_R 6
 
-#include <vector>
-
 int engine(const std::vector<char *> &rawWords, int *options, std::vector<char *> &res);
 
 #endif //CMAKETEST_ENGINE_H

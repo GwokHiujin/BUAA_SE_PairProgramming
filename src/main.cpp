@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
         int options[8];
         vector<char*> rawWords;
         parser.parseParams(0, (const char**)argv, options, rawWords);
-        engine(rawWords, options, result);
+        //engine(rawWords, options, result);
     } catch (bugReport &e) {
         e.errorReport();
     }
