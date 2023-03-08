@@ -8,7 +8,7 @@ using namespace std;
 class paramException {
 public:
     paramException(): errorFlag(-1) { };
-    paramException(int flag): errorFlag(flag) { };
+    explicit paramException(int flag): errorFlag(flag) { };
 public:
     void errorReport() const;
 private:
