@@ -2,6 +2,7 @@
 #define CMAKETEST_PARAMPARSER_H
 
 using namespace std;
+extern std::vector<char*> rawWords;
 
 class paramParser {
     /* Parse the parameters, return a bit vector contains
@@ -13,7 +14,7 @@ private:
     static inline bool isSingleLetter(char c) ;
 public:
     int * parseParams(int argc, const char* argv[],
-                      int options[8], vector<char*> rawWords);
+                      int options[8]);
 };
 
 char paramParser::toLowercase(char c) {
@@ -28,7 +29,7 @@ bool paramParser::isSingleLetter(char c) {
 }
 
 int * paramParser::parseParams(int argc, const char* argv[],
-                               int options[8], vector<char*> rawWords) {
+                               int options[8]) {
     string srcFileName;
     // If detected, switch to 1;
     // if letter detected, switch to letter's ASCII

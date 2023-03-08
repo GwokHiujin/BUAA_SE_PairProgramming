@@ -14,6 +14,6 @@
 
 #include <vector>
 
-int engine(const std::vector<char *> &rawWords, int *options, std::vector<char *> &res);
+int engine(int *options, std::vector<char *> &res);
 
 #endif //CMAKETEST_ENGINE_H
