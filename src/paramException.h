@@ -24,17 +24,22 @@ void paramException::errorReport() const {
     switch (errorFlag) {
         case 1:
             cout << "ERROR: The target input file could not be found! " << endl;
+            break;
         case 2:
-            cout << "ERROR: You have entered conflicting parameters, "
-                    "please check the specific requirements." << endl;
+            cout << "ERROR: You have entered conflicting parameters, please check the specific requirements." << endl;
+            break;
         case 3:
             cout << "ERROR: The parameters are invalid. " << endl;
+            break;
         case 4:
             cout << "ERROR: Lack of parameters. " << endl;
+            break;
         case 5:
             cout << "ERROR: Too many parameters. " << endl;
+            break;
         default:
             cout << "Unknown ERROR: Please contact the author. " << endl;
+            break;
     }
 }
 
