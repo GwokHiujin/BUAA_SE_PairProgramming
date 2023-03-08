@@ -21,7 +21,7 @@ unordered_map<char *, int> words;
 unordered_map<int, char *> idxToWords;
 queue<int> spfaQueue;
 vector<int> dfsVector;
-vector<char *> result;
+vector<char *> resultVector;
 
 void getWordsIdx() {
     wordsLen = rawWords.size();
@@ -159,7 +159,7 @@ void spfa(char start) {
 //}
 
 int getResultPath(int *options) {
-    result.clear();
+    resultVector.clear();
     int maxLen = 0;
     int maxIdx = 0;
 
@@ -204,14 +204,14 @@ int getResultPath(int *options) {
     int tmp = maxIdx;
     while (path[tmp] != -1) {
         if (path[tmp] < wordsLen) {
-            result.push_back(idxToWords[path[tmp]]);
+            resultVector.push_back(idxToWords[path[tmp]]);
         }
         tmp = path[tmp];
     }
 
-    reverse(result.begin(), result.end());
-    if (result.size() < 2) {
-        result.clear();
+    reverse(resultVector.begin(), resultVector.end());
+    if (resultVector.size() < 2) {
+        resultVector.clear();
         return 0;
     }
     return maxLen;
@@ -240,9 +240,9 @@ void dfs(int s) {
             str += idxToWords[dfsVector[i]];
             str += " ";
         }
-        result.push_back((char *) str.data());
-        if(result.size() > 20000) {
-            result.clear();
+        resultVector.push_back((char *) str.data());
+        if(resultVector.size() > 20000) {
+            resultVector.clear();
             throw bugReport(BUG_CHAIN_TOO_LONG);
         }
     }
@@ -269,7 +269,7 @@ int engine(int *options, vector<char *> &res) {
     int ans = 0;    // max dist
     if (options[OP_N]) {
         getAllLinks();
-        ans = result.size();
+        ans = resultVector.size();
     } else {
         if (options[OP_H]) {
             spfa(options[OP_H]);
@@ -285,10 +285,10 @@ int engine(int *options, vector<char *> &res) {
             }
         }
     }
-    // max dist = ans, link = result
+    // max dist = ans, link = resultVector
     // problem here, has to decide whether the link contains 2 or more words
 
-    for (auto &i: result) {
+    for (auto &i: resultVector) {
         res.push_back(i);
     }
     return ans;
