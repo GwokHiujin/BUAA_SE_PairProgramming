@@ -1,4 +1,5 @@
 #include "engine.h"
+#include "bugReport.h"
 #include <cstring>
 #include <cstdio>
 #include <algorithm>
@@ -254,8 +255,9 @@ int engine(const vector<char *> &rawWords, int *options, vector<char *> &res) {
     getWordsIdx(rawWords);
     if (!options[OP_R]) {
         bool t = topsort(rawWords);
-        // error handling
-        // TODO
+        if(!t) {
+            throw bugReport(BUG_RING_EXIST);
+        }
     }
     getGraph(rawWords, options);
     if (options[OP_N]) {
