@@ -1,16 +1,13 @@
-<<<<<<< HEAD
-=======
 #include "engine.h"
 #include "bugReport.h"
 #include "paramParser.h"
->>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
+#include "engine.h"
 #include <cstring>
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
 #include <queue>
 #include <string>
-#include "engine.h"
 
 using namespace std;
 
@@ -161,11 +158,7 @@ void spfa(char start) {
 //    return maxLen;
 //}
 
-<<<<<<< HEAD
-int getResultPath(vector<char *> rawWords, int *options) {
-=======
 int getResultPath(int *options) {
->>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
     resultVector.clear();
     int maxLen = 0;
     int maxIdx = 0;
@@ -252,10 +245,7 @@ void dfs(int s) {
             resultVector.clear();
             throw bugReport(BUG_CHAIN_TOO_LONG);
         }
-<<<<<<< HEAD
         resultVector.push_back((char *) str.data());
-=======
->>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
     }
 }
 
@@ -298,11 +288,6 @@ int engine(int *options, vector<char *> &res) {
     }
     // max dist = ans, link = resultVector
     // problem here, has to decide whether the link contains 2 or more words
-<<<<<<< HEAD
-    //TODO
-=======
-
->>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
     for (auto &i: resultVector) {
         res.push_back(i);
     }

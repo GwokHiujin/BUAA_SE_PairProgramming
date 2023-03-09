@@ -13,8 +13,8 @@ bool paramParser::isSingleLetter(char c) {
     return false;
 }
 
-int * paramParser::parseParams(int argc, const char* argv[],
-                               int options[8]) {
+int *paramParser::parseParams(int argc, const char *argv[],
+                              int options[8]) {
     string srcFileName;
     // If detected, switch to 1;
     // if letter detected, switch to letter's ASCII
@@ -23,7 +23,7 @@ int * paramParser::parseParams(int argc, const char* argv[],
     int param_r = 0;
     FILE *srcFile;
 
-    for (int i = 0; i < argc; i++) {
+    for (int i = 0; i < argc; i++) {    // todo  argc? argc - 1?
         string curArg = argv[i];
         if (curArg[0] == '-') {
             // option
@@ -113,7 +113,7 @@ int * paramParser::parseParams(int argc, const char* argv[],
     if (suffixStr != "txt") {
         throw bugReport(FILE_INVALID);
     } else {
-        const char* path = srcFileName.data();
+        const char *path = srcFileName.data();
         srcFile = fopen(path, "r");
         if (srcFile == nullptr) {
             fclose(srcFile);
@@ -140,8 +140,8 @@ int * paramParser::parseParams(int argc, const char* argv[],
             // Divide word
             if (curWord.length() > 1) {
                 char *rawWord = nullptr;
-                curWord.copy(rawWord, curWord.length(), 0);
-                *(rawWord+curWord.length()) = '\0';
+                curWord.copy(rawWord, curWord.length(), 0); // todo: wrong here
+                *(rawWord + curWord.length()) = '\0';
                 rawWords.push_back(rawWord);
             }
             curWord.clear();
