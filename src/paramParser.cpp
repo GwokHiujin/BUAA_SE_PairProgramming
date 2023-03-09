@@ -138,7 +138,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
         } else {
             // Divide word
             if (curWord.length() > 1) {
-                char *rawWord = (char*)malloc(curWord.length() + 1);
+                char *rawWord = (char *) malloc(curWord.length() + 1);
                 int k = 0;
                 for (k = 0; k < curWord.length(); k++) {
                     rawWord[k] = curWord[k];
@@ -167,4 +167,22 @@ int *paramParser::parseParams(int argc, const char *argv[],
     options[6] = param_r;
 
     return options;
+}
+
+void paramParser::parseWords(string words) {
+    string curWord;
+    for (char c : words) {
+        if(isSingleLetter(c)) {
+            curWord += toLowercase(c);
+        } else {
+            char *rawWord = (char *) malloc(curWord.size() + 1);
+            int k = 0;
+            for (k = 0; k < curWord.size(); k++) {
+                rawWord[k] = curWord[k];
+            }
+            rawWord[k] = 0;
+            rawWords.push_back(rawWord);
+            curWord.clear();
+        }
+    }
 }

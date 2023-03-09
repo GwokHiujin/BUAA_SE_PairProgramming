@@ -261,7 +261,7 @@ void getAllLinks() {
     }
 }
 
-int engine(int *options, vector<string> &res) {
+int engine(int *options, char * res[]) {
     getWordsIdx();
     if (!options[OP_R]) {
         bool t = topsort();
@@ -274,8 +274,14 @@ int engine(int *options, vector<string> &res) {
     if (options[OP_N]) {
         getAllLinks();
         ans = resultVector.size();
-        for (auto &str: resultVector) {
-            res.push_back(str);
+        for(int i = 0; i<resultVector.size(); i++) {
+            char* tmp = (char *) malloc(resultVector[i].size() + 1);
+            int k = 0;
+            for (k = 0; k < resultVector[i].size(); k++) {
+                tmp[k] = resultVector[i][k];
+            }
+            tmp[k] = 0;
+            res[i] = tmp;
         }
     } else {
         if (options[OP_H]) {
@@ -283,9 +289,14 @@ int engine(int *options, vector<string> &res) {
             int t = getResultPath(options);
             if (ans < t) {
                 ans = t;
-                res.clear();
-                for (auto &str: resultVector) {
-                    res.push_back(str);
+                for(int i = 0; i<resultVector.size(); i++) {
+                    char* tmp = (char *) malloc(resultVector[i].size() + 1);
+                    int k = 0;
+                    for (k = 0; k < resultVector[i].size(); k++) {
+                        tmp[k] = resultVector[i][k];
+                    }
+                    tmp[k] = 0;
+                    res[i] = tmp;
                 }
             }
         } else {
@@ -296,9 +307,14 @@ int engine(int *options, vector<string> &res) {
                 int t = getResultPath(options);
                 if (ans < t) {
                     ans = t;
-                    res.clear();
-                    for (auto &str: resultVector) {
-                        res.push_back(str);
+                    for(int i = 0; i<resultVector.size(); i++) {
+                        char* tmp = (char *) malloc(resultVector[i].size() + 1);
+                        int k = 0;
+                        for (k = 0; k < resultVector[i].size(); k++) {
+                            tmp[k] = resultVector[i][k];
+                        }
+                        tmp[k] = 0;
+                        res[i] = tmp;
                     }
                 }
             }
