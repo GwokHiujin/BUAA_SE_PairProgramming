@@ -23,7 +23,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
     int param_r = 0;
     FILE *srcFile;
 
-    for (int i = 0; i < argc; i++) {    // todo  argc? argc - 1?
+    for (int i = 1; i < argc; i++) {
         string curArg = argv[i];
         if (curArg[0] == '-') {
             // option
@@ -108,6 +108,8 @@ int *paramParser::parseParams(int argc, const char *argv[],
         throw bugReport(PARAM_CONFLICT_CW);
     }
 
+    // cout << "read file name: " << srcFileName << endl;
+
     // Check file name
     string suffixStr = srcFileName.substr(srcFileName.find_last_of('.') + 1);
     if (suffixStr != "txt") {
@@ -125,10 +127,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
     char curChar;
     string curWord;
     bool flagBegin = true;
-    if (fgetc(srcFile) == EOF) {
-        fclose(srcFile);
-        throw bugReport(FILE_EMPTY);
-    }
+
     while ((curChar = fgetc(srcFile)) && curChar != EOF) {
         curChar = toLowercase(curChar);
         if (isSingleLetter(curChar)) {
@@ -139,9 +138,12 @@ int *paramParser::parseParams(int argc, const char *argv[],
         } else {
             // Divide word
             if (curWord.length() > 1) {
-                char *rawWord = nullptr;
-                curWord.copy(rawWord, curWord.length(), 0); // todo: wrong here
-                *(rawWord + curWord.length()) = '\0';
+                char *rawWord = (char*)malloc(curWord.length() + 1);
+                int k = 0;
+                for (k = 0; k < curWord.length(); k++) {
+                    rawWord[k] = curWord[k];
+                }
+                rawWord[k] = 0;
                 rawWords.push_back(rawWord);
             }
             curWord.clear();
@@ -151,6 +153,10 @@ int *paramParser::parseParams(int argc, const char *argv[],
 
     // Always remember to close the stream
     fclose(srcFile);
+
+    if (rawWords.empty()) {
+        throw bugReport(FILE_EMPTY);
+    }
 
     options[0] = param['n'];
     options[1] = param['w'];
