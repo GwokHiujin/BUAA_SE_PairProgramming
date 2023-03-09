@@ -261,7 +261,7 @@ void getAllLinks() {
     }
 }
 
-int engine(int *options, char * res[]) {
+int engine(int *options, char *res[]) {
     getWordsIdx();
     if (!options[OP_R]) {
         bool t = topsort();
@@ -274,8 +274,8 @@ int engine(int *options, char * res[]) {
     if (options[OP_N]) {
         getAllLinks();
         ans = resultVector.size();
-        for(int i = 0; i<resultVector.size(); i++) {
-            char* tmp = (char *) malloc(resultVector[i].size() + 1);
+        for (int i = 0; i < resultVector.size(); i++) {
+            char *tmp = (char *) malloc(resultVector[i].size() + 1);
             int k = 0;
             for (k = 0; k < resultVector[i].size(); k++) {
                 tmp[k] = resultVector[i][k];
@@ -285,18 +285,20 @@ int engine(int *options, char * res[]) {
         }
     } else {
         if (options[OP_H]) {
-            spfa(options[OP_H]);
-            int t = getResultPath(options);
-            if (ans < t) {
-                ans = t;
-                for(int i = 0; i<resultVector.size(); i++) {
-                    char* tmp = (char *) malloc(resultVector[i].size() + 1);
-                    int k = 0;
-                    for (k = 0; k < resultVector[i].size(); k++) {
-                        tmp[k] = resultVector[i][k];
+            if (options[OP_J] != options[OP_H]) {
+                spfa(options[OP_H]);
+                int t = getResultPath(options);
+                if (ans < t) {
+                    ans = t;
+                    for (int i = 0; i < resultVector.size(); i++) {
+                        char *tmp = (char *) malloc(resultVector[i].size() + 1);
+                        int k = 0;
+                        for (k = 0; k < resultVector[i].size(); k++) {
+                            tmp[k] = resultVector[i][k];
+                        }
+                        tmp[k] = 0;
+                        res[i] = tmp;
                     }
-                    tmp[k] = 0;
-                    res[i] = tmp;
                 }
             }
         } else {
@@ -307,8 +309,8 @@ int engine(int *options, char * res[]) {
                 int t = getResultPath(options);
                 if (ans < t) {
                     ans = t;
-                    for(int i = 0; i<resultVector.size(); i++) {
-                        char* tmp = (char *) malloc(resultVector[i].size() + 1);
+                    for (int i = 0; i < resultVector.size(); i++) {
+                        char *tmp = (char *) malloc(resultVector[i].size() + 1);
                         int k = 0;
                         for (k = 0; k < resultVector[i].size(); k++) {
                             tmp[k] = resultVector[i][k];

@@ -13,10 +13,10 @@ int main(int argc, char *argv[]) {
     try {
         paramParser parser = paramParser();
 
-        int options[8] = {0, 0, 1, 0, 'm', 0, 0, 0};
+        int options[8] = {0, 0, 1, 0, 'b', 'o', 1, 0};
         //const char * test[] = {"-n", "input.txt"};
         //parser.parseParams(2, test, options);
-        char tmp1[10] = "woo", tmp2[10] = "ooooooom", tmp3[10] = "md", tmp4[10] = "dab";
+        char tmp1[10] = "bo", tmp2[10] = "om", tmp3[10] = "md", tmp4[10] = "dab";   // TODO problem with cycle
         rawWords.push_back(tmp1);
         rawWords.push_back(tmp2);
         rawWords.push_back(tmp3);
