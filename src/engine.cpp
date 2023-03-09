@@ -21,7 +21,7 @@ unordered_map<char *, int> words;
 unordered_map<int, char *> idxToWords;
 queue<int> spfaQueue;
 vector<int> dfsVector;
-vector<char *> resultVector;
+vector<string> resultVector;
 
 void getWordsIdx() {
     wordsLen = rawWords.size();
@@ -90,7 +90,7 @@ bool topsort() {
             }
         }
     }
-    return tt == vertexNum;
+    return tt == vertexNum - 1;
 }
 
 void getGraph(int *options) {
@@ -123,7 +123,7 @@ void spfa(char start) {
             int j = e[i];
             if (dist[j] < dist[t] + w[i]) {
                 dist[j] = dist[t] + w[i];
-                path[j] = t;
+                path[t] = j;
                 if (!vis[j]) {
                     spfaQueue.push(j);
                 }
@@ -207,6 +207,7 @@ int getResultPath(int *options) {
             resultVector.push_back(idxToWords[path[tmp]]);
         }
         tmp = path[tmp];
+        if(tmp == 0x3f3f3f3f) break;
     }
 
     reverse(resultVector.begin(), resultVector.end());
@@ -230,22 +231,24 @@ void dfs(int s) {
     }
 
     // get ans
-    int tmpLen = dfsVector.size();
+    int tmpLen = dfsVector.size(), realLen = 0;
     string str;
-    if (tmpLen >= 2) {
-        for (int i = 0; i < tmpLen; i++) {
-            if (dfsVector[i] >= wordsLen) {
-                continue;
+    for (int i = 0; i < tmpLen; i++) {
+        if (dfsVector[i] >= wordsLen) {
+            continue;
+        }
+        realLen++;
+        str += idxToWords[dfsVector[i]];
+        str += " ";
+    }
+    if (realLen >= 2) {
+        if (resultVector.empty() || str != resultVector.back()) {
+            resultVector.push_back(str);
+            if (resultVector.size() > 20000) {
+                resultVector.clear();
+                throw bugReport(BUG_CHAIN_TOO_LONG);
             }
-            str += idxToWords[dfsVector[i]];
-            str += " ";
         }
-        resultVector.push_back((char *) str.data());
-        if(resultVector.size() > 20000) {
-            resultVector.clear();
-            throw bugReport(BUG_CHAIN_TOO_LONG);
-        }
-        resultVector.push_back((char *) str.data());
     }
 }
 
@@ -258,7 +261,7 @@ void getAllLinks() {
     }
 }
 
-int engine(int *options, vector<char *> &res) {
+int engine(int *options, vector<string> &res) {
     getWordsIdx();
     if (!options[OP_R]) {
         bool t = topsort();
@@ -266,7 +269,7 @@ int engine(int *options, vector<char *> &res) {
             throw bugReport(BUG_RING_EXIST);
         }
     }
-    getGraph( options);
+    getGraph(options);
     int ans = 0;    // max dist
     if (options[OP_N]) {
         getAllLinks();
@@ -280,7 +283,7 @@ int engine(int *options, vector<char *> &res) {
             for (int i = 0; i < 26; i++) {
                 char s = 'a' + i;
                 if (options[OP_J] == s) continue;
-                spfa( s);
+                spfa(s);
                 int t = getResultPath(options);
                 if (ans < t) ans = t;
             }

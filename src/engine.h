@@ -13,7 +13,8 @@
 #define OP_R 6
 
 #include <vector>
+#include <string>
 
-int engine(int *options, std::vector<char *> &res);
+int engine(int *options, std::vector<std::string> &res);
 
 #endif //CMAKETEST_ENGINE_H

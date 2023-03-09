@@ -2,21 +2,8 @@
 #define CMAKETEST_OUTPUT_H
 
 #include <vector>
+#include <string>
 
-void output(int *options, std::vector<char *> result, int ans) {
-    if (freopen("solution.txt", "r", stdout) == NULL) {
-        throw bugReport(FILE_FAIL_OUTPUT);
-    }
-    if (options[OP_N]) {
-        cout << ans << endl;
-        for (auto & i : result) {
-            cout << i << endl;
-        }
-    } else {
-        for (auto & i : result) {
-            cout << i << endl;
-        }
-    }
-}
+void output(const int *options, const std::vector<std::string>& result, int ans);
 
 #endif //CMAKETEST_OUTPUT_H
