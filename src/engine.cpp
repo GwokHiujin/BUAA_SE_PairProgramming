@@ -118,7 +118,7 @@ void spfa(char start) {
     while (!spfaQueue.empty()) {
         int t = spfaQueue.front();
         spfaQueue.pop();
-        vis[t] = false;
+        vis[t] = false; // TODO problem with self cycle
         for (int i = head[t]; ~i; i = ne[i]) {
             int j = e[i];
             if (dist[j] < dist[t] + w[i]) {
@@ -161,7 +161,7 @@ void spfa(char start) {
 int getResultPath(int *options) {
     resultVector.clear();
     int maxLen = 0;
-    int maxIdx = 0;
+    int maxIdx = -1;
 
     if (options[OP_T]) {
         if (options[OP_W]) {
@@ -169,7 +169,7 @@ int getResultPath(int *options) {
             maxLen = dist[maxIdx];
         } else if (options[OP_C]) {
             for (int i = 0; i < wordsLen; i++) {
-                if (rawWords[i][strlen(rawWords[i]) - 1] == options[OP_C]) {
+                if (rawWords[i][strlen(rawWords[i]) - 1] == options[OP_T]) {
                     if (dist[i] > 0) {
                         int t = dist[i] + strlen(rawWords[i]);
                         if (t > maxLen) {

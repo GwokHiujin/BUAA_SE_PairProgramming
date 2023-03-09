@@ -8,8 +8,8 @@
 #define OP_W 1
 #define OP_C 2
 #define OP_H 3
-#define OP_J 4
-#define OP_T 5
+#define OP_T 4
+#define OP_J 5
 #define OP_R 6
 
 int engine(int *options, char *res[]);
