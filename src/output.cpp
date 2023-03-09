@@ -4,18 +4,23 @@
 #include <cstdio>
 
 void output(const int *options, const std::vector<string> &result, int ans) {
-    if (freopen("solution.txt", "w", stdout) == nullptr) {
+    FILE *file = fopen("solution.txt", "w");
+
+    if (file == nullptr) {
         throw bugReport(FILE_FAIL_OUTPUT);
     }
 
     if (options[OP_N]) {
-        cout << ans << endl;
-        for (auto &i: result) {
-            cout << i << endl;
+        fprintf(file, "%d\n", ans);
+        int resultLen = result.size();
+        for(int i = 0; i<resultLen; i++) {
+            fprintf(file, "%s\n", result[i].c_str());
         }
     } else {
-        for (auto &i: result) {
-            cout << i << endl;
+        int resultLen = result.size();
+        for(int i = 0; i<resultLen; i++) {
+            fprintf(file, "%s\n", result[i].c_str());
         }
     }
+    fclose(file);
 }

@@ -123,7 +123,7 @@ void spfa(char start) {
             int j = e[i];
             if (dist[j] < dist[t] + w[i]) {
                 dist[j] = dist[t] + w[i];
-                path[t] = j;
+                path[j] = t;
                 if (!vis[j]) {
                     spfaQueue.push(j);
                 }
@@ -202,12 +202,12 @@ int getResultPath(int *options) {
     }
 
     int tmp = maxIdx;
-    while (path[tmp] != -1) {
-        if (path[tmp] < wordsLen) {
-            resultVector.push_back(idxToWords[path[tmp]]);
+    while (tmp != -1) {
+        if (tmp < wordsLen) {
+            resultVector.push_back(idxToWords[tmp]);
         }
         tmp = path[tmp];
-        if(tmp == 0x3f3f3f3f) break;
+        if (tmp == 0x3f3f3f3f) break;   // to prevent accident
     }
 
     reverse(resultVector.begin(), resultVector.end());
@@ -274,25 +274,38 @@ int engine(int *options, vector<string> &res) {
     if (options[OP_N]) {
         getAllLinks();
         ans = resultVector.size();
+        for (auto &str: resultVector) {
+            res.push_back(str);
+        }
     } else {
         if (options[OP_H]) {
             spfa(options[OP_H]);
             int t = getResultPath(options);
-            if (ans < t) ans = t;
+            if (ans < t) {
+                ans = t;
+                res.clear();
+                for (auto &str: resultVector) {
+                    res.push_back(str);
+                }
+            }
         } else {
             for (int i = 0; i < 26; i++) {
                 char s = 'a' + i;
                 if (options[OP_J] == s) continue;
                 spfa(s);
                 int t = getResultPath(options);
-                if (ans < t) ans = t;
+                if (ans < t) {
+                    ans = t;
+                    res.clear();
+                    for (auto &str: resultVector) {
+                        res.push_back(str);
+                    }
+                }
             }
         }
     }
     // max dist = ans, link = resultVector
     // problem here, has to decide whether the link contains 2 or more words
-    for (auto &i: resultVector) {
-        res.push_back(i);
-    }
+
     return ans;
 }
