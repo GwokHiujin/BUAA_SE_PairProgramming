@@ -4,6 +4,6 @@
 #include <vector>
 #include <string>
 
-void output(const int *options, const std::vector<std::string>& result, int ans);
+void output(const int *options, char* result[], int ans);
 
 #endif //CMAKETEST_OUTPUT_H

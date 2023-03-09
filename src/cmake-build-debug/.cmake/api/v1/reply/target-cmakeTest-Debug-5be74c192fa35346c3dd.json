@@ -59,7 +59,8 @@
 				3,
 				6,
 				7,
-				8
+				8,
+				10
 			]
 		}
 	],
@@ -100,7 +101,8 @@
 				3,
 				6,
 				7,
-				8
+				8,
+				10
 			]
 		},
 		{
@@ -110,7 +112,8 @@
 				1,
 				2,
 				4,
-				5
+				5,
+				9
 			]
 		}
 	],
@@ -164,6 +167,17 @@
 			"backtrace" : 1,
 			"compileGroupIndex" : 0,
 			"path" : "output.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 1,
+			"path" : "api.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 1,
+			"compileGroupIndex" : 0,
+			"path" : "api.cpp",
 			"sourceGroupIndex" : 0
 		}
 	],

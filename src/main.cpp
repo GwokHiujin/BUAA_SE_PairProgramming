@@ -6,7 +6,7 @@
 #include "output.h"
 
 using namespace std;
-vector<string> result;
+char* result[20005];
 vector<char *> rawWords;
 
 int main(int argc, char *argv[]) {

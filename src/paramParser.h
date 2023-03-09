@@ -2,6 +2,7 @@
 #define CMAKETEST_PARAMPARSER_H
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ private:
 public:
     int * parseParams(int argc, const char* argv[],
                       int options[8]);
+    void parseWords(string words);
 };
 
 #endif //CMAKETEST_PARAMPARSER_H
