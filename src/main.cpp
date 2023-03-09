@@ -13,8 +13,7 @@ int main(int argc, char *argv[]) {
     try {
         paramParser parser = paramParser();
         int options[8];
-        const char * test[] = {"-n", "input.txt"};
-        parser.parseParams(2, test, options);
+        parser.parseParams(argc, (const char**) argv, options);
         int ans = engine(options, result);
         output(options, result, ans);
     } catch (bugReport &e) {
