@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+#include "engine.h"
+#include "bugReport.h"
+#include "paramParser.h"
+>>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
 #include <cstring>
 #include <algorithm>
 #include <vector>
@@ -20,7 +26,7 @@ queue<int> spfaQueue;
 vector<int> dfsVector;
 vector<char *> resultVector;
 
-void getWordsIdx(vector<char *> rawWords) {
+void getWordsIdx() {
     wordsLen = rawWords.size();
     vertexNum = wordsLen + 26;
     int tmp = 0;
@@ -45,7 +51,7 @@ void addEdge(int from, int to, int weight) {
 }
 
 // true: no ring, false: has ring
-bool topsort(vector<char *> rawWords) {
+bool topsort() {
     // check for word as %...%
     int countHET[26];  //   count words whose head equals tail
     memset(countHET, 0, sizeof(countHET));
@@ -90,7 +96,7 @@ bool topsort(vector<char *> rawWords) {
     return tt == vertexNum;
 }
 
-void getGraph(vector<char *> rawWords, int *options) {
+void getGraph(int *options) {
     // rebuild graph
     initGraph();
     for (int i = 0; i < wordsLen; i++) {
@@ -103,7 +109,7 @@ void getGraph(vector<char *> rawWords, int *options) {
     }
 }
 
-void spfa(vector<char *> rawWords, char start) {
+void spfa(char start) {
     memset(vis, 0, sizeof(vis));
     memset(dist, -1, sizeof(dist));
     memset(path, 0x3f, sizeof(dist));
@@ -155,7 +161,11 @@ void spfa(vector<char *> rawWords, char start) {
 //    return maxLen;
 //}
 
+<<<<<<< HEAD
 int getResultPath(vector<char *> rawWords, int *options) {
+=======
+int getResultPath(int *options) {
+>>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
     resultVector.clear();
     int maxLen = 0;
     int maxIdx = 0;
@@ -235,12 +245,21 @@ void dfs(int s) {
                 continue;
             }
             str += idxToWords[dfsVector[i]];
+            str += " ";
         }
         resultVector.push_back((char *) str.data());
+        if(resultVector.size() > 20000) {
+            resultVector.clear();
+            throw bugReport(BUG_CHAIN_TOO_LONG);
+        }
+<<<<<<< HEAD
+        resultVector.push_back((char *) str.data());
+=======
+>>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
     }
 }
 
-void getAllLinks(vector<char *> rawWords) {
+void getAllLinks() {
     for (int i = wordsLen; i < vertexNum; i++) {
         memset(vis, 0, sizeof(vis));
         dfsVector.clear();
@@ -249,46 +268,43 @@ void getAllLinks(vector<char *> rawWords) {
     }
 }
 
-int engine(const vector<char *> &rawWords, int *options, vector<char *> &res) {
-    getWordsIdx(rawWords);
+int engine(int *options, vector<char *> &res) {
+    getWordsIdx();
     if (!options[OP_R]) {
-        bool t = topsort(rawWords);
-        if(!t) {
+        bool t = topsort();
+        if (!t) {
             throw bugReport(BUG_RING_EXIST);
         }
     }
-    getGraph(rawWords, options);
+    getGraph( options);
+    int ans = 0;    // max dist
     if (options[OP_N]) {
-        getAllLinks(rawWords);
+        getAllLinks();
+        ans = resultVector.size();
     } else {
-        int ans = 0;    // max dist
         if (options[OP_H]) {
-            spfa(rawWords, options[OP_H]);
-//            int t = getResultNum(rawWords, options);
-//            if (ans < t) {
-//                getResultPath(rawWords, options);
-//            }
-            int t = getResultPath(rawWords, options);
+            spfa(options[OP_H]);
+            int t = getResultPath(options);
             if (ans < t) ans = t;
         } else {
             for (int i = 0; i < 26; i++) {
                 char s = 'a' + i;
                 if (options[OP_J] == s) continue;
-                spfa(rawWords, s);
-//                int t = getResultNum(rawWords, options);
-//                if (ans < t) {
-//                    getResultPath(rawWords, options);
-//                }
-                int t = getResultPath(rawWords, options);
+                spfa( s);
+                int t = getResultPath(options);
                 if (ans < t) ans = t;
             }
         }
     }
     // max dist = ans, link = resultVector
     // problem here, has to decide whether the link contains 2 or more words
+<<<<<<< HEAD
     //TODO
+=======
+
+>>>>>>> bf216d5393ca4be274dc18c3658a7ba634c6871d
     for (auto &i: resultVector) {
         res.push_back(i);
     }
-    return 1;
+    return ans;
 }

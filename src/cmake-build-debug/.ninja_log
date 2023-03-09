@@ -1,7 +1,0 @@
-# ninja log v5
-2	493	6999944806888411	cmakeTest.exe	183c69947152a18c
-2	933	6999944674339202	CMakeFiles/cmakeTest.dir/main.cpp.obj	1c03b845058855a
-3	634	6999945055554667	build.ninja	2fb958f79ba2567a
-2	1402	6999943837122035	CMakeFiles/cmakeTest.dir/engine.cpp.obj	faf0794a8fbed154
-2	868	6999945055554667	build.ninja	2fb958f79ba2567a
-3	1154	6999945067595337	CMakeFiles/cmakeTest.dir/main.cpp.obj	1c03b845058855a
