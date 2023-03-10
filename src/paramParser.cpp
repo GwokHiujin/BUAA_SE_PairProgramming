@@ -1,6 +1,8 @@
 #include <string>
+#include <queue>
 #include "paramParser.h"
 #include "bugReport.h"
+#include <algorithm>
 
 char paramParser::toLowercase(char c) {
     return ('a' <= c && c <= 'z') ? c : (c - 'A' + 'a');
@@ -185,4 +187,5 @@ void paramParser::parseWords(string words) {
             curWord.clear();
         }
     }
+    rawWords.erase(unique(rawWords.begin(), rawWords.end()), rawWords.end());
 }

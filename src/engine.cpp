@@ -102,7 +102,7 @@ void getGraph(int *options) {
             if (rawWords[i][0] == OP_J) continue;
         }
         int w1 = options[OP_W] ? 1 : strlen(rawWords[i]);
-        int w2 = ((wordsLen + rawWords[i][strlen(rawWords[i]) - 1] - 'a') == (wordsLen + rawWords[i][0] - 'a'));
+        int w2 = ((rawWords[i][strlen(rawWords[i]) - 1]) == (rawWords[i][0]));
         if (w2) {
             selfCircle[rawWords[i][0] - 'a'].push_back(rawWords[i]);
         }
@@ -282,17 +282,26 @@ int getResultPath(int *options) {
         reverse(resultVector.begin(), resultVector.end());
     }
     vector<string> tmpResult;
+    if (!resultVector.empty()) {
+        string tmp = resultVector[0];
+        if (!selfCircle[tmp[0] - 'a'].empty()) {
+            for (auto &j: selfCircle[tmp[0] - 'a']) {
+                tmpResult.push_back(j);
+            }
+        }
+    }
     for (auto &tmp: resultVector) {
-        if (tmp[0] != tmp[tmp.size() - 1]) {
+        if (tmp[0] != tmp[tmp.size() - 1] && tmp != tmpResult.back()) {
             tmpResult.push_back(tmp);
         }
         if (!selfCircle[tmp[tmp.size() - 1] - 'a'].empty()) {
-            for (auto &j: selfCircle[tmp[tmp.size() - 1]-'a']) {
+            for (auto &j: selfCircle[tmp[tmp.size() - 1] - 'a']) {
                 tmpResult.push_back(j);
             }
         }
     }
     resultVector.clear();
+    tmpResult.erase(unique(tmpResult.begin(), tmpResult.end()), tmpResult.end());
     maxLen = 0;
     for (auto &i: tmpResult) {
         if (options[OP_W]) {
