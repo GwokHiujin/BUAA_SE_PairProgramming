@@ -1,23 +1,32 @@
 #include "api.h"
 #include "paramParser.h"
 #include "engine.h"
+#include <ctime>
 
-int gen_chains_all(string words, int len, char *result[]) {
+double timeCost;
+
+__declspec(dllexport) int gen_chains_all(string words, int len, char *result[]) {
     rawWords.clear();
     paramParser parser = paramParser();
+
+    clock_t t1 = clock();
     parser.parseWords(words);
 
     int options[8] = {0};
     options[OP_N] = 1;
     len = engine(options, result);
 
+    clock_t t2 = clock();
+    timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
     return len;
 }
 
-int gen_chain_word(string words, int len, char *result[], char head, char tail, char prohibit,
+__declspec(dllexport) int gen_chain_word(string words, int len, char *result[], char head, char tail, char prohibit,
                    bool enable_loop) {
     rawWords.clear();
     paramParser parser = paramParser();
+
+    clock_t t1 = clock();
     parser.parseWords(words);
 
     int options[8] = {0};
@@ -28,13 +37,17 @@ int gen_chain_word(string words, int len, char *result[], char head, char tail, 
     options[OP_R] = enable_loop;
     len = engine(options, result);
 
+    clock_t t2 = clock();
+    timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
     return len;
 }
 
-int gen_chain_char(string words, int len, char *result[], char head, char tail, char prohibit,
+__declspec(dllexport) int gen_chain_char(string words, int len, char *result[], char head, char tail, char prohibit,
                    bool enable_loop) {
     rawWords.clear();
     paramParser parser = paramParser();
+
+    clock_t t1 = clock();
     parser.parseWords(words);
 
     int options[8] = {0};
@@ -45,5 +58,11 @@ int gen_chain_char(string words, int len, char *result[], char head, char tail, 
     options[OP_R] = enable_loop;
     len = engine(options, result);
 
+    clock_t t2 = clock();
+    timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
     return len;
+}
+
+__declspec(dllexport) double get_execution_time() {
+    return timeCost;
 }
