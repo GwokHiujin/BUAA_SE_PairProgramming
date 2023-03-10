@@ -3,6 +3,8 @@
 #include "paramParser.h"
 #include "bugReport.h"
 #include <algorithm>
+#include <unordered_set>
+unordered_set<string> tmpUniqueRawWord;
 
 char paramParser::toLowercase(char c) {
     return ('a' <= c && c <= 'z') ? c : (c - 'A' + 'a');
@@ -169,6 +171,24 @@ int *paramParser::parseParams(int argc, const char *argv[],
     options[6] = param_r;
 
     return options;
+}
+
+void paramParser::uniqueWords(string words) {
+    for(auto & rawWord : rawWords) {
+        if(!tmpUniqueRawWord.count(rawWord)) {
+            tmpUniqueRawWord.insert(rawWord);
+        }
+    }
+    rawWords.clear();
+    for(auto str:tmpUniqueRawWord) {
+        char *rawWord = (char *) malloc(str.size() + 1);
+        int k = 0;
+        for (k = 0; k < str.size(); k++) {
+            rawWord[k] = str[k];
+        }
+        rawWord[k] = 0;
+        rawWords.push_back(rawWord);
+    }
 }
 
 void paramParser::parseWords(string words) {

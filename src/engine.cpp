@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <queue>
 #include <string>
 
@@ -23,6 +24,9 @@ queue<int> spfaQueue;
 vector<int> dfsVector;
 vector<string> resultVector;
 vector<string> selfCircle[26];
+vector<string> tmpResult;
+unordered_set<string> tmpUniqueResult;
+
 
 void getWordsIdx() {
     wordsLen = rawWords.size();
@@ -281,7 +285,6 @@ int getResultPath(int *options) {
         }
         reverse(resultVector.begin(), resultVector.end());
     }
-    vector<string> tmpResult;
     if (!resultVector.empty()) {
         string tmp = resultVector[0];
         if (!selfCircle[tmp[0] - 'a'].empty()) {
@@ -293,24 +296,29 @@ int getResultPath(int *options) {
     for (auto &tmp: resultVector) {
         if (tmp[0] != tmp[tmp.size() - 1] && tmp != tmpResult.back()) {
             tmpResult.push_back(tmp);
-        }
-        if (!selfCircle[tmp[tmp.size() - 1] - 'a'].empty()) {
-            for (auto &j: selfCircle[tmp[tmp.size() - 1] - 'a']) {
-                tmpResult.push_back(j);
+            if (!selfCircle[tmp[tmp.size() - 1] - 'a'].empty()) {
+                for (auto &j: selfCircle[tmp[tmp.size() - 1] - 'a']) {
+                    tmpResult.push_back(j);
+                }
             }
         }
     }
-    resultVector.clear();
-    tmpResult.erase(unique(tmpResult.begin(), tmpResult.end()), tmpResult.end());
+
     maxLen = 0;
-    for (auto &i: tmpResult) {
-        if (options[OP_W]) {
-            maxLen += 1;
-        } else if (options[OP_C]) {
-            maxLen += i.size();
+    resultVector.clear();
+    // unique
+    for (auto tmp: tmpResult) {
+        if (!tmpUniqueResult.count(tmp)) {
+            tmpUniqueResult.insert(tmp);
+            if (options[OP_W]) {
+                maxLen += 1;
+            } else if (options[OP_C]) {
+                maxLen += tmp.size();
+            }
+            resultVector.push_back(tmp);
         }
-        resultVector.push_back(i);
     }
+
     if (resultVector.size() < 2) {
         resultVector.clear();
         return 0;
