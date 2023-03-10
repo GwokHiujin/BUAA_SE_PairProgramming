@@ -15,7 +15,7 @@ using namespace std;
 
 int head[MAX_V], e[MAX_E], ne[MAX_E], w[MAX_E], dist[MAX_V], path[MAX_V];    // e = edge, ne = next, w = weight
 int topsortQueue[MAX_V], din[MAX_V];
-int idx, wordsLen, vertexNum;
+int idx, wordsLen, vertexNum, ansWithLoop;
 bool vis[MAX_V];
 unordered_map<char *, int> words;
 unordered_map<int, char *> idxToWords;
@@ -118,7 +118,7 @@ void spfa(char start) {
     while (!spfaQueue.empty()) {
         int t = spfaQueue.front();
         spfaQueue.pop();
-        vis[t] = false; // TODO problem with self cycle
+        vis[t] = false; // TODO problem with cycle(self + whole)
         for (int i = head[t]; ~i; i = ne[i]) {
             int j = e[i];
             if (dist[j] < dist[t] + w[i]) {
@@ -126,6 +126,7 @@ void spfa(char start) {
                 path[j] = t;
                 if (!vis[j]) {
                     spfaQueue.push(j);
+                    vis[j] = true;
                 }
             }
         }
@@ -158,18 +159,98 @@ void spfa(char start) {
 //    return maxLen;
 //}
 
+void dfsLoop(int s, int *options) {
+    // get ans
+    int tmpLen = dfsVector.size(), realLen = 0;
+    int tmpAns = 0, lastChar = 0;
+    for (int i = 0; i < tmpLen; i++) {
+        if (dfsVector[i] >= wordsLen) {
+            continue;
+        }
+        realLen++;
+        lastChar = idxToWords[dfsVector[i]][strlen(idxToWords[dfsVector[i]]) - 1];
+        if (options[OP_W]) {
+            tmpAns++;
+        } else {
+            tmpAns += strlen(idxToWords[dfsVector[i]]);
+        }
+    }
+    if (realLen >= 2 && (!options[OP_T] || options[OP_T] == lastChar)) {
+        if (ansWithLoop < tmpAns) {
+            ansWithLoop = tmpAns;
+            realLen = 0;
+            for (int i = 0; i < tmpLen; i++) {
+                if (dfsVector[i] >= wordsLen) {
+                    continue;
+                }
+                path[realLen++] = dfsVector[i];
+            }
+        }
+    }
+
+    for (int i = head[s]; ~i; i = ne[i]) {
+        int j = e[i];
+        if (j >= wordsLen || !vis[j]) {
+            vis[j] = true;
+            dfsVector.push_back(j);
+            dfsLoop(j, options);
+            dfsVector.pop_back();
+            vis[j] = false;
+        }
+    }
+}
+
+void maxDistWithLoop(char start, int *options) {    // for -r
+    ansWithLoop = 0;
+    memset(vis, 0, sizeof(vis));
+    memset(path, 0x3f, sizeof(dist));
+    dfsVector.clear();
+    dfsVector.push_back(start - 'a' + wordsLen);
+    dfsLoop(start - 'a' + wordsLen, options);
+}
+
 int getResultPath(int *options) {
-    resultVector.clear();
     int maxLen = 0;
     int maxIdx = -1;
-
-    if (options[OP_T]) {
-        if (options[OP_W]) {
-            maxIdx = wordsLen + options[OP_T] - 'a';
-            maxLen = dist[maxIdx];
-        } else if (options[OP_C]) {
-            for (int i = 0; i < wordsLen; i++) {
-                if (rawWords[i][strlen(rawWords[i]) - 1] == options[OP_T]) {
+    resultVector.clear();
+    if (options[OP_R]) {
+        for (int i = 0; i < 20005; i++) {
+            if (path[i] == 0x3f3f3f3f) break;
+            resultVector.push_back(idxToWords[path[i]]);
+            if (options[OP_W]) {
+                maxLen += 1;
+            } else if (options[OP_C]) {
+                maxLen += strlen(idxToWords[path[i]]);
+            }
+        }
+    } else {
+        if (options[OP_T]) {
+            if (options[OP_W]) {
+                maxIdx = wordsLen + options[OP_T] - 'a';
+                maxLen = dist[maxIdx];
+            } else if (options[OP_C]) {
+                for (int i = 0; i < wordsLen; i++) {
+                    if (rawWords[i][strlen(rawWords[i]) - 1] == options[OP_T]) {
+                        if (dist[i] > 0) {
+                            int t = dist[i] + strlen(rawWords[i]);
+                            if (t > maxLen) {
+                                maxLen = t;
+                                maxIdx = i;
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if (options[OP_W]) {
+                for (int i = wordsLen; i < vertexNum; i++) {
+                    if (dist[i] > maxLen) {
+                        maxLen = dist[i];
+                        maxIdx = i;
+                    }
+                }
+            } else if (options[OP_C]) {
+                for (int i = 0; i < wordsLen; i++) {
                     if (dist[i] > 0) {
                         int t = dist[i] + strlen(rawWords[i]);
                         if (t > maxLen) {
@@ -180,37 +261,17 @@ int getResultPath(int *options) {
                 }
             }
         }
-    } else {
-        if (options[OP_W]) {
-            for (int i = wordsLen; i < vertexNum; i++) {
-                if (dist[i] > maxLen) {
-                    maxLen = dist[i];
-                    maxIdx = i;
-                }
-            }
-        } else if (options[OP_C]) {
-            for (int i = 0; i < wordsLen; i++) {
-                if (dist[i] > 0) {
-                    int t = dist[i] + strlen(rawWords[i]);
-                    if (t > maxLen) {
-                        maxLen = t;
-                        maxIdx = i;
-                    }
-                }
-            }
-        }
-    }
 
-    int tmp = maxIdx;
-    while (tmp != -1) {
-        if (tmp < wordsLen) {
-            resultVector.push_back(idxToWords[tmp]);
+        int tmp = maxIdx;
+        while (tmp != -1) {
+            if (tmp < wordsLen) {
+                resultVector.push_back(idxToWords[tmp]);
+            }
+            tmp = path[tmp];
+            if (tmp == 0x3f3f3f3f) break;   // to prevent accident
         }
-        tmp = path[tmp];
-        if (tmp == 0x3f3f3f3f) break;   // to prevent accident
+        reverse(resultVector.begin(), resultVector.end());
     }
-
-    reverse(resultVector.begin(), resultVector.end());
     if (resultVector.size() < 2) {
         resultVector.clear();
         return 0;
@@ -218,18 +279,7 @@ int getResultPath(int *options) {
     return maxLen;
 }
 
-void dfs(int s) {
-    for (int i = head[s]; ~i; i = ne[i]) {
-        int j = e[i];
-        if (!vis[j]) {
-            vis[j] = true;
-            dfsVector.push_back(s);
-            dfs(j);
-            dfsVector.pop_back();
-            vis[j] = false;
-        }
-    }
-
+void dfsLink(int s) {
     // get ans
     int tmpLen = dfsVector.size(), realLen = 0;
     string str;
@@ -250,6 +300,17 @@ void dfs(int s) {
             }
         }
     }
+
+    for (int i = head[s]; ~i; i = ne[i]) {
+        int j = e[i];
+        if (j >= wordsLen || !vis[j]) {
+            vis[j] = true;
+            dfsVector.push_back(j);
+            dfsLink(j);
+            dfsVector.pop_back();
+            vis[j] = false;
+        }
+    }
 }
 
 void getAllLinks() {
@@ -257,7 +318,7 @@ void getAllLinks() {
         memset(vis, 0, sizeof(vis));
         dfsVector.clear();
         dfsVector.push_back(i);
-        dfs(i);
+        dfsLink(i);
     }
 }
 
@@ -286,7 +347,11 @@ int engine(int *options, char *res[]) {
     } else {
         if (options[OP_H]) {
             if (options[OP_J] != options[OP_H]) {
-                spfa(options[OP_H]);
+                if (options[OP_R]) {
+                    maxDistWithLoop(options[OP_H], options);
+                } else {
+                    spfa(options[OP_H]);
+                }
                 int t = getResultPath(options);
                 if (ans < t) {
                     ans = t;
@@ -305,18 +370,22 @@ int engine(int *options, char *res[]) {
             for (int i = 0; i < 26; i++) {
                 char s = 'a' + i;
                 if (options[OP_J] == s) continue;
-                spfa(s);
+                if (options[OP_R]) {
+                    maxDistWithLoop(s, options);
+                } else {
+                    spfa(s);
+                }
                 int t = getResultPath(options);
                 if (ans < t) {
                     ans = t;
-                    for (int i = 0; i < resultVector.size(); i++) {
-                        char *tmp = (char *) malloc(resultVector[i].size() + 1);
+                    for (int j = 0; j < resultVector.size(); j++) {
+                        char *tmp = (char *) malloc(resultVector[j].size() + 1);
                         int k = 0;
-                        for (k = 0; k < resultVector[i].size(); k++) {
-                            tmp[k] = resultVector[i][k];
+                        for (k = 0; k < resultVector[j].size(); k++) {
+                            tmp[k] = resultVector[j][k];
                         }
                         tmp[k] = 0;
-                        res[i] = tmp;
+                        res[j] = tmp;
                     }
                 }
             }
