@@ -22,6 +22,7 @@ unordered_map<int, char *> idxToWords;
 queue<int> spfaQueue;
 vector<int> dfsVector;
 vector<string> resultVector;
+vector<string> selfCircle[26];
 
 void getWordsIdx() {
     wordsLen = rawWords.size();
@@ -100,9 +101,14 @@ void getGraph(int *options) {
         if (options[OP_J]) {
             if (rawWords[i][0] == OP_J) continue;
         }
+        int w1 = options[OP_W] ? 1 : strlen(rawWords[i]);
+        int w2 = ((wordsLen + rawWords[i][strlen(rawWords[i]) - 1] - 'a') == (wordsLen + rawWords[i][0] - 'a'));
+        if (w2) {
+            selfCircle[rawWords[i][0] - 'a'].push_back(rawWords[i]);
+        }
         addEdge(words[rawWords[i]], wordsLen + rawWords[i][strlen(rawWords[i]) - 1] - 'a',
-                options[OP_W] ? 1 : strlen(rawWords[i]));
-        addEdge(wordsLen + rawWords[i][0] - 'a', words[rawWords[i]], 0);
+                w1);
+        addEdge(wordsLen + rawWords[i][0] - 'a', words[rawWords[i]], w2 ? -w1 : 0);
     }
 }
 
@@ -114,6 +120,7 @@ void spfa(char start) {
     vis[start - 'a' + wordsLen] = true;
     path[start - 'a' + wordsLen] = -1;
     spfaQueue.push(start - 'a' + wordsLen);
+    int tmp = -1, tmpfa = -1, tmpffa = -1;
 
     while (!spfaQueue.empty()) {
         int t = spfaQueue.front();
@@ -262,15 +269,38 @@ int getResultPath(int *options) {
             }
         }
 
-        int tmp = maxIdx;
+        int tmp = maxIdx, lastVertex = -2;
         while (tmp != -1) {
             if (tmp < wordsLen) {
                 resultVector.push_back(idxToWords[tmp]);
+                lastVertex = tmp;
             }
             tmp = path[tmp];
+            if (tmp == lastVertex) break;
             if (tmp == 0x3f3f3f3f) break;   // to prevent accident
         }
         reverse(resultVector.begin(), resultVector.end());
+    }
+    vector<string> tmpResult;
+    for (auto &tmp: resultVector) {
+        if (tmp[0] != tmp[tmp.size() - 1]) {
+            tmpResult.push_back(tmp);
+        }
+        if (!selfCircle[tmp[tmp.size() - 1] - 'a'].empty()) {
+            for (auto &j: selfCircle[tmp[tmp.size() - 1]-'a']) {
+                tmpResult.push_back(j);
+            }
+        }
+    }
+    resultVector.clear();
+    maxLen = 0;
+    for (auto &i: tmpResult) {
+        if (options[OP_W]) {
+            maxLen += 1;
+        } else if (options[OP_C]) {
+            maxLen += i.size();
+        }
+        resultVector.push_back(i);
     }
     if (resultVector.size() < 2) {
         resultVector.clear();
