@@ -17,7 +17,7 @@ public:
 private:
     static inline char toLowercase(char c) ;
     static inline bool isSingleLetter(char c) ;
-    static inline void uniqueWords(string words);
+    static inline void uniqueWords();
 public:
     int * parseParams(int argc, const char* argv[],
                       int options[8]);

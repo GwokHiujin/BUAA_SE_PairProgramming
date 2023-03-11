@@ -4,6 +4,7 @@
 #include "bugReport.h"
 #include <algorithm>
 #include <unordered_set>
+
 unordered_set<string> tmpUniqueRawWord;
 
 char paramParser::toLowercase(char c) {
@@ -133,15 +134,15 @@ int *paramParser::parseParams(int argc, const char *argv[],
     bool flagBegin = true;
 
     while ((curChar = fgetc(srcFile)) && curChar != EOF) {
-        curChar = toLowercase(curChar);
         if (isSingleLetter(curChar)) {
+            curChar = toLowercase(curChar);
             curWord += curChar;
             if (flagBegin) {
                 flagBegin = false;
             }
         } else {
             // Divide word
-            if (curWord.length() > 1) {
+            if (curWord.length() > 0) {
                 char *rawWord = (char *) malloc(curWord.length() + 1);
                 int k = 0;
                 for (k = 0; k < curWord.length(); k++) {
@@ -154,6 +155,19 @@ int *paramParser::parseParams(int argc, const char *argv[],
             flagBegin = true;
         }
     }
+
+    // last word
+    if (curWord.length() > 0) {
+        char *rawWord = (char *) malloc(curWord.length() + 1);
+        int k = 0;
+        for (k = 0; k < curWord.length(); k++) {
+            rawWord[k] = curWord[k];
+        }
+        rawWord[k] = 0;
+        rawWords.push_back(rawWord);
+    }
+    curWord.clear();
+    flagBegin = true;
 
     // Always remember to close the stream
     fclose(srcFile);
@@ -170,17 +184,19 @@ int *paramParser::parseParams(int argc, const char *argv[],
     options[5] = letter['t'];
     options[6] = param_r;
 
+    uniqueWords();
+
     return options;
 }
 
-void paramParser::uniqueWords(string words) {
-    for(auto & rawWord : rawWords) {
-        if(!tmpUniqueRawWord.count(rawWord)) {
+void paramParser::uniqueWords() {
+    for (auto &rawWord: rawWords) {
+        if (!tmpUniqueRawWord.count(rawWord)) {
             tmpUniqueRawWord.insert(rawWord);
         }
     }
     rawWords.clear();
-    for(auto str:tmpUniqueRawWord) {
+    for (auto str: tmpUniqueRawWord) {
         char *rawWord = (char *) malloc(str.size() + 1);
         int k = 0;
         for (k = 0; k < str.size(); k++) {
@@ -193,8 +209,8 @@ void paramParser::uniqueWords(string words) {
 
 void paramParser::parseWords(string words) {
     string curWord;
-    for (char c : words) {
-        if(isSingleLetter(c)) {
+    for (char c: words) {
+        if (isSingleLetter(c)) {
             curWord += toLowercase(c);
         } else {
             char *rawWord = (char *) malloc(curWord.size() + 1);
@@ -207,5 +223,4 @@ void paramParser::parseWords(string words) {
             curWord.clear();
         }
     }
-    rawWords.erase(unique(rawWords.begin(), rawWords.end()), rawWords.end());
 }

@@ -16,7 +16,7 @@ void bugReport::errorReport() const {
                         "please check if the file path is correct. ";
             break;
         case FILE_EMPTY:
-            reportMsg = "ERROR: The input file is empty and can not be parsed. ";
+            reportMsg = "ERROR: The input file is empty or doesn't contain valid words. ";
             break;
         case FILE_MISSING:
             reportMsg = "ERROR: Missing input file path. ";
