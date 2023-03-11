@@ -3,8 +3,8 @@
 #include <algorithm>
 #include <cassert>
 #include <unordered_set>
-#include "paramParser.h"
-#include "engine.h"
+#include "../include/paramParser.h"
+#include "../include/engine.h"
 
 using namespace std;
 char *testResult[20005];
@@ -36,7 +36,7 @@ char* stringToCharStar(string a) {
     return ans;
 }
 
-void parseWordTest(string input, int argc, char *argv[], char *wordAns[], int wordAnsLen, int *optAns) {
+void parseWordUnitTest(string input, int argc, char *argv[], char *wordAns[], int wordAnsLen, int *optAns) {
     FILE *file = fopen("input.txt", "w");
     fprintf(file, "%s", input.c_str());
     fclose(file);
@@ -76,13 +76,18 @@ void parseWordTest(string input, int argc, char *argv[], char *wordAns[], int wo
     }
 }
 
-void engineTest(char *input[], int inputLen, int *options, char *ans[], int ansLen) {
+void engineUnitTest(char *input[], int inputLen, int *options, char *ans[], int ansLen) {
     int engineOutput = engine(options, testResult);
     if(engineOutput != ansLen) {
         printf("%-20d %-20d\n", engineOutput, ansLen);
     }
-    //TODO
     assert(engineOutput == ansLen);
+
+    //TODO
+    if(options[OP_N]) {
+        wordsSet.clear();
+
+    }
     for (int i = 0; i < engineOutput; i++) {
         if(!wordCmp(testResult[i], ans[i])) {
             printf("%d: %-20s %-20s\n", i, testResult[i], ans[i]);

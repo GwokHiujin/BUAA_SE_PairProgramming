@@ -1,7 +1,7 @@
 #include <string>
 #include <queue>
-#include "paramParser.h"
-#include "bugReport.h"
+#include "include/paramParser.h"
+#include "include/bugReport.h"
 #include <algorithm>
 #include <unordered_set>
 

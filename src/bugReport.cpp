@@ -1,4 +1,4 @@
-#include "bugReport.h"
+#include "include/bugReport.h"
 
 void bugReport::printMsg(const string &msg) {
     cout << msg << endl;

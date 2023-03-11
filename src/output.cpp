@@ -1,6 +1,6 @@
-#include "output.h"
-#include "bugReport.h"
-#include "engine.h"
+#include "include/output.h"
+#include "include/bugReport.h"
+#include "include/engine.h"
 #include <cstdio>
 
 void output(const int *options, char *result[], int ans) {
