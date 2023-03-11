@@ -78,8 +78,15 @@ void parseWordTest(string input, int argc, char *argv[], char *wordAns[], int wo
 
 void engineTest(char *input[], int inputLen, int *options, char *ans[], int ansLen) {
     int engineOutput = engine(options, testResult);
+    if(engineOutput != ansLen) {
+        printf("%-20d %-20d\n", engineOutput, ansLen);
+    }
+    //TODO
     assert(engineOutput == ansLen);
     for (int i = 0; i < engineOutput; i++) {
+        if(!wordCmp(testResult[i], ans[i])) {
+            printf("%d: %-20s %-20s\n", i, testResult[i], ans[i]);
+        }
         assert(testResult[i] == ans[i]);
     }
 }

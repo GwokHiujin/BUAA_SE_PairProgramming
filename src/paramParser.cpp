@@ -83,7 +83,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
                     // Invalid parameter:
                     // nxtArg is not a single letter
                     if (isSingleLetter(nxtArg[0])) {
-                        letter[curArg[1]] = nxtArg[0];
+                        letter[curArg[1]] = toLowercase(nxtArg[0]);
                     } else {
                         throw bugReport(PARAM_INVALID);
                     }
