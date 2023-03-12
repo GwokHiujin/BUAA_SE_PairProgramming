@@ -7,13 +7,16 @@
 #include <random>
 #include <ctime>
 #include <sstream>
+#include <cassert>
 #include "../include/engine.h"
+#include "../include/paramParser.h"
 
 using namespace std;
 const int randomN = 10005, randomM = 100005;
 
 vector<string> randomWords;
 vector<string> randomGlobalAns;
+char *randomResult[20005];
 int randE[randomM], randNe[randomM], randH[randomN], randVis[randomN];
 int randIdx;
 
@@ -21,6 +24,25 @@ vector<vector<string>> randPaths;
 vector<string> singlePath;
 
 unordered_set<string> randomWordsSet;
+
+
+string charStarToString(char *a) {
+    string ans;
+    for (int i = 0; i < strlen(a); i++) {
+        ans += a[i];
+    }
+    return ans;
+}
+
+char *stringToCharStar(string a) {
+    char *ans = (char *) malloc(a.length() + 1);
+    int k = 0;
+    for (k = 0; k < a.length(); k++) {
+        ans[k] = a[k];
+    }
+    ans[k] = 0;
+    return ans;
+}
 
 void createData(int n) {
     randomWords.clear();
@@ -49,6 +71,9 @@ void add(int a, int b) {
 }
 
 void dfs(int t) {
+    if(singlePath.size() > 1) {
+        randPaths.push_back(singlePath);
+    }
     for (int i = randH[t]; ~i; i = randNe[i]) {
         int j = randE[i];
         if (randVis[j]) continue;
@@ -58,7 +83,6 @@ void dfs(int t) {
         singlePath.pop_back();
         randVis[j] = false;
     }
-    randPaths.push_back(singlePath);
 }
 
 void bruteForce(int n, int *options) {
@@ -70,6 +94,9 @@ void bruteForce(int n, int *options) {
         }
         if (!options[OP_H] || (options[OP_H] == randomWords[i].front())) {
             randPaths.clear();
+            singlePath.clear();
+            memset(randVis, 0, sizeof(randVis));
+            singlePath.push_back(randomWords[i]);
             dfs(i);
 
             int maxAns = 0, maxIdx = 0;
@@ -159,10 +186,94 @@ void randomTestEngine(int n, int *options, string input) {
     }
 
     bruteForce(n, options);
+}
 
-    //TODO
+void randomTestPrint() {
     printf("ans: %d\n", randomGlobalAns.size());
     for (auto &randomGlobalAn: randomGlobalAns) {
         printf("%s\n", randomGlobalAn.c_str());
+    }
+}
+
+void randomTestCmp(int *options) {
+    rawWords.clear();
+    for (auto &randomWord: randomWords) {
+        char *str = stringToCharStar(randomWord);
+        rawWords.push_back(str);
+    }
+
+    int ans = engine(options, randomResult);
+    if (ans != randomGlobalAns.size()) {
+        printf("    %-10s |        %-20s\n", "yours", "ans");
+        printf("    %-10d |        %-20d\n", ans, randomGlobalAns.size());
+
+
+        printf("------------------------------------------------------\n");
+        printf("-----------------------ans----------------------------\n");
+        printf("ans: %d\n", randomGlobalAns.size());
+        for (auto &randomGlobalAn: randomGlobalAns) {
+            printf("%s\n", randomGlobalAn.c_str());
+        }
+        printf("------------------------------------------------------\n");
+        printf("-----------------------yours--------------------------\n");
+        printf("ans: %d\n", ans);
+        for (int i = 0; i<ans; i++) {
+            printf("%s\n", randomResult[i]);
+        }
+    }
+    assert(ans == randomGlobalAns.size());
+
+    if (!options[OP_N]) {
+        for (int i = 1; i < ans; i++) {
+            string str1 = charStarToString(randomResult[i - 1]);
+            string str2 = charStarToString(randomResult[i]);
+            if (str1.back() != str2.front()) {
+                printf("%d: %-20s %-20s\n", i, str1.c_str(), str2.c_str());
+            }
+            assert(str1.back() == str2.front());
+        }
+    }
+
+    if (options[OP_C]) {
+        int len1 = 0, len2 = 0;
+        for (int i = 0; i < ans; i++) {
+            len1 += strlen(randomResult[i]);
+            len2 += randomGlobalAns[i].size();
+        }
+        if (len1 != len2) {
+            printf("    %-10s |        %-20s\n", "yours", "ans");
+            printf("    %-10d |        %-20d\n", len1, len2);
+            printf("--------------------------------------------------------\n");
+
+            for (int i = 0; i < ans; i++) {
+                printf("%d: %-20s %-20s\n", i, randomResult[i], randomGlobalAns[i].c_str());
+            }
+        }
+        assert(len1 == len2);
+    }
+
+    if (options[OP_H]) {
+        if (ans) {
+            string str = charStarToString(randomResult[0]);
+            assert(str.front() == options[OP_H]);
+        }
+    }
+
+    if (options[OP_T]) {
+        if (ans) {
+            string str = charStarToString(randomResult[ans - 1]);
+            assert(str.back() == options[OP_T]);
+        }
+    }
+
+    if (options[OP_J]) {
+        for (int i = 0; i < ans; i++) {
+            string str = charStarToString(randomResult[i]);
+            if (str.front() == options[OP_J]) {
+                printf("%d: %-20s %-20c\n", i, str.c_str(), options[OP_J]);
+
+            }
+            assert(str.front() != options[OP_J]);
+        }
     }
 }

@@ -11,4 +11,8 @@ void engineUnitTest(char *input[], int inputLen, int *options, char *ans[], int 
 
 void randomTestEngine(int n, int *options, string input);
 
+void randomTestPrint();
+
+void randomTestCmp(int *options);
+
 #endif //CMAKETEST_TEST_H

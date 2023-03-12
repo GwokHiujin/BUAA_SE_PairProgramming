@@ -23,14 +23,20 @@ int main(int argc, char *argv[]) {
 //            parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
 //        }
 
-        int options[8] = {1, 0, 0, 0, 0, 0, 1, 0};
-        randomTestEngine(30, options, "");
+//        int options[8] = {0, 1, 0, 0, 0, 0, 1, 0};
+//
+//        for (int i = 0; i < 20; i++) {
+//            randomTestEngine(20, options, "");
+//            //randomTestPrint();
+//            randomTestCmp(options);
+//        }
 
-//        paramParser parser = paramParser();
-//        int options[8];
-//        parser.parseParams(argc, (const char**) argv, options);
-//        int ans = engine(options, result);
-//        output(options, result, ans);
+
+        paramParser parser = paramParser();
+        int options[8];
+        parser.parseParams(argc, (const char**) argv, options);
+        int ans = engine(options, result);
+        output(options, result, ans);
     } catch (bugReport &e) {
         e.errorReport();
     }

@@ -285,6 +285,7 @@ int getResultPath(int *options) {
         }
         reverse(resultVector.begin(), resultVector.end());
     }
+    tmpResult.clear();
     if (!resultVector.empty()) {
         string tmp = resultVector[0];
         if (!selfCircle[tmp[0] - 'a'].empty()) {
@@ -294,7 +295,7 @@ int getResultPath(int *options) {
         }
     }
     for (auto &tmp: resultVector) {
-        if (tmp[0] != tmp[tmp.size() - 1] && tmp != tmpResult.back()) {
+        if (tmp[0] != tmp[tmp.size() - 1] && (tmpResult.empty() || tmp != tmpResult.back())) {
             tmpResult.push_back(tmp);
             if (!selfCircle[tmp[tmp.size() - 1] - 'a'].empty()) {
                 for (auto &j: selfCircle[tmp[tmp.size() - 1] - 'a']) {
@@ -306,6 +307,7 @@ int getResultPath(int *options) {
 
     maxLen = 0;
     resultVector.clear();
+    tmpUniqueResult.clear();
     // unique
     for (auto tmp: tmpResult) {
         if (!tmpUniqueResult.count(tmp)) {
@@ -321,6 +323,8 @@ int getResultPath(int *options) {
 
     if (resultVector.size() < 2) {
         resultVector.clear();
+        tmpUniqueResult.clear();
+        tmpResult.clear();
         return 0;
     }
     return maxLen;

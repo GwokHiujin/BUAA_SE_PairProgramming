@@ -18,24 +18,6 @@ bool wordCmp(char *a, char *b) {
     return true;
 }
 
-string charStarToString(char *a) {
-    string ans;
-    for(int i = 0; i<strlen(a); i++) {
-        ans += a[i];
-    }
-    return ans;
-}
-
-char* stringToCharStar(string a) {
-    char *ans = (char *) malloc(a.length() + 1);
-    int k = 0;
-    for (k = 0; k < a.length(); k++) {
-        ans[k] = a[k];
-    }
-    ans[k] = 0;
-    return ans;
-}
-
 void parseWordUnitTest(string input, int argc, char *argv[], char *wordAns[], int wordAnsLen, int *optAns) {
     FILE *file = fopen("input.txt", "w");
     fprintf(file, "%s", input.c_str());
