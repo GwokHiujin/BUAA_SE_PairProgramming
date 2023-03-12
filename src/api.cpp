@@ -5,7 +5,7 @@
 
 double timeCost;
 
-__declspec(dllexport) int gen_chains_all(string words, int len, char *result[]) {
+extern "C" __declspec(dllexport) int gen_chains_all(char* words, int len, char *result[]) {
     rawWords.clear();
     paramParser parser = paramParser();
 
@@ -21,7 +21,7 @@ __declspec(dllexport) int gen_chains_all(string words, int len, char *result[]) 
     return len;
 }
 
-__declspec(dllexport) int gen_chain_word(string words, int len, char *result[], char head, char tail, char prohibit,
+extern "C" __declspec(dllexport) int gen_chain_word(char* words, int len, char *result[], char head, char tail, char prohibit,
                    bool enable_loop) {
     rawWords.clear();
     paramParser parser = paramParser();
@@ -42,7 +42,7 @@ __declspec(dllexport) int gen_chain_word(string words, int len, char *result[], 
     return len;
 }
 
-__declspec(dllexport) int gen_chain_char(string words, int len, char *result[], char head, char tail, char prohibit,
+extern "C" __declspec(dllexport) int gen_chain_char(char* words, int len, char *result[], char head, char tail, char prohibit,
                    bool enable_loop) {
     rawWords.clear();
     paramParser parser = paramParser();
@@ -63,6 +63,6 @@ __declspec(dllexport) int gen_chain_char(string words, int len, char *result[], 
     return len;
 }
 
-__declspec(dllexport) double get_execution_time() {
+extern "C" __declspec(dllexport) double get_execution_time() {
     return timeCost;
 }

@@ -1,5 +1,6 @@
-ab
-bc
-cd
-de
-ef
+5
+ac cdd 
+ab bb 
+ab bb be 
+ab be 
+bb be 
