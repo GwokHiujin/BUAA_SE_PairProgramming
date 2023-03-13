@@ -26,7 +26,7 @@ vector<int> dfsVector;
 vector<string> resultVector;
 vector<PII> selfCircle[26];
 
-void init() {
+void init(int *options) {
     for (int i = 0; i < 26; i++) {
         for (int j = 0; j < 26; j++) {
             graph[i][j].clear();
@@ -35,7 +35,10 @@ void init() {
     }
     rawWordsSet.clear();
     resultVector.clear();
-    memset(dist, 0, sizeof(dist));
+    if(options[OP_T]) {
+
+    }
+    memset(dist, -1, sizeof(dist));
     memset(topSortPath, -1, sizeof(topSortPath));
 }
 
