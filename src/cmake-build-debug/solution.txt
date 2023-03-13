@@ -1,6 +1,6 @@
 5
-ac cdd 
 ab bb 
 ab bb be 
 ab be 
+ac cdd 
 bb be 
