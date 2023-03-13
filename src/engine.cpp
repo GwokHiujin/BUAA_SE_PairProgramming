@@ -18,7 +18,7 @@ using namespace std;
 
 vector<PII> graph[60][60];
 int topsortQueue[MAX_V], din[MAX_V], dist[MAX_E], topSortPath[MAX_E];
-int maxRingSize;
+int maxRingSize, maxPathSize;
 bool vis[MAX_E];
 unordered_map<char *, int> rawWordsSet;
 vector<int> path;
@@ -223,8 +223,51 @@ void getMaxRing(int *options) {
     }
 }
 
-void getPath(int si, int sj) {
+void dfsGetPath(int s, int *options) {
+    if (path.size() >= 2) {
+        string str = rawWords[path.back()];
+        if (!options[OP_T] || options[OP_T] == str.back()) {
+            int tmpLen = 0;
+            for (int i: path) {
+                tmpLen += (options[OP_W] ? 1 : strlen(rawWords[i]));
+            }
+            if (tmpLen > maxPathSize) {
+                maxPathSize = tmpLen;
+                resultVector.clear();
+                for (int i: path) {
+                    resultVector.push_back(rawWords[i]);
+                }
+            }
+        }
+    }
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < graph[s][i].size(); j++) {
+            PII t = graph[s][i][j];
+            if (!vis[t.second]) {
+                vis[t.second] = true;
+                path.push_back(t.second);
+                dfsGetPath(i, options);
+                vis[t.second] = false;
+                path.pop_back();
+            }
+        }
+    }
+}
 
+void getPath(int *options) {
+    if (options[OP_H]) {
+        path.clear();
+        maxPathSize = 0;
+        memset(vis, 0, sizeof(vis));
+        dfsGetPath(options[OP_H] - 'a', options);
+    } else {
+        maxPathSize = 0;
+        for (int i = 0; i < 26; i++) {
+            path.clear();
+            memset(vis, 0, sizeof(vis));
+            dfsGetPath(i, options);
+        }
+    }
 }
 
 int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
@@ -250,63 +293,64 @@ int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
     } else if (options[OP_R]) {
         getMaxRing(options);
     } else {
-        if (options[OP_T]) {
-            memset(dist, -0x3f, sizeof(dist));
-            dist[options[OP_T]] = 0;
-        } else {
-            memset(dist, 0, sizeof(dist));
-        }
-        memset(topSortPath, -1, sizeof(topSortPath));
-
-        topSort();
-
-        for (int i = 25; i >= 0; i--) { // dist[i] : maxLen from i
-            int t = topsortQueue[i];    // t --> j
-
-            for (int j = 0; j < 26; j++) {
-                if (!graph[t][j].empty()) {
-                    if (dist[t] + graph[t][j][0].first > dist[j]) {
-                        dist[j] = dist[t] + graph[t][j][0].first;
-                        topSortPath[j] = t;
-                    }
-                }
-            }
-
-            for (int j = 0; j < selfCircle[t].size(); j++) {
-                dist[t] += selfCircle[t][j].first;
-            }
-        }
+        getPath(options);
+//        if (options[OP_T]) {
+//            memset(dist, -0x3f, sizeof(dist));
+//            dist[options[OP_T]] = 0;
+//        } else {
+//            memset(dist, 0, sizeof(dist));
+//        }
+//        memset(topSortPath, -1, sizeof(topSortPath));
+//
+//        topSort();
+//
+//        for (int i = 25; i >= 0; i--) { // dist[i] : maxLen from i
+//            int t = topsortQueue[i];    // t --> j
+//
+//            for (int j = 0; j < 26; j++) {
+//                if (!graph[t][j].empty()) {
+//                    if (dist[t] + graph[t][j][0].first > dist[j]) {
+//                        dist[j] = dist[t] + graph[t][j][0].first;
+//                        topSortPath[j] = t;
+//                    }
+//                }
+//            }
+//
+//            for (int j = 0; j < selfCircle[t].size(); j++) {
+//                dist[t] += selfCircle[t][j].first;
+//            }
+//        }
 
         // get path
         // path has to contain 2 or more vertexes
-        int pathLen = 0, pathIdxi = -1, pathIdxj = -1;
-        // first path: i --> j
-        for (int i = 0; i < 26; i++) {
-            if (options[OP_H] && options[OP_H] - 'a' != i) continue;
-            int maxLen = 0, maxIdx = -1;
-            for (int j = 0; j < 26; j++) {
-                if (graph[i][j].empty()) continue;
-                if (!dist[j]) continue;
-                if(i == j) {
-                    maxLen = dist[j] + selfCircle[i].front().first;
-                    maxIdx = j;
-                }
-                else if (dist[j] + graph[i][j][0].first > maxLen) {
-                    maxLen = dist[j] + graph[i][j][0].first;
-                    maxIdx = j;
-                }
-            }
-            if (maxLen > pathLen) {
-                pathLen = maxLen;
-                pathIdxi = i;
-                pathIdxj = maxIdx;
-            }
-        }
-        // pathLen = 0 ==> no ans
-        // path begin: pathIdxi --> pathIdxj
-        if(pathLen) {
-            getPath(pathIdxi, pathIdxj);
-        }
+//        int pathLen = 0, pathIdxi = -1, pathIdxj = -1;
+//        // first path: i --> j
+//        for (int i = 0; i < 26; i++) {
+//            if (options[OP_H] && options[OP_H] - 'a' != i) continue;
+//            int maxLen = 0, maxIdx = -1;
+//            for (int j = 0; j < 26; j++) {
+//                if (graph[i][j].empty()) continue;
+//                if (!dist[j]) continue;
+//                if(i == j) {
+//                    maxLen = dist[j] + selfCircle[i].front().first;
+//                    maxIdx = j;
+//                }
+//                else if (dist[j] + graph[i][j][0].first > maxLen) {
+//                    maxLen = dist[j] + graph[i][j][0].first;
+//                    maxIdx = j;
+//                }
+//            }
+//            if (maxLen > pathLen) {
+//                pathLen = maxLen;
+//                pathIdxi = i;
+//                pathIdxj = maxIdx;
+//            }
+//        }
+//        // pathLen = 0 ==> no ans
+//        // path begin: pathIdxi --> pathIdxj
+//        if(pathLen) {
+//            getPath(options, pathIdxi, pathIdxj);
+//        }
     }
 
     if (resultVector.size() > 20000) {
