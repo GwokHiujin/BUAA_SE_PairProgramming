@@ -1,5 +1,11 @@
-ab
-bc
-cd
-de
-ef
+10
+ab bc 
+ab bc cd 
+ab bc cd de 
+ab bc cd de ef 
+bc cd 
+bc cd de 
+bc cd de ef 
+cd de 
+cd de ef 
+de ef 

@@ -7,6 +7,7 @@
 #include "include/engine.h"
 #include "include/output.h"
 #include "include/test.h"
+#include "include/api.h"
 
 using namespace std;
 char *result[20005];
@@ -16,15 +17,15 @@ int main(int argc, char *argv[]) {
     try {
 //        {
 //            string input = "abcdefg hijklmn opq rst uvw xyz";
-        int argc = 3;
-        char *argv[10] = {"Wordlist.exe", "-c", "input.txt"};
+//        int argc = 3;
+//        char *argv[10] = {"Wordlist.exe", "-c", "input.txt"};
 //            char *wordAns[10] = {"abcdefg", "hijklmn", "opq", "rst", "uvw", "xyz"};
 //            int wordAnsLen = 6;
 //            int optAns[8] = {0, 1, 0, 'a', 0, 0, 1, 0};
 //            parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
 //        }
 
-//        int options[8] = {0, 0, 1, 0, 0, 0, 1, 0};
+        int options[8] = {1, 0, 0, 0, 0, 0, 0, 0};
 //
 //        for (int i = 0; i < 20; i++) {
 //            Sleep(1000);
@@ -33,12 +34,17 @@ int main(int argc, char *argv[]) {
 //            randomTestPrint();
 //            //randomTestCmp(options);
 //        }
+        string words = "ab bc cd de ef eeeeefffff";
+        int ans = gen_chains_all(words, 0, result);
+//        paramParser parser = paramParser();
+//        int options[8];
+//        parser.parseParams(argc, (const char **) argv, options);
+//        int ans = engine(options, result);
+        char * tmpResult;
+        tmpResult = getResult();
+        printf("%s", tmpResult);
 
-        paramParser parser = paramParser();
-        int options[8];
-        parser.parseParams(argc, (const char **) argv, options);
-        int ans = engine(options, result);
-        output(options, result, ans);
+//        output(options, result, ans);
     } catch (bugReport &e) {
         e.errorReport();
     }
