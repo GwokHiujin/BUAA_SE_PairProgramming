@@ -17,7 +17,7 @@ int main(int argc, char *argv[]) {
 //        {
 //            string input = "abcdefg hijklmn opq rst uvw xyz";
         int argc = 3;
-        char *argv[10] = {"Wordlist.exe", "-n", "input.txt"};
+        char *argv[10] = {"Wordlist.exe", "-w", "input.txt"};
 //            char *wordAns[10] = {"abcdefg", "hijklmn", "opq", "rst", "uvw", "xyz"};
 //            int wordAnsLen = 6;
 //            int optAns[8] = {0, 1, 0, 'a', 0, 0, 1, 0};

@@ -32,7 +32,6 @@ extern "C" __declspec(dllexport) int gen_chains_all(const char* words, int len, 
         apiResult[i] = result[i];
     }
     apiLen = len;
-
     return len;
 }
 

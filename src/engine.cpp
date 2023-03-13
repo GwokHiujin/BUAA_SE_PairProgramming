@@ -112,12 +112,17 @@ bool topSort() {
 }
 
 void rebuildGraph(int *options) {
-    if (options[OP_R] || options[OP_N]) {
-        for (int i = 0; i < 26; i++) {
-            for (int j = 0; j < selfCircle[i].size(); j++) {
-                graph[i][i].push_back(selfCircle[i][j]);
-            }
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < selfCircle[i].size(); j++) {
+            graph[i][i].push_back(selfCircle[i][j]);
         }
+    } //TODO
+    if (options[OP_R] || options[OP_N]) {
+//        for (int i = 0; i < 26; i++) {
+//            for (int j = 0; j < selfCircle[i].size(); j++) {
+//                graph[i][i].push_back(selfCircle[i][j]);
+//            }
+//        }
     } else {    // useless part
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < 26; j++) {
