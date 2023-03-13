@@ -1,6 +1,3 @@
-5
-ab bb 
-ab bb be 
-ab be 
-ac cdd 
-bb be 
+ab
+bb
+be

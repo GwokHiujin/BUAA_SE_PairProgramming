@@ -18,13 +18,13 @@ using namespace std;
 
 vector<PII> graph[60][60];
 int topsortQueue[MAX_V], din[MAX_V];
+int maxRingSize;
 bool vis[MAX_E];
 unordered_map<char *, int> rawWordsSet;
 vector<int> path;
 vector<int> dfsVector;
 vector<string> resultVector;
 vector<PII> selfCircle[26];
-vector<char *> tmpResult;
 
 void init() {
     for (int i = 0; i < 26; i++) {
@@ -34,6 +34,7 @@ void init() {
         selfCircle[i].clear();
     }
     rawWordsSet.clear();
+    resultVector.clear();
 }
 
 void add(int a, int b, int c, int num) {
@@ -139,6 +140,9 @@ void rebuildGraph(int *options) {
 }
 
 void dfsAllLinks(int s) {
+    if (resultVector.size() > 20000) {
+        return;
+    }
     if (path.size() >= 2) {
         string str;
         for (int i: path) {
@@ -169,8 +173,51 @@ void getAllLinks() {
     }
 }
 
-void getMaxRing() {
+void dfsMaxRing(int s, int *options) {  // todo: optimize
+    if (path.size() >= 2) {
+        string str = rawWords[path.back()];
+        if (!options[OP_T] || options[OP_T] == str.back()) {
+            int tmpLen = 0;
+            for (int i: path) {
+                tmpLen += (options[OP_W] ? 1 : strlen(rawWords[i]));
+            }
+            if (tmpLen > maxRingSize) {
+                maxRingSize = tmpLen;
+                resultVector.clear();
+                for (int i: path) {
+                    resultVector.push_back(rawWords[i]);
+                }
+            }
+        }
+    }
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < graph[s][i].size(); j++) {
+            PII t = graph[s][i][j];
+            if (!vis[t.second]) {
+                vis[t.second] = true;
+                path.push_back(t.second);
+                dfsMaxRing(i, options);
+                vis[t.second] = false;
+                path.pop_back();
+            }
+        }
+    }
+}
 
+void getMaxRing(int *options) {
+    if (options[OP_H]) {
+        path.clear();
+        maxRingSize = 0;
+        memset(vis, 0, sizeof(vis));
+        dfsMaxRing(options[OP_H] - 'a', options);
+    } else {
+        maxRingSize = 0;
+        for (int i = 0; i < 26; i++) {
+            path.clear();
+            memset(vis, 0, sizeof(vis));
+            dfsMaxRing(i, options);
+        }
+    }
 }
 
 
@@ -194,9 +241,12 @@ int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
     if (options[OP_N]) {
         getAllLinks();
     } else if (options[OP_R]) {
-
+        getMaxRing(options);
     }
 
+    if (resultVector.size() > 20000) {
+        throw bugReport(BUG_CHAIN_TOO_LONG);
+    }
     for (int i = 0; i < resultVector.size(); i++) {
         res[i] = stringToCharPointer(resultVector[i]);
     }
