@@ -17,7 +17,7 @@ using namespace std;
 
 
 vector<PII> graph[60][60];
-int topsortQueue[MAX_V], din[MAX_V];
+int topsortQueue[MAX_V], din[MAX_V], dist[MAX_E], topSortPath[MAX_E];
 int maxRingSize;
 bool vis[MAX_E];
 unordered_map<char *, int> rawWordsSet;
@@ -35,6 +35,8 @@ void init() {
     }
     rawWordsSet.clear();
     resultVector.clear();
+    memset(dist, 0, sizeof(dist));
+    memset(topSortPath, -1, sizeof(topSortPath));
 }
 
 void add(int a, int b, int c, int num) {
@@ -69,12 +71,17 @@ void buildGraph(int *options) {
     }
 }
 
-bool checkSelfCircle() {
+bool checkSelfCircle(int *options) {
     int cnt = 0;
     for (int i = 0; i < 26; i++) {
         if (graph[i][i].size() >= 2) {
             cnt++;
         }
+        int nodeWeightofSelfCircle = 0;
+        for (auto & j : graph[i][i]) {
+            nodeWeightofSelfCircle += j.first;
+        }
+        dist[i] += nodeWeightofSelfCircle;
     }
     return cnt < 1;
 }
@@ -102,6 +109,10 @@ bool topSort(int *options) {
         int t = topsortQueue[hh++]; // get front and pop
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < graph[t][i].size(); j++) {
+                if (dist[t] + graph[t][i][j].first > dist[i]) {
+                    dist[i] = dist[t] + graph[t][i][j].first;
+                    topSortPath[i] = t;
+                }
                 if ((--din[i]) == 0) {
                     topsortQueue[++tt] = i;
                 }
@@ -118,7 +129,7 @@ void rebuildGraph(int *options) {
                 graph[i][i].push_back(selfCircle[i][j]);
             }
         }
-    } else {
+    } else {    // useless part
         for (int i = 0; i < 26; i++) {
             for (int j = 0; j < 26; j++) {
                 if (i == j) {
@@ -220,7 +231,6 @@ void getMaxRing(int *options) {
     }
 }
 
-
 int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
     init();
     markRawWords();
@@ -242,6 +252,8 @@ int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
         getAllLinks();
     } else if (options[OP_R]) {
         getMaxRing(options);
+    } else {
+
     }
 
     if (resultVector.size() > 20000) {
