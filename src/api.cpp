@@ -4,8 +4,12 @@
 #include <ctime>
 
 double timeCost;
+char *apiResult[20005];
 
-extern "C" __declspec(dllexport) int gen_chains_all(char* words, int len, char *result[]) {
+extern "C" __declspec(dllexport) int gen_chains_all(char *words, int len, char *result[]) {
+    for (int i = 0; i < 20005; i++) {
+        apiResult[i] = nullptr;
+    }
     rawWords.clear();
     paramParser parser = paramParser();
 
@@ -18,11 +22,18 @@ extern "C" __declspec(dllexport) int gen_chains_all(char* words, int len, char *
 
     clock_t t2 = clock();
     timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
+    for (int i = 0; i < len; i++) {
+        apiResult[i] = result[i];
+    }
     return len;
 }
 
-extern "C" __declspec(dllexport) int gen_chain_word(char* words, int len, char *result[], char head, char tail, char prohibit,
-                   bool enable_loop) {
+extern "C" __declspec(dllexport) int
+gen_chain_word(char *words, int len, char *result[], char head, char tail, char prohibit,
+               bool enable_loop) {
+    for (int i = 0; i < 20005; i++) {
+        apiResult[i] = nullptr;
+    }
     rawWords.clear();
     paramParser parser = paramParser();
 
@@ -39,11 +50,18 @@ extern "C" __declspec(dllexport) int gen_chain_word(char* words, int len, char *
 
     clock_t t2 = clock();
     timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
+    for (int i = 0; i < len; i++) {
+        apiResult[i] = result[i];
+    }
     return len;
 }
 
-extern "C" __declspec(dllexport) int gen_chain_char(char* words, int len, char *result[], char head, char tail, char prohibit,
-                   bool enable_loop) {
+extern "C" __declspec(dllexport) int
+gen_chain_char(char *words, int len, char *result[], char head, char tail, char prohibit,
+               bool enable_loop) {
+    for (int i = 0; i < 20005; i++) {
+        apiResult[i] = nullptr;
+    }
     rawWords.clear();
     paramParser parser = paramParser();
 
@@ -60,9 +78,16 @@ extern "C" __declspec(dllexport) int gen_chain_char(char* words, int len, char *
 
     clock_t t2 = clock();
     timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
+    for (int i = 0; i < len; i++) {
+        apiResult[i] = result[i];
+    }
     return len;
 }
 
 extern "C" __declspec(dllexport) double get_execution_time() {
     return timeCost;
+}
+
+extern "C" __declspec(dllexport) char **get_result() {
+    return apiResult;
 }
