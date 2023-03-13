@@ -1,3 +1,3 @@
-D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/cmake-build-debug/CMakeFiles/cmakeTest.dir
-D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/cmake-build-debug/CMakeFiles/edit_cache.dir
-D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/HJinKuo/Documents/RyanKuo/Study_At_School/Homework/SoftwareEngineering/pairProgramming/code/src/cmake-build-debug/CMakeFiles/cmakeTest.dir
+C:/Users/HJinKuo/Documents/RyanKuo/Study_At_School/Homework/SoftwareEngineering/pairProgramming/code/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/HJinKuo/Documents/RyanKuo/Study_At_School/Homework/SoftwareEngineering/pairProgramming/code/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
