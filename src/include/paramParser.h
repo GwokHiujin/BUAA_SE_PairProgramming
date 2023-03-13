@@ -2,6 +2,7 @@
 #define CMAKETEST_PARAMPARSER_H
 
 #include <vector>
+#include <string>
 
 using namespace std;
 
@@ -16,9 +17,11 @@ public:
 private:
     static inline char toLowercase(char c) ;
     static inline bool isSingleLetter(char c) ;
+    static inline void uniqueWords();
 public:
     int * parseParams(int argc, const char* argv[],
                       int options[8]);
+    void parseWords(string words);
 };
 
 #endif //CMAKETEST_PARAMPARSER_H

@@ -1,295 +1,369 @@
-#include "engine.h"
-#include "bugReport.h"
-#include "paramParser.h"
+#include "include/engine.h"
+#include "include/bugReport.h"
+#include "include/paramParser.h"
+#include "include/engine.h"
 #include <cstring>
-#include <cstdio>
 #include <algorithm>
 #include <vector>
 #include <unordered_map>
+#include <unordered_set>
 #include <queue>
 #include <string>
 
+typedef pair<int, int> PII;
 using namespace std;
 
 /* function 'engine' should return a validCode */
 
-int head[MAX_V], e[MAX_E], ne[MAX_E], w[MAX_E], dist[MAX_V], path[MAX_V];    // e = edge, ne = next, w = weight
-int topsortQueue[MAX_V], din[MAX_V];
-int idx, wordsLen, vertexNum;
-bool vis[MAX_V];
-unordered_map<char *, int> words;
-unordered_map<int, char *> idxToWords;
-queue<int> spfaQueue;
+
+vector<PII> graph[60][60];
+int topsortQueue[MAX_V], din[MAX_V], dist[MAX_E], topSortPath[MAX_E];
+int maxRingSize, maxPathSize;
+bool vis[MAX_E];
+unordered_map<char *, int> rawWordsSet;
+vector<int> path;
 vector<int> dfsVector;
-vector<char *> resultVector;
+vector<string> resultVector;
+vector<PII> selfCircle[26];
 
-void getWordsIdx() {
-    wordsLen = rawWords.size();
-    vertexNum = wordsLen + 26;
-    int tmp = 0;
-    for (int i = 0; i < wordsLen; i++) {
-        if (!words.count(rawWords[i])) {
-            idxToWords[tmp] = rawWords[i];
-            words[rawWords[i]] = tmp++;
+void init() {
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < 26; j++) {
+            graph[i][j].clear();
         }
+        selfCircle[i].clear();
+    }
+    rawWordsSet.clear();
+    resultVector.clear();
+}
+
+void add(int a, int b, int c, int num) {
+    graph[a][b].push_back({c, num});
+}
+
+char *stringToCharPointer(string a) {
+    char *ans = (char *) malloc(a.length() + 1);
+    int k = 0;
+    for (k = 0; k < a.length(); k++) {
+        ans[k] = a[k];
+    }
+    ans[k] = 0;
+    return ans;
+}
+
+void markRawWords() {
+    for (int i = 0; i < rawWords.size(); i++) {
+        rawWordsSet[rawWords[i]] = i;
     }
 }
 
-void initGraph() {
-    memset(head, -1, sizeof(head));
-    idx = 0;
-}
-
-void addEdge(int from, int to, int weight) {
-    e[idx] = to;
-    w[idx] = weight;
-    ne[idx] = head[from];
-    head[from] = idx++;
-}
-
-// true: no ring, false: has ring
-bool topsort() {
-    // check for word as %...%
-    int countHET[26];  //   count words whose head equals tail
-    memset(countHET, 0, sizeof(countHET));
-    for (int i = 0; i < wordsLen; i++) {
-        if (rawWords[i][0] == rawWords[i][strlen(rawWords[i]) - 1]) {
-            countHET[rawWords[i][0] - 'a']++;
-            if (countHET[rawWords[i][0] - 'a'] == 2) {
-                return false;
-            }
-        }
-    }
-
-    // build graph
-    initGraph();
-    // A: wordsLen, B: wordsLen + 1, etc.
-    for (int i = 0; i < wordsLen; i++) {
-        if (rawWords[i][0] == rawWords[i][strlen(rawWords[i]) - 1]) {
+void buildGraph(int *options) {
+    for (auto &rawWord: rawWords) {
+        if (options[OP_J] == rawWord[0]) {
             continue;
         }
-        addEdge(words[rawWords[i]], wordsLen + rawWords[i][strlen(rawWords[i]) - 1] - 'a', 1);
-        addEdge(wordsLen + rawWords[i][0] - 'a', words[rawWords[i]], 1);
-        din[wordsLen + rawWords[i][strlen(rawWords[i]) - 1] - 'a']++;
-        din[words[rawWords[i]]]++;
+        int weight = options[OP_C] ? strlen(rawWord) : 1;
+        add(rawWord[0] - 'a', rawWord[strlen(rawWord) - 1] - 'a', weight, rawWordsSet[rawWord]);
+        //printf("%c %c %d %d\n", rawWord[0], rawWord[strlen(rawWord) - 1], weight, rawWordsSet[rawWord]);
+        din[rawWord[strlen(rawWord) - 1] - 'a']++;
     }
+}
 
-    // the real topsort itself
-    int tt = -1, hh = 0;    // head and tail of the queue
-    for (int i = 0; i < vertexNum; i++) {
+bool checkSelfCircle() {
+    int cnt = 0;
+    for (int i = 0; i < 26; i++) {
+        if (graph[i][i].size() >= 2) {
+            cnt++;
+        }
+    }
+    return cnt < 1;
+}
+
+void deleteSelfCircle() {
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < graph[i][i].size(); j++) {
+            selfCircle[i].push_back(graph[i][i][j]); // the idx in rawWords
+            din[i]--;
+        }
+        graph[i][i].clear();
+    }
+}
+
+bool topSort() {
+    deleteSelfCircle();
+    int tt = -1, hh = 0;
+    for (int i = 0; i < 26; i++) {
         if (din[i] == 0) {
             topsortQueue[++tt] = i;
         }
     }
+
     while (hh <= tt) {
         int t = topsortQueue[hh++]; // get front and pop
-        for (int i = head[t]; ~i; i = ne[i]) {
-            int j = e[i];
-            if (--din[j] == 0) {
-                topsortQueue[++tt] = j;
-            }
-        }
-    }
-    return tt == vertexNum;
-}
-
-void getGraph(int *options) {
-    // rebuild graph
-    initGraph();
-    for (int i = 0; i < wordsLen; i++) {
-        if (options[OP_J]) {
-            if (rawWords[i][0] == OP_J) continue;
-        }
-        addEdge(words[rawWords[i]], wordsLen + rawWords[i][strlen(rawWords[i]) - 1] - 'a',
-                options[OP_W] ? 1 : strlen(rawWords[i]));
-        addEdge(wordsLen + rawWords[i][0] - 'a', words[rawWords[i]], 0);
-    }
-}
-
-void spfa(char start) {
-    memset(vis, 0, sizeof(vis));
-    memset(dist, -1, sizeof(dist));
-    memset(path, 0x3f, sizeof(dist));
-    dist[start - 'a' + wordsLen] = 0;
-    vis[start - 'a' + wordsLen] = true;
-    path[start - 'a' + wordsLen] = -1;
-    spfaQueue.push(start - 'a' + wordsLen);
-
-    while (!spfaQueue.empty()) {
-        int t = spfaQueue.front();
-        spfaQueue.pop();
-        vis[t] = false;
-        for (int i = head[t]; ~i; i = ne[i]) {
-            int j = e[i];
-            if (dist[j] < dist[t] + w[i]) {
-                dist[j] = dist[t] + w[i];
-                path[j] = t;
-                if (!vis[j]) {
-                    spfaQueue.push(j);
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < graph[t][i].size(); j++) {
+                if ((--din[i]) == 0) {
+                    topsortQueue[++tt] = i;
                 }
             }
         }
     }
+    return tt == 25;
 }
 
-//int getResultNum(vector<char *> rawWords, int *options) {
-//    int maxLen = 0;
-//    if (options[OP_T]) {
-//        if(options[OP_W]) {
-//            maxLen = dist[wordsLen + options[OP_T] - 'a'];
-//        } else if(options[OP_C]) {
-//            // check all words which ends with options[OP_T] - 'a'
-//        }
-//    } else {
-//        if (options[OP_W]) {
-//            for (int i = wordsLen; i < vertexNum; i++) {
-//                if (dist[i] > maxLen) {
-//                    maxLen = dist[i];
-//                }
-//            }
-//        } else if(options[OP_C]) {
-//            for (int i = 0; i < wordsLen; i++) {
-//                if (dist[i] > maxLen) {
-//                    maxLen = dist[i];
-//                }
+void rebuildGraph(int *options) {
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < selfCircle[i].size(); j++) {
+            graph[i][i].push_back(selfCircle[i][j]);
+        }
+    } //TODO
+    if (options[OP_R] || options[OP_N]) {
+//        for (int i = 0; i < 26; i++) {
+//            for (int j = 0; j < selfCircle[i].size(); j++) {
+//                graph[i][i].push_back(selfCircle[i][j]);
 //            }
 //        }
-//    }
-//    return maxLen;
-//}
-
-int getResultPath(int *options) {
-    resultVector.clear();
-    int maxLen = 0;
-    int maxIdx = 0;
-
-    if (options[OP_T]) {
-        if (options[OP_W]) {
-            maxIdx = wordsLen + options[OP_T] - 'a';
-            maxLen = dist[maxIdx];
-        } else if (options[OP_C]) {
-            for (int i = 0; i < wordsLen; i++) {
-                if (rawWords[i][strlen(rawWords[i]) - 1] == options[OP_C]) {
-                    if (dist[i] > 0) {
-                        int t = dist[i] + strlen(rawWords[i]);
-                        if (t > maxLen) {
-                            maxLen = t;
-                            maxIdx = i;
-                        }
+    } else {    // useless part
+        for (int i = 0; i < 26; i++) {
+            for (int j = 0; j < 26; j++) {
+                if (i == j) {
+                    continue;
+                }
+                int maxLen = 0;
+                PII maxIdx;
+                for (auto t: graph[i][j]) {
+                    if (maxLen < t.first) {
+                        maxLen = t.first;
+                        maxIdx = t;
                     }
                 }
-            }
-        }
-    } else {
-        if (options[OP_W]) {
-            for (int i = wordsLen; i < vertexNum; i++) {
-                if (dist[i] > maxLen) {
-                    maxLen = dist[i];
-                    maxIdx = i;
-                }
-            }
-        } else if (options[OP_C]) {
-            for (int i = 0; i < wordsLen; i++) {
-                if (dist[i] > 0) {
-                    int t = dist[i] + strlen(rawWords[i]);
-                    if (t > maxLen) {
-                        maxLen = t;
-                        maxIdx = i;
-                    }
+                if (maxLen != 0) {
+                    graph[i][j].clear();
+                    graph[i][j].push_back(maxIdx);
+                    din[j]++;
                 }
             }
         }
     }
-
-    int tmp = maxIdx;
-    while (path[tmp] != -1) {
-        if (path[tmp] < wordsLen) {
-            resultVector.push_back(idxToWords[path[tmp]]);
-        }
-        tmp = path[tmp];
-    }
-
-    reverse(resultVector.begin(), resultVector.end());
-    if (resultVector.size() < 2) {
-        resultVector.clear();
-        return 0;
-    }
-    return maxLen;
 }
 
-void dfs(int s) {
-    for (int i = head[s]; ~i; i = ne[i]) {
-        int j = e[i];
-        if (!vis[j]) {
-            vis[j] = true;
-            dfsVector.push_back(s);
-            dfs(j);
-            dfsVector.pop_back();
-            vis[j] = false;
-        }
+void dfsAllLinks(int s) {
+    if (resultVector.size() > 20000) {
+        return;
     }
-
-    // get ans
-    int tmpLen = dfsVector.size();
-    string str;
-    if (tmpLen >= 2) {
-        for (int i = 0; i < tmpLen; i++) {
-            if (dfsVector[i] >= wordsLen) {
-                continue;
-            }
-            str += idxToWords[dfsVector[i]];
+    if (path.size() >= 2) {
+        string str;
+        for (int i: path) {
+            str += rawWords[i];
             str += " ";
         }
-        resultVector.push_back((char *) str.data());
-        if(resultVector.size() > 20000) {
-            resultVector.clear();
-            throw bugReport(BUG_CHAIN_TOO_LONG);
+        resultVector.push_back(str);
+    }
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < graph[s][i].size(); j++) {
+            PII t = graph[s][i][j];
+            if (!vis[t.second]) {
+                vis[t.second] = true;
+                path.push_back(t.second);
+                dfsAllLinks(i);
+                vis[t.second] = false;
+                path.pop_back();
+            }
         }
     }
 }
 
 void getAllLinks() {
-    for (int i = wordsLen; i < vertexNum; i++) {
+    for (int i = 0; i < 26; i++) {
+        path.clear();
         memset(vis, 0, sizeof(vis));
-        dfsVector.clear();
-        dfsVector.push_back(i);
-        dfs(i);
+        dfsAllLinks(i);
     }
 }
 
-int engine(int *options, vector<char *> &res) {
-    getWordsIdx();
-    if (!options[OP_R]) {
-        bool t = topsort();
-        if (!t) {
-            throw bugReport(BUG_RING_EXIST);
-        }
-    }
-    getGraph( options);
-    int ans = 0;    // max dist
-    if (options[OP_N]) {
-        getAllLinks();
-        ans = resultVector.size();
-    } else {
-        if (options[OP_H]) {
-            spfa(options[OP_H]);
-            int t = getResultPath(options);
-            if (ans < t) ans = t;
-        } else {
-            for (int i = 0; i < 26; i++) {
-                char s = 'a' + i;
-                if (options[OP_J] == s) continue;
-                spfa( s);
-                int t = getResultPath(options);
-                if (ans < t) ans = t;
+void dfsMaxRing(int s, int *options) {  // todo: optimize
+    if (path.size() >= 2) {
+        string str = rawWords[path.back()];
+        if (!options[OP_T] || options[OP_T] == str.back()) {
+            int tmpLen = 0;
+            for (int i: path) {
+                tmpLen += (options[OP_W] ? 1 : strlen(rawWords[i]));
+            }
+            if (tmpLen > maxRingSize) {
+                maxRingSize = tmpLen;
+                resultVector.clear();
+                for (int i: path) {
+                    resultVector.push_back(rawWords[i]);
+                }
             }
         }
     }
-    // max dist = ans, link = resultVector
-    // problem here, has to decide whether the link contains 2 or more words
-
-    for (auto &i: resultVector) {
-        res.push_back(i);
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < graph[s][i].size(); j++) {
+            PII t = graph[s][i][j];
+            if (!vis[t.second]) {
+                vis[t.second] = true;
+                path.push_back(t.second);
+                dfsMaxRing(i, options);
+                vis[t.second] = false;
+                path.pop_back();
+            }
+        }
     }
-    return ans;
+}
+
+void getMaxRing(int *options) {
+    if (options[OP_H]) {
+        path.clear();
+        maxRingSize = 0;
+        memset(vis, 0, sizeof(vis));
+        dfsMaxRing(options[OP_H] - 'a', options);
+    } else {
+        maxRingSize = 0;
+        for (int i = 0; i < 26; i++) {
+            path.clear();
+            memset(vis, 0, sizeof(vis));
+            dfsMaxRing(i, options);
+        }
+    }
+}
+
+void dfsGetPath(int s, int *options) {
+    if (path.size() >= 2) {
+        string str = rawWords[path.back()];
+        if (!options[OP_T] || options[OP_T] == str.back()) {
+            int tmpLen = 0;
+            for (int i: path) {
+                tmpLen += (options[OP_W] ? 1 : strlen(rawWords[i]));
+            }
+            if (tmpLen > maxPathSize) {
+                maxPathSize = tmpLen;
+                resultVector.clear();
+                for (int i: path) {
+                    resultVector.push_back(rawWords[i]);
+                }
+            }
+        }
+    }
+    for (int i = 0; i < 26; i++) {
+        for (int j = 0; j < graph[s][i].size(); j++) {
+            PII t = graph[s][i][j];
+            if (!vis[t.second]) {
+                vis[t.second] = true;
+                path.push_back(t.second);
+                dfsGetPath(i, options);
+                vis[t.second] = false;
+                path.pop_back();
+            }
+        }
+    }
+}
+
+void getPath(int *options) {
+    if (options[OP_H]) {
+        path.clear();
+        maxPathSize = 0;
+        memset(vis, 0, sizeof(vis));
+        dfsGetPath(options[OP_H] - 'a', options);
+    } else {
+        maxPathSize = 0;
+        for (int i = 0; i < 26; i++) {
+            path.clear();
+            memset(vis, 0, sizeof(vis));
+            dfsGetPath(i, options);
+        }
+    }
+}
+
+int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
+    init();
+    markRawWords();
+
+    buildGraph(options);
+
+    if (!options[OP_R]) {
+        if (!checkSelfCircle()) {
+            throw bugReport(BUG_RING_EXIST);
+        }
+        if (!topSort()) {
+            throw bugReport(BUG_RING_EXIST);
+        }
+    }
+
+    memset(din, 0, sizeof(din));
+    rebuildGraph(options);
+
+    if (options[OP_N]) {
+        getAllLinks();
+    } else if (options[OP_R]) {
+        getMaxRing(options);
+    } else {
+        getPath(options);
+//        if (options[OP_T]) {
+//            memset(dist, -0x3f, sizeof(dist));
+//            dist[options[OP_T]] = 0;
+//        } else {
+//            memset(dist, 0, sizeof(dist));
+//        }
+//        memset(topSortPath, -1, sizeof(topSortPath));
+//
+//        topSort();
+//
+//        for (int i = 25; i >= 0; i--) { // dist[i] : maxLen from i
+//            int t = topsortQueue[i];    // t --> j
+//
+//            for (int j = 0; j < 26; j++) {
+//                if (!graph[t][j].empty()) {
+//                    if (dist[t] + graph[t][j][0].first > dist[j]) {
+//                        dist[j] = dist[t] + graph[t][j][0].first;
+//                        topSortPath[j] = t;
+//                    }
+//                }
+//            }
+//
+//            for (int j = 0; j < selfCircle[t].size(); j++) {
+//                dist[t] += selfCircle[t][j].first;
+//            }
+//        }
+
+        // get path
+        // path has to contain 2 or more vertexes
+//        int pathLen = 0, pathIdxi = -1, pathIdxj = -1;
+//        // first path: i --> j
+//        for (int i = 0; i < 26; i++) {
+//            if (options[OP_H] && options[OP_H] - 'a' != i) continue;
+//            int maxLen = 0, maxIdx = -1;
+//            for (int j = 0; j < 26; j++) {
+//                if (graph[i][j].empty()) continue;
+//                if (!dist[j]) continue;
+//                if(i == j) {
+//                    maxLen = dist[j] + selfCircle[i].front().first;
+//                    maxIdx = j;
+//                }
+//                else if (dist[j] + graph[i][j][0].first > maxLen) {
+//                    maxLen = dist[j] + graph[i][j][0].first;
+//                    maxIdx = j;
+//                }
+//            }
+//            if (maxLen > pathLen) {
+//                pathLen = maxLen;
+//                pathIdxi = i;
+//                pathIdxj = maxIdx;
+//            }
+//        }
+//        // pathLen = 0 ==> no ans
+//        // path begin: pathIdxi --> pathIdxj
+//        if(pathLen) {
+//            getPath(options, pathIdxi, pathIdxj);
+//        }
+    }
+
+    if (resultVector.size() > 20000) {
+        throw bugReport(BUG_CHAIN_TOO_LONG);
+    }
+    for (int i = 0; i < resultVector.size(); i++) {
+        res[i] = stringToCharPointer(resultVector[i]);
+    }
+
+    return resultVector.size();
 }

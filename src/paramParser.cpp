@@ -1,6 +1,11 @@
 #include <string>
-#include "paramParser.h"
-#include "bugReport.h"
+#include <queue>
+#include "include/paramParser.h"
+#include "include/bugReport.h"
+#include <algorithm>
+#include <unordered_set>
+
+unordered_set<string> tmpUniqueRawWord;
 
 char paramParser::toLowercase(char c) {
     return ('a' <= c && c <= 'z') ? c : (c - 'A' + 'a');
@@ -13,8 +18,8 @@ bool paramParser::isSingleLetter(char c) {
     return false;
 }
 
-int * paramParser::parseParams(int argc, const char* argv[],
-                               int options[8]) {
+int *paramParser::parseParams(int argc, const char *argv[],
+                              int options[8]) {
     string srcFileName;
     // If detected, switch to 1;
     // if letter detected, switch to letter's ASCII
@@ -23,7 +28,7 @@ int * paramParser::parseParams(int argc, const char* argv[],
     int param_r = 0;
     FILE *srcFile;
 
-    for (int i = 0; i < argc; i++) {
+    for (int i = 1; i < argc; i++) {
         string curArg = argv[i];
         if (curArg[0] == '-') {
             // option
@@ -78,7 +83,7 @@ int * paramParser::parseParams(int argc, const char* argv[],
                     // Invalid parameter:
                     // nxtArg is not a single letter
                     if (isSingleLetter(nxtArg[0])) {
-                        letter[curArg[1]] = nxtArg[0];
+                        letter[curArg[1]] = toLowercase(nxtArg[0]);
                     } else {
                         throw bugReport(PARAM_INVALID);
                     }
@@ -108,12 +113,14 @@ int * paramParser::parseParams(int argc, const char* argv[],
         throw bugReport(PARAM_CONFLICT_CW);
     }
 
+    // cout << "read file name: " << srcFileName << endl;
+
     // Check file name
     string suffixStr = srcFileName.substr(srcFileName.find_last_of('.') + 1);
     if (suffixStr != "txt") {
         throw bugReport(FILE_INVALID);
     } else {
-        const char* path = srcFileName.data();
+        const char *path = srcFileName.data();
         srcFile = fopen(path, "r");
         if (srcFile == nullptr) {
             fclose(srcFile);
@@ -125,23 +132,23 @@ int * paramParser::parseParams(int argc, const char* argv[],
     char curChar;
     string curWord;
     bool flagBegin = true;
-    if (fgetc(srcFile) == EOF) {
-        fclose(srcFile);
-        throw bugReport(FILE_EMPTY);
-    }
+
     while ((curChar = fgetc(srcFile)) && curChar != EOF) {
-        curChar = toLowercase(curChar);
         if (isSingleLetter(curChar)) {
+            curChar = toLowercase(curChar);
             curWord += curChar;
             if (flagBegin) {
                 flagBegin = false;
             }
         } else {
             // Divide word
-            if (curWord.length() > 1) {
-                char *rawWord = nullptr;
-                curWord.copy(rawWord, curWord.length(), 0);
-                *(rawWord+curWord.length()) = '\0';
+            if (curWord.length() > 0) {
+                char *rawWord = (char *) malloc(curWord.length() + 1);
+                int k = 0;
+                for (k = 0; k < curWord.length(); k++) {
+                    rawWord[k] = curWord[k];
+                }
+                rawWord[k] = 0;
                 rawWords.push_back(rawWord);
             }
             curWord.clear();
@@ -149,8 +156,25 @@ int * paramParser::parseParams(int argc, const char* argv[],
         }
     }
 
+    // last word
+    if (curWord.length() > 0) {
+        char *rawWord = (char *) malloc(curWord.length() + 1);
+        int k = 0;
+        for (k = 0; k < curWord.length(); k++) {
+            rawWord[k] = curWord[k];
+        }
+        rawWord[k] = 0;
+        rawWords.push_back(rawWord);
+    }
+    curWord.clear();
+    flagBegin = true;
+
     // Always remember to close the stream
     fclose(srcFile);
+
+    if (rawWords.empty()) {
+        throw bugReport(FILE_EMPTY);
+    }
 
     options[0] = param['n'];
     options[1] = param['w'];
@@ -160,5 +184,43 @@ int * paramParser::parseParams(int argc, const char* argv[],
     options[5] = letter['t'];
     options[6] = param_r;
 
+    uniqueWords();
+
     return options;
+}
+
+void paramParser::uniqueWords() {
+    for (auto &rawWord: rawWords) {
+        if (!tmpUniqueRawWord.count(rawWord)) {
+            tmpUniqueRawWord.insert(rawWord);
+        }
+    }
+    rawWords.clear();
+    for (auto str: tmpUniqueRawWord) {
+        char *rawWord = (char *) malloc(str.size() + 1);
+        int k = 0;
+        for (k = 0; k < str.size(); k++) {
+            rawWord[k] = str[k];
+        }
+        rawWord[k] = 0;
+        rawWords.push_back(rawWord);
+    }
+}
+
+void paramParser::parseWords(string words) {
+    string curWord;
+    for (char c: words) {
+        if (isSingleLetter(c)) {
+            curWord += toLowercase(c);
+        } else {
+            char *rawWord = (char *) malloc(curWord.size() + 1);
+            int k = 0;
+            for (k = 0; k < curWord.size(); k++) {
+                rawWord[k] = curWord[k];
+            }
+            rawWord[k] = 0;
+            rawWords.push_back(rawWord);
+            curWord.clear();
+        }
+    }
 }
