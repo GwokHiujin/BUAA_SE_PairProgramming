@@ -1,0 +1,43 @@
+        -:    0:Source:D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/include/bugReport.h
+        -:    0:Graph:D:\miao\SCHOOL\BUAA\Junior(last)\SE\pairProgramming\BUAA_SE_PairProgramming\src\cmake-build-debug-coverage\CMakeFiles\cmakeTest.dir\engine.cpp.gcno
+        -:    0:Data:D:\miao\SCHOOL\BUAA\Junior(last)\SE\pairProgramming\BUAA_SE_PairProgramming\src\cmake-build-debug-coverage\CMakeFiles\cmakeTest.dir\engine.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#ifndef CMAKETEST_BUGREPORT_H
+        -:    2:#define CMAKETEST_BUGREPORT_H
+        -:    3:
+        -:    4:#include <iostream>
+        -:    5:
+        -:    6:using namespace std;
+        -:    7:
+        -:    8:#define FILE_INVALID 1
+        -:    9:#define FILE_NONEXIST 2
+        -:   10:#define FILE_EMPTY 3
+        -:   11:#define FILE_MISSING 4
+        -:   12:#define FILE_FAIL_OUTPUT 5
+        -:   13:#define PARAM_LACK_LETTER 6
+        -:   14:#define PARAM_LACK_OPT 7
+        -:   15:#define PARAM_CONFLICT_N 8
+        -:   16:#define PARAM_CONFLICT_CW 9
+        -:   17:#define PARAM_DUPLICATE 10
+        -:   18:#define PARAM_INVALID 11
+        -:   19:#define BUG_RING_EXIST 12
+        -:   20:#define BUG_CHAIN_TOO_LONG 13
+        -:   21:
+        -:   22:class bugReport {
+        -:   23:public:
+        -:   24:    bugReport(): errorFlag(-1) { };
+function _ZN9bugReportC1Ei called 0 returned 0% blocks executed 0%
+    #####:   25:    explicit bugReport(int flag): errorFlag(flag) { };
+        -:   26:    ~bugReport() = default;
+        -:   27:public:
+        -:   28:    void errorReport() const;
+        -:   29:    int getErrorFlag() const;
+        -:   30:private:
+        -:   31:    int errorFlag;
+        -:   32:    static void printMsg(const string&) ;
+        -:   33:};
+        -:   34:
+        -:   35:
+        -:   36:
+        -:   37:#endif //CMAKETEST_BUGREPORT_H

@@ -17,7 +17,7 @@
 rule CXX_COMPILER__cmakeTest_Debug
   depfile = $DEP_FILE
   deps = gcc
-  command = D:\Tools\x86_64-8.1.0-release-win32-seh-rt_v6-rev0\mingw64\bin\g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
+  command = D:\Tools\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $DEFINES $INCLUDES $FLAGS -MD -MT $out -MF $DEP_FILE -o $out -c $in
   description = Building CXX object $out
 
 
@@ -25,7 +25,7 @@ rule CXX_COMPILER__cmakeTest_Debug
 # Rule for linking CXX executable.
 
 rule CXX_EXECUTABLE_LINKER__cmakeTest_Debug
-  command = cmd.exe /C "$PRE_LINK && D:\Tools\x86_64-8.1.0-release-win32-seh-rt_v6-rev0\mingw64\bin\g++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
+  command = cmd.exe /C "$PRE_LINK && D:\Tools\x86_64-8.1.0-release-posix-seh-rt_v6-rev0\mingw64\bin\g++.exe $FLAGS $LINK_FLAGS $in -o $TARGET_FILE -Wl,--out-implib,$TARGET_IMPLIB -Wl,--major-image-version,0,--minor-image-version,0 $LINK_PATH $LINK_LIBRARIES && $POST_BUILD"
   description = Linking CXX executable $TARGET_FILE
   restat = $RESTAT
 

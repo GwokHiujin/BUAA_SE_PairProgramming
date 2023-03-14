@@ -1,0 +1,720 @@
+        -:    0:Source:D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp
+        -:    0:Graph:D:\miao\SCHOOL\BUAA\Junior(last)\SE\pairProgramming\BUAA_SE_PairProgramming\src\cmake-build-debug-coverage\CMakeFiles\cmakeTest.dir\paramParser.cpp.gcno
+        -:    0:Data:D:\miao\SCHOOL\BUAA\Junior(last)\SE\pairProgramming\BUAA_SE_PairProgramming\src\cmake-build-debug-coverage\CMakeFiles\cmakeTest.dir\paramParser.cpp.gcda
+        -:    0:Runs:1
+        -:    0:Programs:1
+        -:    1:#include <string>
+        -:    2:#include <queue>
+        -:    3:#include "include/paramParser.h"
+        -:    4:#include "include/bugReport.h"
+        -:    5:#include <algorithm>
+        -:    6:#include <unordered_set>
+        -:    7:
+        -:    8:unordered_set<string> tmpUniqueRawWord;
+        -:    9:
+function _ZN11paramParser11toLowercaseEc called 121 returned 100% blocks executed 83%
+      121:   10:char paramParser::toLowercase(char c) {
+     121*:   11:    return ('a' <= c && c <= 'z') ? c : (c - 'A' + 'a');
+      121:   11-block  0
+branch  0 taken 121 (fallthrough)
+branch  1 taken 0
+      121:   11-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 121
+    %%%%%:   11-block  2
+      121:   11-block  3
+      121:   11-block  4
+        -:   12:}
+        -:   13:
+function _ZN11paramParser14isSingleLetterEc called 183 returned 100% blocks executed 100%
+      183:   14:bool paramParser::isSingleLetter(char c) {
+      183:   15:    if (('a' <= c && c <= 'z') || ('A' <= c && c <= 'Z')) {
+      183:   15-block  0
+branch  0 taken 121 (fallthrough)
+branch  1 taken 62
+      121:   15-block  1
+branch  2 taken 0 (fallthrough)
+branch  3 taken 121
+       62:   15-block  2
+branch  4 taken 3 (fallthrough)
+branch  5 taken 59
+        3:   15-block  3
+branch  6 taken 0 (fallthrough)
+branch  7 taken 3
+      121:   16:        return true;
+      121:   16-block  0
+        -:   17:    }
+       62:   18:    return false;
+       62:   18-block  0
+        -:   19:}
+        -:   20:
+function _ZN11paramParser11parseParamsEiPPKcPi called 0 returned 0% blocks executed 0%
+    #####:   21:int *paramParser::parseParams(int argc, const char *argv[],
+        -:   22:                              int options[8]) {
+    #####:   23:    string srcFileName;
+    %%%%%:   23-block  0
+call    0 never executed
+call    1 never executed
+    $$$$$:   23-block  1
+call    2 never executed
+        -:   24:    // If detected, switch to 1;
+        -:   25:    // if letter detected, switch to letter's ASCII
+    #####:   26:    int letter[127] = {0};
+    #####:   27:    int param[127] = {0};
+    #####:   28:    int param_r = 0;
+        -:   29:    FILE *srcFile;
+        -:   30:
+    #####:   31:    for (int i = 1; i < argc; i++) {
+    %%%%%:   31-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   32:        string curArg = argv[i];
+    %%%%%:   32-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   32-block  1
+call    4 never executed
+    $$$$$:   32-block  2
+    $$$$$:   32-block  3
+call    5 never executed
+    #####:   33:        if (curArg[0] == '-') {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   33-block  0
+branch  3 never executed
+branch  4 never executed
+        -:   34:            // option
+    #####:   35:            if (curArg.length() != 2) {
+    %%%%%:   35-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   36:                throw bugReport(PARAM_INVALID);
+    %%%%%:   36-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   37:            }
+    #####:   38:            switch (curArg[1]) {
+    %%%%%:   38-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   38-block  1
+branch  3 never executed
+branch  4 never executed
+branch  5 never executed
+branch  6 never executed
+    #####:   39:                case 'n':
+        -:   40:                case 'w':
+        -:   41:                case 'c': {
+    #####:   42:                    if (param[curArg[1]]) {
+    %%%%%:   42-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   42-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:   43:                        throw bugReport(PARAM_DUPLICATE);
+    %%%%%:   43-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   44:                    } else {
+    #####:   45:                        param[curArg[1]] = 1;
+    %%%%%:   45-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   46:                    }
+    #####:   47:                    if (i + 1 == argc) {
+    %%%%%:   47-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   48:                        throw bugReport(FILE_MISSING);
+    %%%%%:   48-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   49:                    }
+    #####:   50:                    string nxtArg = argv[i + 1];
+    %%%%%:   50-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:   50-block  1
+call    4 never executed
+    $$$$$:   50-block  2
+    $$$$$:   50-block  3
+call    5 never executed
+    #####:   51:                    if (nxtArg[0] == '-' && nxtArg.length() == 2) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   51-block  0
+branch  3 never executed
+branch  4 never executed
+    %%%%%:   51-block  1
+call    5 never executed
+branch  6 never executed
+branch  7 never executed
+    %%%%%:   51-block  2
+    %%%%%:   51-block  3
+    %%%%%:   51-block  4
+branch  8 never executed
+branch  9 never executed
+        -:   52:                        // consider it as a parameter
+    #####:   53:                        throw bugReport(FILE_MISSING);
+    %%%%%:   53-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   54:                        i++;
+        -:   55:                    }
+        -:   56:                }
+    #####:   57:                    break;
+    #####:   58:                case 'r':
+    #####:   59:                    if (param_r) {
+    %%%%%:   59-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   60:                        throw bugReport(PARAM_DUPLICATE);
+    %%%%%:   60-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   61:                    } else {
+    #####:   62:                        param_r = 1;
+        -:   63:                    }
+    #####:   64:                    break;
+    %%%%%:   64-block  0
+    #####:   65:                case 'h':
+        -:   66:                case 't':
+        -:   67:                case 'j': {
+    #####:   68:                    if (letter[curArg[1]]) {
+    %%%%%:   68-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   68-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:   69:                        throw bugReport(PARAM_DUPLICATE);
+    %%%%%:   69-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   70:                    } else {
+    #####:   71:                        letter[curArg[1]] = 1;
+    %%%%%:   71-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:   72:                    }
+        -:   73:                    // Lack of letter:
+        -:   74:                    // i+1 reach the end of argv;
+        -:   75:                    // nxtArg.length != 1, consider it as a filename
+    #####:   76:                    if (i + 1 == argc) {
+    %%%%%:   76-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:   77:                        throw bugReport(PARAM_LACK_LETTER);
+    %%%%%:   77-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   78:                    }
+    #####:   79:                    string nxtArg = argv[i + 1];
+    %%%%%:   79-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    $$$$$:   79-block  1
+    $$$$$:   79-block  2
+call    4 never executed
+    #####:   80:                    if (nxtArg.size() != 1) {
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:   81:                        throw bugReport(PARAM_LACK_LETTER);
+    %%%%%:   81-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   82:                    }
+        -:   83:                    // Invalid parameter:
+        -:   84:                    // nxtArg is not a single letter
+    #####:   85:                    if (isSingleLetter(nxtArg[0])) {
+    %%%%%:   85-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   85-block  1
+call    3 never executed
+branch  4 never executed
+branch  5 never executed
+    #####:   86:                        letter[curArg[1]] = toLowercase(nxtArg[0]);
+    %%%%%:   86-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:   86-block  1
+call    3 never executed
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:   86-block  2
+        -:   87:                    } else {
+    #####:   88:                        throw bugReport(PARAM_INVALID);
+    %%%%%:   88-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   89:                    }
+    #####:   90:                    i++;
+    %%%%%:   90-block  0
+call    0 never executed
+        -:   91:                }
+    #####:   92:                    break;
+    #####:   93:                default:
+    #####:   94:                    throw bugReport(PARAM_INVALID);
+    %%%%%:   94-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:   95:                    break;
+        -:   96:            }
+        -:   97:        } else {
+        -:   98:            // Filename
+    #####:   99:            if (!srcFileName.empty()) {
+    %%%%%:   99-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  100:                throw bugReport(PARAM_DUPLICATE);
+    %%%%%:  100-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  101:            } else {
+    #####:  102:                srcFileName = curArg;
+    %%%%%:  102-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  103:            }
+        -:  104:        }
+        -:  105:    }
+        -:  106:    // Check parameters' combination
+    #####:  107:    if (!param['n'] && !param['w'] && !param['c']) {
+    %%%%%:  107-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  107-block  1
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  107-block  2
+branch  4 never executed
+branch  5 never executed
+    #####:  108:        throw bugReport(PARAM_LACK_OPT);
+    %%%%%:  108-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  109:    } else if (param['n'] && (param['w'] & param['c'] &
+    %%%%%:  109-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  110:                              letter['h'] & letter['j'] & letter['t'])) {
+    %%%%%:  110-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  111:        throw bugReport(PARAM_CONFLICT_N);
+    %%%%%:  111-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+    #####:  112:    } else if (param['w'] && param['c']) {
+    %%%%%:  112-block  0
+branch  0 never executed
+branch  1 never executed
+    %%%%%:  112-block  1
+branch  2 never executed
+branch  3 never executed
+    #####:  113:        throw bugReport(PARAM_CONFLICT_CW);
+    %%%%%:  113-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  114:    }
+        -:  115:
+        -:  116:    // cout << "read file name: " << srcFileName << endl;
+        -:  117:
+        -:  118:    // Check file name
+    #####:  119:    string suffixStr = srcFileName.substr(srcFileName.find_last_of('.') + 1);
+    %%%%%:  119-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+call    4 never executed
+    $$$$$:  119-block  1
+call    5 never executed
+    #####:  120:    if (suffixStr != "txt") {
+    %%%%%:  120-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  120-block  1
+branch  3 never executed
+branch  4 never executed
+    #####:  121:        throw bugReport(FILE_INVALID);
+    %%%%%:  121-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  122:    } else {
+    #####:  123:        const char *path = srcFileName.data();
+    %%%%%:  123-block  0
+call    0 never executed
+    #####:  124:        srcFile = fopen(path, "r");
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  125:        if (srcFile == nullptr) {
+    %%%%%:  125-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  126:            fclose(srcFile);
+    %%%%%:  126-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  127:            throw bugReport(FILE_NONEXIST);
+    %%%%%:  127-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  128:        }
+        -:  129:    }
+        -:  130:
+        -:  131:    // Read File
+        -:  132:    char curChar;
+    #####:  133:    string curWord;
+    %%%%%:  133-block  0
+call    0 never executed
+    $$$$$:  133-block  1
+call    1 never executed
+    #####:  134:    bool flagBegin = true;
+        -:  135:
+    #####:  136:    while ((curChar = fgetc(srcFile)) && curChar != EOF) {
+    %%%%%:  136-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  136-block  1
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  136-block  2
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  136-block  3
+    %%%%%:  136-block  4
+    %%%%%:  136-block  5
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  136-block  6
+    #####:  137:        if (isSingleLetter(curChar)) {
+    %%%%%:  137-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  138:            curChar = toLowercase(curChar);
+    %%%%%:  138-block  0
+call    0 never executed
+    #####:  139:            curWord += curChar;
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  140:            if (flagBegin) {
+    %%%%%:  140-block  0
+branch  0 never executed
+branch  1 never executed
+    #####:  141:                flagBegin = false;
+    %%%%%:  141-block  0
+        -:  142:            }
+        -:  143:        } else {
+        -:  144:            // Divide word
+    #####:  145:            if (curWord.length() > 0) {
+    %%%%%:  145-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  146:                char *rawWord = (char *) malloc(curWord.length() + 1);
+    %%%%%:  146-block  0
+call    0 never executed
+    #####:  147:                int k = 0;
+    #####:  148:                for (k = 0; k < curWord.length(); k++) {
+    %%%%%:  148-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  149:                    rawWord[k] = curWord[k];
+    %%%%%:  149-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  149-block  1
+        -:  150:                }
+    #####:  151:                rawWord[k] = 0;
+    #####:  152:                rawWords.push_back(rawWord);
+    %%%%%:  152-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  153:            }
+    #####:  154:            curWord.clear();
+    %%%%%:  154-block  0
+call    0 never executed
+    #####:  155:            flagBegin = true;
+        -:  156:        }
+        -:  157:    }
+        -:  158:
+        -:  159:    // last word
+    #####:  160:    if (curWord.length() > 0) {
+    %%%%%:  160-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  161:        char *rawWord = (char *) malloc(curWord.length() + 1);
+    %%%%%:  161-block  0
+call    0 never executed
+    #####:  162:        int k = 0;
+    #####:  163:        for (k = 0; k < curWord.length(); k++) {
+    %%%%%:  163-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  164:            rawWord[k] = curWord[k];
+    %%%%%:  164-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  164-block  1
+        -:  165:        }
+    #####:  166:        rawWord[k] = 0;
+    #####:  167:        rawWords.push_back(rawWord);
+    %%%%%:  167-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  168:    }
+    #####:  169:    curWord.clear();
+    %%%%%:  169-block  0
+call    0 never executed
+    #####:  170:    flagBegin = true;
+        -:  171:
+        -:  172:    // Always remember to close the stream
+    #####:  173:    fclose(srcFile);
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  174:
+    #####:  175:    if (rawWords.empty()) {
+    %%%%%:  175-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  176:        throw bugReport(FILE_EMPTY);
+    %%%%%:  176-block  0
+call    0 never executed
+call    1 never executed
+call    2 never executed
+        -:  177:    }
+        -:  178:
+    #####:  179:    options[0] = param['n'];
+    #####:  180:    options[1] = param['w'];
+    #####:  181:    options[2] = param['c'];
+    #####:  182:    options[3] = letter['h'];
+    #####:  183:    options[4] = letter['j'];
+    #####:  184:    options[5] = letter['t'];
+    #####:  185:    options[6] = param_r;
+        -:  186:
+    #####:  187:    uniqueWords();
+    %%%%%:  187-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  188:
+    #####:  189:    return options;
+    %%%%%:  189-block  0
+call    0 never executed
+    %%%%%:  189-block  1
+        -:  190:}
+        -:  191:
+function _ZN11paramParser11uniqueWordsEv called 0 returned 0% blocks executed 0%
+    #####:  192:void paramParser::uniqueWords() {
+    #####:  193:    for (auto &rawWord: rawWords) {
+    %%%%%:  193-block  0
+call    0 never executed
+call    1 never executed
+    %%%%%:  193-block  1
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  193-block  2
+call    5 never executed
+    %%%%%:  193-block  3
+call    6 never executed
+    #####:  194:        if (!tmpUniqueRawWord.count(rawWord)) {
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  194-block  0
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  194-block  1
+call    7 never executed
+call    8 never executed
+branch  9 never executed
+branch 10 never executed
+    $$$$$:  194-block  2
+call   11 never executed
+    $$$$$:  194-block  3
+    $$$$$:  194-block  4
+call   12 never executed
+    $$$$$:  194-block  5
+    #####:  195:            tmpUniqueRawWord.insert(rawWord);
+    %%%%%:  195-block  0
+call    0 never executed
+call    1 never executed
+branch  2 never executed
+branch  3 never executed
+    %%%%%:  195-block  1
+call    4 never executed
+branch  5 never executed
+branch  6 never executed
+    %%%%%:  195-block  2
+call    7 never executed
+call    8 never executed
+    $$$$$:  195-block  3
+call    9 never executed
+    $$$$$:  195-block  4
+    $$$$$:  195-block  5
+call   10 never executed
+    $$$$$:  195-block  6
+        -:  196:        }
+        -:  197:    }
+    #####:  198:    rawWords.clear();
+    %%%%%:  198-block  0
+call    0 never executed
+    #####:  199:    for (auto str: tmpUniqueRawWord) {
+call    0 never executed
+call    1 never executed
+    %%%%%:  199-block  0
+call    2 never executed
+branch  3 never executed
+branch  4 never executed
+    %%%%%:  199-block  1
+call    5 never executed
+call    6 never executed
+branch  7 never executed
+branch  8 never executed
+    %%%%%:  199-block  2
+call    9 never executed
+call   10 never executed
+    $$$$$:  199-block  3
+call   11 never executed
+    #####:  200:        char *rawWord = (char *) malloc(str.size() + 1);
+    %%%%%:  200-block  0
+call    0 never executed
+    #####:  201:        int k = 0;
+    #####:  202:        for (k = 0; k < str.size(); k++) {
+    %%%%%:  202-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    #####:  203:            rawWord[k] = str[k];
+    %%%%%:  203-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+    %%%%%:  203-block  1
+        -:  204:        }
+    #####:  205:        rawWord[k] = 0;
+    #####:  206:        rawWords.push_back(rawWord);
+    %%%%%:  206-block  0
+call    0 never executed
+branch  1 never executed
+branch  2 never executed
+        -:  207:    }
+    #####:  208:}
+    %%%%%:  208-block  0
+        -:  209:
+function _ZN11paramParser10parseWordsENSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE called 10 returned 100% blocks executed 86%
+       10:  210:void paramParser::parseWords(string words) {
+       20:  211:    string curWord;
+       10:  211-block  0
+call    0 returned 10
+       10:  211-block  1
+call    1 returned 10
+    $$$$$:  211-block  2
+call    2 never executed
+      193:  212:    for (char c: words) {
+call    0 returned 10
+call    1 returned 10
+      193:  212-block  0
+call    2 returned 193
+branch  3 taken 183 (fallthrough)
+branch  4 taken 10
+      183:  212-block  1
+call    5 returned 183
+      183:  212-block  2
+call    6 returned 183
+      183:  213:        if (isSingleLetter(c)) {
+call    0 returned 183
+branch  1 taken 121 (fallthrough)
+branch  2 taken 62
+      121:  214:            curWord += toLowercase(c);
+      121:  214-block  0
+call    0 returned 121
+call    1 returned 121
+branch  2 taken 121 (fallthrough)
+branch  3 taken 0 (throw)
+        -:  215:        } else {
+       62:  216:            char *rawWord = (char *) malloc(curWord.size() + 1);
+       62:  216-block  0
+call    0 returned 62
+       62:  217:            int k = 0;
+      183:  218:            for (k = 0; k < curWord.size(); k++) {
+      183:  218-block  0
+call    0 returned 183
+branch  1 taken 121 (fallthrough)
+branch  2 taken 62
+      121:  219:                rawWord[k] = curWord[k];
+      121:  219-block  0
+call    0 returned 121
+branch  1 taken 121 (fallthrough)
+branch  2 taken 0 (throw)
+      121:  219-block  1
+        -:  220:            }
+       62:  221:            rawWord[k] = 0;
+       62:  222:            rawWords.push_back(rawWord);
+       62:  222-block  0
+call    0 returned 62
+branch  1 taken 62 (fallthrough)
+branch  2 taken 0 (throw)
+       62:  223:            curWord.clear();
+       62:  223-block  0
+call    0 returned 62
+        -:  224:        }
+        -:  225:    }
+       10:  226:}
