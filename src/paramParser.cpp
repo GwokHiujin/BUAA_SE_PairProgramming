@@ -209,18 +209,35 @@ void paramParser::uniqueWords() {
 
 void paramParser::parseWords(string words) {
     string curWord;
-    for (char c: words) {
-        if (isSingleLetter(c)) {
-            curWord += toLowercase(c);
+    for (char curChar: words) {
+        if (isSingleLetter(curChar)) {
+            curChar = toLowercase(curChar);
+            curWord += curChar;
         } else {
-            char *rawWord = (char *) malloc(curWord.size() + 1);
-            int k = 0;
-            for (k = 0; k < curWord.size(); k++) {
-                rawWord[k] = curWord[k];
+            // Divide word
+            if (curWord.length() > 0) {
+                char *rawWord = (char *) malloc(curWord.length() + 1);
+                int k = 0;
+                for (k = 0; k < curWord.length(); k++) {
+                    rawWord[k] = curWord[k];
+                }
+                rawWord[k] = 0;
+                rawWords.push_back(rawWord);
             }
-            rawWord[k] = 0;
-            rawWords.push_back(rawWord);
             curWord.clear();
         }
     }
+    // last word
+    if (curWord.length() > 0) {
+        char *rawWord = (char *) malloc(curWord.length() + 1);
+        int k = 0;
+        for (k = 0; k < curWord.length(); k++) {
+            rawWord[k] = curWord[k];
+        }
+        rawWord[k] = 0;
+        rawWords.push_back(rawWord);
+    }
+    curWord.clear();
+
+    uniqueWords();
 }
