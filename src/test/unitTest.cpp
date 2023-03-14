@@ -25,6 +25,7 @@ void parseWordUnitTest(string input, int argc, char *argv[], char *wordAns[], in
     fclose(file);
     paramParser parser = paramParser();
     int options[8];
+    rawWords.clear();
     parser.parseParams(argc, (const char **) argv, options);
     vector<char *> tmpAns = rawWords;
     vector<char *> wordAnsVector;
@@ -38,7 +39,7 @@ void parseWordUnitTest(string input, int argc, char *argv[], char *wordAns[], in
     if (tmpAns.size() != wordAnsVector.size()) {
         printf("    %-10s |        %-20s\n", "yours", "ans");
         printf("    %-10d |        %-20d\n", tmpAns.size(), wordAnsVector.size());
-        for (int i = 0; i < max(wordAnsVector.size(), tmpAns.size()); i++) {
+        for (int i = 0; i < min(wordAnsVector.size(), tmpAns.size()); i++) {
             printf("%d: %-20s %-20s\n", i, tmpAns[i], wordAnsVector[i]);
         }
     }

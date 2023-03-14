@@ -180,8 +180,8 @@ int *paramParser::parseParams(int argc, const char *argv[],
     options[1] = param['w'];
     options[2] = param['c'];
     options[3] = letter['h'];
-    options[4] = letter['j'];
-    options[5] = letter['t'];
+    options[4] = letter['t'];
+    options[5] = letter['j'];
     options[6] = param_r;
 
     uniqueWords();

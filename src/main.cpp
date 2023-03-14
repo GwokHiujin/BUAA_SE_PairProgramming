@@ -133,26 +133,27 @@ TEST(Manual, T10) {
 }
 
 TEST(Manual, T11) {
-    string input = "abcdefg hijklmn opq rst uvw xyz";
-    int argc = 3;
-    char *argv[10] = {"Wordlist.exe", "-w", "input.txt"};
-    char *wordAns[10] = {"abcdefg", "hijklmn", "opq", "rst", "uvw", "xyz"};
+    Sleep(1000);
+    string input = "bbcdefg hijklmn opq rst uvw xyz";
+    int argc = 6;
+    char *argv[10] = {"Wordlist.exe", "-w", "input.txt", "-h", "a", "-r"};
+    char *wordAns[10] = {"bbcdefg", "hijklmn", "opq", "rst", "uvw", "xyz"};
     int wordAnsLen = 6;
     int optAns[8] = {0, 1, 0, 'a', 0, 0, 1, 0};
     parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
+    Sleep(1000);
 }
 
 TEST(Manual, T12) {
     char *words = "a ac ad d ab abc cd bd\n";
     char *ans[10] = {"a", "ab", "bd", "d"};
-    string ansStr = "a ab bd d";
+    char *ansStr = "a\nab\nbd\nd\n";
     int ansLen = 4;
     test_gen_chain_char(words, 'a', 'd', 'c', false, ans, ansLen);
 
     char *testRes = getResult();
-    for (int i = 0; i < testLen; i++) {
-        ASSERT_EQ(strcmp(ansStr, testRes[i]), 0);
-    }
+    printf("%s %s\n", testRes, ansStr);
+    ASSERT_EQ(strcmp(ansStr, testRes), 0);
 }
 
 // -n
