@@ -1,4 +1,4 @@
-#include "bugReport.h"
+#include "include/bugReport.h"
 
 void bugReport::printMsg(const string &msg) {
     cout << msg << endl;
@@ -57,3 +57,7 @@ void bugReport::errorReport() const {
     }
     printMsg(reportMsg);
 }
+
+int bugReport::getErrorFlag() const {
+    return errorFlag * -1;
+};

@@ -1,8 +1,8 @@
 #ifndef CMAKETEST_ENGINE_H
 #define CMAKETEST_ENGINE_H
 
-#define MAX_V 10005
-#define MAX_E 20005
+#define MAX_V 60
+#define MAX_E 3600
 
 #define OP_N 0
 #define OP_W 1

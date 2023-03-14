@@ -52,44 +52,58 @@ build cmake_object_order_depends_target_cmakeTest: phony || CMakeFiles/cmakeTest
 build CMakeFiles/cmakeTest.dir/main.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/main.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\main.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
 build CMakeFiles/cmakeTest.dir/engine.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\engine.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
 build CMakeFiles/cmakeTest.dir/bugReport.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/bugReport.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\bugReport.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
 build CMakeFiles/cmakeTest.dir/paramParser.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\paramParser.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
 build CMakeFiles/cmakeTest.dir/output.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/output.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\output.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
 build CMakeFiles/cmakeTest.dir/api.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\api.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
-build CMakeFiles/cmakeTest.dir/unitTest.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/unitTest.cpp || cmake_object_order_depends_target_cmakeTest
-  DEP_FILE = CMakeFiles\cmakeTest.dir\unitTest.cpp.obj.d
+build CMakeFiles/cmakeTest.dir/test/unitTest.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/unitTest.cpp || cmake_object_order_depends_target_cmakeTest
+  DEP_FILE = CMakeFiles\cmakeTest.dir\test\unitTest.cpp.obj.d
   FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
-  OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
+  OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir\test
+
+build CMakeFiles/cmakeTest.dir/test/randomTest.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp || cmake_object_order_depends_target_cmakeTest
+  DEP_FILE = CMakeFiles\cmakeTest.dir\test\randomTest.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include
+  OBJECT_DIR = CMakeFiles\cmakeTest.dir
+  OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir\test
 
 
 # =============================================================================
@@ -99,7 +113,7 @@ build CMakeFiles/cmakeTest.dir/unitTest.cpp.obj: CXX_COMPILER__cmakeTest_Debug D
 #############################################
 # Link the executable cmakeTest.exe
 
-build cmakeTest.exe: CXX_EXECUTABLE_LINKER__cmakeTest_Debug CMakeFiles/cmakeTest.dir/main.cpp.obj CMakeFiles/cmakeTest.dir/engine.cpp.obj CMakeFiles/cmakeTest.dir/bugReport.cpp.obj CMakeFiles/cmakeTest.dir/paramParser.cpp.obj CMakeFiles/cmakeTest.dir/output.cpp.obj CMakeFiles/cmakeTest.dir/api.cpp.obj CMakeFiles/cmakeTest.dir/unitTest.cpp.obj
+build cmakeTest.exe: CXX_EXECUTABLE_LINKER__cmakeTest_Debug CMakeFiles/cmakeTest.dir/main.cpp.obj CMakeFiles/cmakeTest.dir/engine.cpp.obj CMakeFiles/cmakeTest.dir/bugReport.cpp.obj CMakeFiles/cmakeTest.dir/paramParser.cpp.obj CMakeFiles/cmakeTest.dir/output.cpp.obj CMakeFiles/cmakeTest.dir/api.cpp.obj CMakeFiles/cmakeTest.dir/test/unitTest.cpp.obj CMakeFiles/cmakeTest.dir/test/randomTest.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
