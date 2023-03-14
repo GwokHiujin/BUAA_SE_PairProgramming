@@ -1,5 +1,4 @@
 #include "include/engine.h"
-#include "include/bugReport.h"
 #include "include/paramParser.h"
 #include "include/engine.h"
 #include <cstring>
@@ -283,12 +282,8 @@ int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
     buildGraph(options);
 
     if (!options[OP_R]) {
-        if (!checkSelfCircle()) {
-            throw bugReport(BUG_RING_EXIST);
-        }
-        if (!topSort()) {
-            throw bugReport(BUG_RING_EXIST);
-        }
+        checkSelfCircle();
+        topSort();
     }
 
     memset(din, 0, sizeof(din));
@@ -357,10 +352,6 @@ int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
 //        if(pathLen) {
 //            getPath(options, pathIdxi, pathIdxj);
 //        }
-    }
-
-    if (resultVector.size() > 20000) {
-        throw bugReport(BUG_CHAIN_TOO_LONG);
     }
     for (int i = 0; i < resultVector.size(); i++) {
         res[i] = stringToCharPointer(resultVector[i]);

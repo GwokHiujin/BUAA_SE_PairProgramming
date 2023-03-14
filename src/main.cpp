@@ -3,7 +3,6 @@
 #include <vector>
 #include <synchapi.h>
 #include <unordered_set>
-#include "include/bugReport.h"
 #include "include/paramParser.h"
 #include "include/engine.h"
 #include "include/output.h"

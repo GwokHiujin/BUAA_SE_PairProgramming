@@ -1,7 +1,6 @@
 #include <string>
 #include <queue>
 #include "include/paramParser.h"
-#include "include/bugReport.h"
 #include <algorithm>
 #include <unordered_set>
 
@@ -32,101 +31,53 @@ int *paramParser::parseParams(int argc, const char *argv[],
         string curArg = argv[i];
         if (curArg[0] == '-') {
             // option
-            if (curArg.length() != 2) {
-                throw bugReport(PARAM_INVALID);
-            }
             switch (curArg[1]) {
                 case 'n':
                 case 'w':
-                case 'c': {
-                    if (param[curArg[1]]) {
-                        throw bugReport(PARAM_DUPLICATE);
-                    } else {
-                        param[curArg[1]] = 1;
-                    }
-                    if (i + 1 == argc) {
-                        throw bugReport(FILE_MISSING);
-                    }
-                    string nxtArg = argv[i + 1];
-                    if (nxtArg[0] == '-' && nxtArg.length() == 2) {
-                        // consider it as a parameter
-                        throw bugReport(FILE_MISSING);
-                        i++;
-                    }
-                }
+                case 'c':
+
+                    param[curArg[1]] = 1;
+
                     break;
                 case 'r':
-                    if (param_r) {
-                        throw bugReport(PARAM_DUPLICATE);
-                    } else {
-                        param_r = 1;
-                    }
+                    param_r = 1;
                     break;
                 case 'h':
                 case 't':
                 case 'j': {
-                    if (letter[curArg[1]]) {
-                        throw bugReport(PARAM_DUPLICATE);
-                    } else {
-                        letter[curArg[1]] = 1;
-                    }
+
+                    letter[curArg[1]] = 1;
                     // Lack of letter:
                     // i+1 reach the end of argv;
                     // nxtArg.length != 1, consider it as a filename
-                    if (i + 1 == argc) {
-                        throw bugReport(PARAM_LACK_LETTER);
-                    }
+
                     string nxtArg = argv[i + 1];
-                    if (nxtArg.size() != 1) {
-                        throw bugReport(PARAM_LACK_LETTER);
-                    }
+
                     // Invalid parameter:
                     // nxtArg is not a single letter
-                    if (isSingleLetter(nxtArg[0])) {
-                        letter[curArg[1]] = toLowercase(nxtArg[0]);
-                    } else {
-                        throw bugReport(PARAM_INVALID);
-                    }
+                    letter[curArg[1]] = toLowercase(nxtArg[0]);
+
                     i++;
                 }
                     break;
                 default:
-                    throw bugReport(PARAM_INVALID);
                     break;
             }
         } else {
             // Filename
-            if (!srcFileName.empty()) {
-                throw bugReport(PARAM_DUPLICATE);
-            } else {
-                srcFileName = curArg;
-            }
+            srcFileName = curArg;
         }
     }
     // Check parameters' combination
-    if (!param['n'] && !param['w'] && !param['c']) {
-        throw bugReport(PARAM_LACK_OPT);
-    } else if (param['n'] && (param['w'] & param['c'] &
-                              letter['h'] & letter['j'] & letter['t'])) {
-        throw bugReport(PARAM_CONFLICT_N);
-    } else if (param['w'] && param['c']) {
-        throw bugReport(PARAM_CONFLICT_CW);
-    }
 
     // cout << "read file name: " << srcFileName << endl;
 
     // Check file name
     string suffixStr = srcFileName.substr(srcFileName.find_last_of('.') + 1);
-    if (suffixStr != "txt") {
-        throw bugReport(FILE_INVALID);
-    } else {
-        const char *path = srcFileName.data();
-        srcFile = fopen(path, "r");
-        if (srcFile == nullptr) {
-            fclose(srcFile);
-            throw bugReport(FILE_NONEXIST);
-        }
-    }
+
+    const char *path = srcFileName.data();
+    srcFile = fopen(path, "r");
+
 
     // Read File
     char curChar;
@@ -171,10 +122,6 @@ int *paramParser::parseParams(int argc, const char *argv[],
 
     // Always remember to close the stream
     fclose(srcFile);
-
-    if (rawWords.empty()) {
-        throw bugReport(FILE_EMPTY);
-    }
 
     options[0] = param['n'];
     options[1] = param['w'];
