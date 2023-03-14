@@ -47,8 +47,14 @@ void test_gen_chain_char(char *words, char head, char tail, char prohibit,
     }
 }
 
+TEST(Manual, T0) {
+    char *words = "a b \n@$%^&*";
+    char *ans[10] = {};
+    int ansLen = 0;
+    test_gen_chain_all(words, ans, ansLen);
+    test_gen_chain_all("words hah", {}, 0);
+}
 
-// parse & no result
 TEST(Manual, T1) {
     char *words = "ast_bfw_132!4_s!dfg\n";
     char *ans[10] = {};
@@ -68,7 +74,7 @@ TEST(Manual, T2) {
 
 // -c
 TEST(Manual, T3) {
-    char *words = "ac cccdd ab bb be\n";
+    char *words = "ac cccdd ab bb be";
     char *ans[10] = {"ac", "cccdd"};
     int ansLen = 2;
     test_gen_chain_char(words, 0, 0, 0, false, ans, ansLen);
@@ -132,15 +138,13 @@ TEST(Manual, T10) {
 }
 
 TEST(Manual, T11) {
-    Sleep(1000);
-    string input = "bbcdefg hijklmn opq rst uvw xyz";
+    string input = "bbcdefg!hijklmn opq rst uvw xyz";
     int argc = 6;
     char *argv[10] = {"Wordlist.exe", "-w", "input.txt", "-h", "a", "-r"};
     char *wordAns[10] = {"bbcdefg", "hijklmn", "opq", "rst", "uvw", "xyz"};
     int wordAnsLen = 6;
     int optAns[8] = {0, 1, 0, 'a', 0, 0, 1, 0};
     parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
-    Sleep(1000);
 }
 
 TEST(Manual, T12) {
@@ -155,6 +159,22 @@ TEST(Manual, T12) {
     ASSERT_EQ(strcmp(ansStr, testRes), 0);
 }
 
+// selfCircle
+TEST(Manual, T13) {
+    char *words = "a aa@aaa\n";
+    char *ans[10] = {"aaa", "aa", "a"};
+    int ansLen = 3;
+    test_gen_chain_char(words, 'a', 0, 0, true, ans, ansLen);
+}
+
+// repeated word
+TEST(Manual, T14) {
+    char *words = "ab ab aaa aaa bc cd#da";
+    char *ans[10] = {"aaa", "ab", "bc", "cd", "da"};
+    int ansLen = 5;
+    test_gen_chain_char(words, 'a', 0, 0, true, ans, ansLen);
+}
+
 // -n
 TEST(Random, T1) {
     int options[8] = {1, 0, 0, 0, 0, 0, 0, 0};
@@ -164,6 +184,8 @@ TEST(Random, T1) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    randomTestEngine(2, options, "a b");
+    randomTestCmp(options);
 }
 
 // -w
@@ -175,6 +197,8 @@ TEST(Random, T2) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    randomTestEngine(2, options, "ab bc");
+    randomTestCmp(options);
 }
 
 // -w -h
@@ -187,6 +211,11 @@ TEST(Random, T3) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    Sleep(1000);
+    int h = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', 0, 0, 0, 0};
+    randomTestEngine(2, options, "ab b");
+    randomTestCmp(options);
 }
 
 // -w -t
@@ -199,6 +228,11 @@ TEST(Random, T4) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int options[8] = {0, 1, 0, 0, t + 'a', 0, 0, 0};
+    Sleep(1000);
+    randomTestEngine(1, options, "a");
+    randomTestCmp(options);
 }
 
 // -w -j
@@ -211,6 +245,11 @@ TEST(Random, T5) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, 0, 0, j + 'a', 0, 0};
+    Sleep(1000);
+    randomTestEngine(1, options, " abc ");
+    randomTestCmp(options);
 }
 
 // -w -h -t
@@ -224,6 +263,12 @@ TEST(Random, T6) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', t + 'a', 0, 0};
+    Sleep(1000);
+    randomTestEngine(2, options, "a bb");
+    randomTestCmp(options);
 }
 
 // -w -h -j
@@ -237,6 +282,12 @@ TEST(Random, T7) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', 0, j + 'a', 0};
+    Sleep(1000);
+    randomTestEngine(2, options, "a b");
+    randomTestCmp(options);
 }
 
 // -w -t -j
@@ -250,6 +301,12 @@ TEST(Random, T8) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, 0, t + 'a', j + 'a', 0};
+    Sleep(1000);
+    randomTestEngine(1, options, " a");
+    randomTestCmp(options);
 }
 
 // -w -h -t -j
@@ -264,6 +321,13 @@ TEST(Random, T9) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', t + 'a', j + 'a', 0};
+    Sleep(1000);
+    randomTestEngine(1, options, "a");
+    randomTestCmp(options);
 }
 
 // -w -r
@@ -275,6 +339,8 @@ TEST(Random, T10) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    randomTestEngine(3, options, "a b c");
+    randomTestCmp(options);
 }
 
 // -w -h -r
@@ -287,6 +353,11 @@ TEST(Random, T11) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', 0, 0, 1, 0};
+    Sleep(1000);
+    randomTestEngine(1, options, "a ");
+    randomTestCmp(options);
 }
 
 // -w -t -r
@@ -299,6 +370,11 @@ TEST(Random, T12) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int options[8] = {0, 1, 0, 0, t + 'a', 0, 1, 0};
+    Sleep(1000);
+    randomTestEngine(1, options, "a");
+    randomTestCmp(options);
 }
 
 // -w -j -r
@@ -311,6 +387,11 @@ TEST(Random, T13) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, 0, 0, j + 'a', 1, 0};
+    Sleep(1000);
+    randomTestEngine(1, options, "aaa ");
+    randomTestCmp(options);
 }
 
 // -w -h -t -r
@@ -324,6 +405,12 @@ TEST(Random, T14) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', t + 'a', 0, 1};
+    Sleep(1000);
+    randomTestEngine(5, options, "a b c e d");
+    randomTestCmp(options);
 }
 
 // -w -h -j -r
@@ -337,6 +424,12 @@ TEST(Random, T15) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', 0, j + 'a', 1};
+    Sleep(1000);
+    randomTestEngine(2, options, "a b");
+    randomTestCmp(options);
 }
 
 // -w -t -j -r
@@ -350,6 +443,12 @@ TEST(Random, T16) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, 0, t + 'a', j + 'a', 1};
+    Sleep(1000);
+    randomTestEngine(1, options, " b");
+    randomTestCmp(options);
 }
 
 // -w -h -t -j -r
@@ -364,6 +463,13 @@ TEST(Random, T17) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 1, 0, h + 'a', t + 'a', j + 'a', 1};
+    Sleep(1000);
+    randomTestEngine(1, options, "a ");
+    randomTestCmp(options);
 }
 
 // -c
@@ -388,6 +494,11 @@ TEST(Random, T19) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', 0, 0, 0, 0};
+    Sleep(1000);
+    randomTestEngine(2, options, "a g");
+    randomTestCmp(options);
 }
 
 // -c -t
@@ -400,6 +511,11 @@ TEST(Random, T20) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int options[8] = {0, 0, 1, 0, t + 'a', 0, 0, 0};
+    Sleep(1000);
+    randomTestEngine(3, options, "a b c");
+    randomTestCmp(options);
 }
 
 // -c -j
@@ -438,6 +554,12 @@ TEST(Random, T23) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', 0, j + 'a', 0};
+    Sleep(1000);
+    randomTestEngine(3, options, "a bc c");
+    randomTestCmp(options);
 }
 
 // -c -t -j
@@ -451,6 +573,12 @@ TEST(Random, T24) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, 0, t + 'a', j + 'a', 0};
+    Sleep(1000);
+    randomTestEngine(2, options, " a b");
+    randomTestCmp(options);
 }
 
 // -c -h -t -j
@@ -465,6 +593,13 @@ TEST(Random, T25) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', t + 'a', j + 'a', 0};
+    Sleep(1000);
+    randomTestEngine(2, options, "a b");
+    randomTestCmp(options);
 }
 
 // -c -r
@@ -476,6 +611,8 @@ TEST(Random, T26) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    randomTestEngine(1, options, " b");
+    randomTestCmp(options);
 }
 
 // -c -h -r
@@ -488,6 +625,12 @@ TEST(Random, T27) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', 0, 0, 1, 0};
+    Sleep(1000);
+    randomTestEngine(2, options, "a aa");
+    //randomTestPrint();
+    randomTestCmp(options);
 }
 
 // -c -t -r
@@ -500,6 +643,11 @@ TEST(Random, T28) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int options[8] = {0, 0, 1, 0, t + 'a', 0, 1, 0};
+    Sleep(1000);
+    randomTestEngine(3, options, " b c cb");
+    randomTestCmp(options);
 }
 
 // -c -j -r
@@ -512,6 +660,11 @@ TEST(Random, T29) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, 0, 0, j + 'a', 1, 0};
+    Sleep(1000);
+    randomTestEngine(1, options, "b");
+    randomTestCmp(options);
 }
 
 // -c -h -t -r
@@ -525,6 +678,13 @@ TEST(Random, T30) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', t + 'a', 0, 1};
+    Sleep(1000);
+    randomTestEngine(3, options, "g gg ggg");
+    //randomTestPrint();
+    randomTestCmp(options);
 }
 
 // -c -h -j -r
@@ -538,6 +698,12 @@ TEST(Random, T31) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', 0, j + 'a', 1};
+    Sleep(1000);
+    randomTestEngine(2, options, "a b");
+    randomTestCmp(options);
 }
 
 // -c -t -j -r
@@ -551,6 +717,12 @@ TEST(Random, T32) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, 0, t + 'a', j + 'a', 1};
+    Sleep(1000);
+    randomTestEngine(1, options, "a");
+    randomTestCmp(options);
 }
 
 // -c -h -t -j -r
@@ -565,6 +737,13 @@ TEST(Random, T33) {
         //randomTestPrint();
         randomTestCmp(options);
     }
+    int h = rand() % 26;
+    int t = rand() % 26;
+    int j = rand() % 26;
+    int options[8] = {0, 0, 1, h + 'a', t + 'a', j + 'a', 1};
+    Sleep(1000);
+    randomTestEngine(2, options, "a bb");
+    randomTestCmp(options);
 }
 
 int main(int argc, char *argv[]) {
