@@ -5,6 +5,7 @@
 #include <unordered_set>
 #include "../include/paramParser.h"
 #include "../include/engine.h"
+#include "gtest/gtest.h"
 
 using namespace std;
 char *testResult[20005];
@@ -41,37 +42,37 @@ void parseWordUnitTest(string input, int argc, char *argv[], char *wordAns[], in
             printf("%d: %-20s %-20s\n", i, tmpAns[i], wordAnsVector[i]);
         }
     }
-    assert(tmpAns.size() == wordAnsVector.size());
+    ASSERT_EQ(tmpAns.size(), wordAnsVector.size());
 
     for (auto &str: tmpAns) {
         if (!wordsSet.count(str)) {
             printf("wrong word %s\n", str);
         }
-        assert(wordsSet.count(str));
+        ASSERT_EQ(wordsSet.count(str), 1);
     }
 
     for (int i = 0; i < 8; i++) {
         if (options[i] != optAns[i]) {
             printf("%d: %-20d %-20d\n", i, options[i], optAns[i]);
         }
-        assert(options[i] == optAns[i]);
+        ASSERT_EQ(options[i], optAns[i]);
     }
 }
 
 void engineUnitTest(char *input[], int inputLen, int *options, char *ans[], int ansLen) {
     int engineOutput = engine(options, testResult);
-    if(engineOutput != ansLen) {
+    if (engineOutput != ansLen) {
         printf("%-20d %-20d\n", engineOutput, ansLen);
     }
     assert(engineOutput == ansLen);
 
     //TODO
-    if(options[OP_N]) {
+    if (options[OP_N]) {
         wordsSet.clear();
 
     }
     for (int i = 0; i < engineOutput; i++) {
-        if(!wordCmp(testResult[i], ans[i])) {
+        if (!wordCmp(testResult[i], ans[i])) {
             printf("%d: %-20s %-20s\n", i, testResult[i], ans[i]);
         }
         assert(testResult[i] == ans[i]);

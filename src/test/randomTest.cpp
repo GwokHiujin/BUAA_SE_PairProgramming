@@ -11,6 +11,7 @@
 #include <ctime>
 #include "../include/engine.h"
 #include "../include/paramParser.h"
+#include "gtest/gtest.h"
 
 using namespace std;
 const int randomN = 10005, randomM = 100005;
@@ -78,16 +79,17 @@ void add(int a, int b) {
     randH[a] = randIdx++;
 }
 
-void dfs(int t) {
+void dfs(int t, int* options) {
     if (singlePath.size() > 1) {
         randPaths.push_back(singlePath);
     }
     for (int i = randH[t]; ~i; i = randNe[i]) {
         int j = randE[i];
         if (randVis[j]) continue;
+        if(randomWords[j].front() == options[OP_J]) continue;
         randVis[j] = true;
         singlePath.push_back(randomWords[j]);
-        dfs(j);
+        dfs(j, options);
         singlePath.pop_back();
         randVis[j] = false;
     }
@@ -105,8 +107,8 @@ void bruteForce(int n, int *options) {
             singlePath.clear();
             memset(randVis, 0, sizeof(randVis));
             singlePath.push_back(randomWords[i]);
-            //randVis[i] = true;
-            dfs(i);
+            randVis[i] = true;
+            dfs(i, options);
 
             int maxAns = 0, maxIdx = 0;
             for (int j = 0; j < randPaths.size(); j++) {
@@ -166,6 +168,7 @@ void bruteForce(int n, int *options) {
 }
 
 void randomTestEngine(int n, int *options, string input) {
+    printf("options: %c %c %c\n", options[OP_H], options[OP_T], options[OP_J]);
     srand(time(0));
     memset(randH, -1, sizeof(randH));
     memset(randNe, 0, sizeof(randNe));
@@ -255,7 +258,7 @@ void randomTestCmp(int *options) {
                 printf("%s\n", randomResult[i]);
             }
         }
-        assert(ans == randomGlobalAns.size());
+        ASSERT_EQ(ans, randomGlobalAns.size());
     }
     if (!options[OP_N]) {
         for (int i = 1; i < ans; i++) {
@@ -264,7 +267,7 @@ void randomTestCmp(int *options) {
             if (str1.back() != str2.front()) {
                 printf("%d: %-20s %-20s\n", i, str1.c_str(), str2.c_str());
             }
-            assert(str1.back() == str2.front());
+            ASSERT_EQ(str1.back(), str2.front());
         }
     }
 
@@ -283,20 +286,20 @@ void randomTestCmp(int *options) {
                 printf("%d: %-20s %-20s\n", i, randomResult[i], randomGlobalAns[i].c_str());
             }
         }
-        assert(len1 == len2);
+        ASSERT_EQ(len1, len2);
     }
 
     if (options[OP_H]) {
         if (ans) {
             string str = charStarToString(randomResult[0]);
-            assert(str.front() == options[OP_H]);
+            ASSERT_EQ(str.front(), options[OP_H]);
         }
     }
 
     if (options[OP_T]) {
         if (ans) {
             string str = charStarToString(randomResult[ans - 1]);
-            assert(str.back() == options[OP_T]);
+            ASSERT_EQ(str.back(), options[OP_T]);
         }
     }
 
@@ -307,7 +310,7 @@ void randomTestCmp(int *options) {
                 printf("%d: %-20s %-20c\n", i, str.c_str(), options[OP_J]);
 
             }
-            assert(str.front() != options[OP_J]);
+            ASSERT_NE(str.front(), options[OP_J]);
         }
     }
 }
