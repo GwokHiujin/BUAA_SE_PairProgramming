@@ -26,6 +26,7 @@ public:
     ~bugReport() = default;
 public:
     void errorReport() const;
+    int getErrorFlag() const;
 private:
     int errorFlag;
     static void printMsg(const string&) ;

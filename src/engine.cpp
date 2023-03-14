@@ -35,6 +35,7 @@ void init() {
     }
     rawWordsSet.clear();
     resultVector.clear();
+    memset(din, 0, sizeof(din));
 }
 
 void add(int a, int b, int c, int num) {

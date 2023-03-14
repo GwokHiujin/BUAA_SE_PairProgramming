@@ -11,11 +11,11 @@ int apiLen = 0;
 extern "C" __declspec(dllexport) int gen_chains_all(const char *words, int len, char *result[]) {
     len = 0;
     rawWords.clear();
+    for (auto &i: apiResult) {
+        i = nullptr;
+    }
     try {
         paramParser parser = paramParser();
-        for (auto &i: apiResult) {
-            i = nullptr;
-        }
 
         clock_t t1 = clock();
         parser.parseWords(words);
@@ -40,12 +40,12 @@ gen_chain_word(const char *words, int len, char *result[], char head, char tail,
                bool enable_loop) {
     len = 0;
     rawWords.clear();
+    for (auto &i: apiResult) {
+        i = nullptr;
+    }
 
     try {
         paramParser parser = paramParser();
-        for (auto &i: apiResult) {
-            i = nullptr;
-        }
 
         clock_t t1 = clock();
         parser.parseWords(words);
@@ -74,12 +74,12 @@ gen_chain_char(const char *words, int len, char *result[], char head, char tail,
                bool enable_loop) {
     len = 0;
     rawWords.clear();
+    for (auto &i: apiResult) {
+        i = nullptr;
+    }
 
     try {
         paramParser parser = paramParser();
-        for (auto &i: apiResult) {
-            i = nullptr;
-        }
         clock_t t1 = clock();
         parser.parseWords(words);
         int options[8] = {0};

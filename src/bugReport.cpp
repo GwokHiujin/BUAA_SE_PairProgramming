@@ -57,3 +57,7 @@ void bugReport::errorReport() const {
     }
     printMsg(reportMsg);
 }
+
+int bugReport::getErrorFlag() const {
+    return errorFlag * -1;
+};
