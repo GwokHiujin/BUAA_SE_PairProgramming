@@ -190,6 +190,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
 }
 
 void paramParser::uniqueWords() {
+    tmpUniqueRawWord.clear();
     for (auto &rawWord: rawWords) {
         if (!tmpUniqueRawWord.count(rawWord)) {
             tmpUniqueRawWord.insert(rawWord);
