@@ -13,6 +13,7 @@ void output(const int *options, char *result[], int ans) {
     if (options[OP_N]) {
         fprintf(file, "%d\n", ans);
     }
+
     int resultLen = ans;
     for (int i = 0; i < resultLen; i++) {
         if(result[i] == nullptr) break; // bad but good enough

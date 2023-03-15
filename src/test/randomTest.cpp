@@ -48,8 +48,6 @@ char *stringToCharStar(string a) {
 }
 
 void createData(int n, int *options) {
-    randomWords.clear();
-    randomWordsSet.clear();
     for (int i = 0; i < n; i++) {
         string str;
         while (true) {
@@ -176,6 +174,9 @@ void randomTestEngine(int n, int *options, string input) {
     memset(randVis, 0, sizeof(randVis));
     memset(randIn, 0, sizeof(randIn));
     randIdx = 0;
+    randomWords.clear();
+    randomWordsSet.clear();
+    randomGlobalAns.clear();
     for (auto &i: randomResult) {
         i = nullptr;
     }

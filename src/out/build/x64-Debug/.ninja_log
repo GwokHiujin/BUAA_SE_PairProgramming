@@ -1,0 +1,10 @@
+# ninja log v5
+151	1523	7005728611761552	CMakeFiles/cmakeTest.dir/api.cpp.obj	269a5905ca17919c
+105	1536	7005728612201593	CMakeFiles/cmakeTest.dir/paramParser.cpp.obj	62769134b5870ad0
+59	1554	7005728612371569	CMakeFiles/cmakeTest.dir/engine.cpp.obj	7dd295fcaf734f39
+341	1802	7005728614881553	googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj	fd244cbc91c4ce20
+199	2007	7005728616911501	CMakeFiles/cmakeTest.dir/test/unitTest.cpp.obj	f0787075b0245bb3
+245	2189	7005728618791489	CMakeFiles/cmakeTest.dir/test/randomTest.cpp.obj	7cebdc33262f8e9a
+294	3016	7005728626982557	googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj	ea7f63c7456f9edf
+55	329	7005728737965909	lib/gtest.lib	3462eb3027a80186
+330	515	7005728739895744	lib/gtest_main.lib	79e015b1f4d3dd7

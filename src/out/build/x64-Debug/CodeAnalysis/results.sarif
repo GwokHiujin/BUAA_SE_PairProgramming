@@ -1,0 +1,3484 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "取消对 NULL 指针“ans”的引用。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                },
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 5,
+                  "endLine": 49,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stringToCharPointer",
+                  "decoratedName": "?stringToCharPointer@@YAPEADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 44,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "“ans”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 45,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“k<a.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 49,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "已取消对“ans”的引用，但可能仍为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "写入 \"ans\" 时缓冲区溢出。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                },
+                "region": {
+                  "startLine": 49,
+                  "startColumn": 5,
+                  "endLine": 49,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stringToCharPointer",
+                  "decoratedName": "?stringToCharPointer@@YAPEADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 44,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "“ans”是一个 0 字节数组"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 45,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<a.length()”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 47,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 34
+                          }
+                        },
+                        "message": {
+                          "text": "“k”可能等于 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "退出此循环(“k<a.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                          },
+                          "region": {
+                            "startLine": 49,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "写入到“ans”无效(位于其可写范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+                },
+                "region": {
+                  "startLine": 327,
+                  "startColumn": 52,
+                  "endLine": 327,
+                  "endColumn": 56
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "getPath",
+                  "decoratedName": "?getPath@@YAXPEAH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32215.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/engine.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "5dd58f92ff00854909908b68d7137b046a6ccfdea2e4695811f9e67cc6c263c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/engine.h"
+          },
+          "hashes": {
+            "sha-256": "685797dbd2e475a630a8d3e31275fd482fa027730734b523e94d959ce041041a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/paramparser.h"
+          },
+          "hashes": {
+            "sha-256": "6a45d3be481c0722ccb44351349ebef934ab74fa6f16291ae6d16f8a5515cd49"
+          }
+        }
+      ]
+    },
+    {
+      "results": [
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "取消对 NULL 指针“rawWord”的引用。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 9,
+                  "endLine": 107,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "paramParser::parseParams",
+                  "decoratedName": "?parseParams@paramParser@@QEAAPEAHHQEAPEBDQEAH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 25,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 27,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 28,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 23
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 71,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 73,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 74,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 78,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 79,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 81,
+                            "startColumn": 39
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 101,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 102,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "“rawWord”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 103,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 104,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 104,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“k<curWord.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 107,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "已取消对“rawWord”的引用，但可能仍为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "写入 \"rawWord\" 时缓冲区溢出。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                },
+                "region": {
+                  "startLine": 107,
+                  "startColumn": 9,
+                  "endLine": 107,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "paramParser::parseParams",
+                  "decoratedName": "?parseParams@paramParser@@QEAAPEAHHQEAPEBDQEAH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 22,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 25,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 26,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 27,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 28,
+                            "startColumn": 11
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 14
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 30,
+                            "startColumn": 23
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 71,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 73,
+                            "startColumn": 17
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 74,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 78,
+                            "startColumn": 10
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 79,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 81,
+                            "startColumn": 39
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 101,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 102,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "“rawWord”是一个 0 字节数组"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 103,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 104,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 104,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<curWord.length()”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 105,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 104,
+                            "startColumn": 44
+                          }
+                        },
+                        "message": {
+                          "text": "“k”可能等于 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 104,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "退出此循环(“k<curWord.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 107,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "写入到“rawWord”无效(位于其可写范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "取消对 NULL 指针“rawWord”的引用。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                },
+                "region": {
+                  "startLine": 142,
+                  "startColumn": 9,
+                  "endLine": 142,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "paramParser::uniqueWords",
+                  "decoratedName": "?uniqueWords@paramParser@@CAXXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 129,
+                            "startColumn": 27
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 130,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 135,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 136,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 136,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 137,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "“rawWord”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 138,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 139,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 139,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“k<str.size()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 142,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "已取消对“rawWord”的引用，但可能仍为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "写入 \"rawWord\" 时缓冲区溢出。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                },
+                "region": {
+                  "startLine": 142,
+                  "startColumn": 9,
+                  "endLine": 142,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "paramParser::uniqueWords",
+                  "decoratedName": "?uniqueWords@paramParser@@CAXXZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 129,
+                            "startColumn": 27
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 130,
+                            "startColumn": 25
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 135,
+                            "startColumn": 19
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 136,
+                            "startColumn": 20
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 136,
+                            "startColumn": 15
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 137,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "“rawWord”是一个 0 字节数组"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 138,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 139,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 139,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<str.size()”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 140,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 139,
+                            "startColumn": 38
+                          }
+                        },
+                        "message": {
+                          "text": "“k”可能等于 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 139,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "退出此循环(“k<str.size()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 142,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "写入到“rawWord”无效(位于其可写范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "取消对 NULL 指针“rawWord”的引用。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                },
+                "region": {
+                  "startLine": 174,
+                  "startColumn": 9,
+                  "endLine": 174,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "paramParser::parseWords",
+                  "decoratedName": "?parseWords@paramParser@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 148,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 149,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 168,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 169,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "“rawWord”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 170,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“k<curWord.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 174,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "已取消对“rawWord”的引用，但可能仍为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "写入 \"rawWord\" 时缓冲区溢出。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                },
+                "region": {
+                  "startLine": 174,
+                  "startColumn": 9,
+                  "endLine": 174,
+                  "endColumn": 22
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "paramParser::parseWords",
+                  "decoratedName": "?parseWords@paramParser@@QEAAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 148,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 149,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 168,
+                            "startColumn": 26
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 169,
+                            "startColumn": 15
+                          }
+                        },
+                        "message": {
+                          "text": "“rawWord”是一个 0 字节数组"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 170,
+                            "startColumn": 13
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<curWord.length()”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 172,
+                            "startColumn": 24
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 44
+                          }
+                        },
+                        "message": {
+                          "text": "“k”可能等于 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 171,
+                            "startColumn": 23
+                          }
+                        },
+                        "message": {
+                          "text": "退出此循环(“k<curWord.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+                          },
+                          "region": {
+                            "startLine": 174,
+                            "startColumn": 20
+                          }
+                        },
+                        "message": {
+                          "text": "写入到“rawWord”无效(位于其可写范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32215.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/paramParser.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "65c3e9aba0cda58e8aa11c9255700ebec8b353c436b8923a84cd91e7e5e91a42"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/paramparser.h"
+          },
+          "hashes": {
+            "sha-256": "6a45d3be481c0722ccb44351349ebef934ab74fa6f16291ae6d16f8a5515cd49"
+          }
+        }
+      ]
+    },
+    {
+      "results": [
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 26,
+                  "endLine": 24,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "gen_chains_all",
+                  "decoratedName": "gen_chains_all",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                },
+                "region": {
+                  "startLine": 53,
+                  "startColumn": 26,
+                  "endLine": 53,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "gen_chain_word",
+                  "decoratedName": "gen_chain_word",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                },
+                "region": {
+                  "startLine": 84,
+                  "startColumn": 26,
+                  "endLine": 84,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "gen_chain_char",
+                  "decoratedName": "gen_chain_char",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "取消对 NULL 指针“ans”的引用。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                },
+                "region": {
+                  "startLine": 103,
+                  "startColumn": 5,
+                  "endLine": 103,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stringToCharStarTmp",
+                  "decoratedName": "?stringToCharStarTmp@@YAPEADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 98,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "“ans”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 99,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“k<a.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 103,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "已取消对“ans”的引用，但可能仍为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "写入 \"ans\" 时缓冲区溢出。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                },
+                "region": {
+                  "startLine": 103,
+                  "startColumn": 5,
+                  "endLine": 103,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stringToCharStarTmp",
+                  "decoratedName": "?stringToCharStarTmp@@YAPEADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 98,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "“ans”是一个 0 字节数组"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 99,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<a.length()”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 101,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 34
+                          }
+                        },
+                        "message": {
+                          "text": "“k”可能等于 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 100,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "退出此循环(“k<a.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+                          },
+                          "region": {
+                            "startLine": 103,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "写入到“ans”无效(位于其可写范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32215.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/api.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "5990610bd56afd5dd8b2b06a2850227163b058da542bf34e879d2792469cd002"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/api.h"
+          },
+          "hashes": {
+            "sha-256": "3ce047cc99b0e6f4f3c38a5a6c8f5f57fc1fe3eb655f6d2f6c628c3393d57178"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/paramparser.h"
+          },
+          "hashes": {
+            "sha-256": "6a45d3be481c0722ccb44351349ebef934ab74fa6f16291ae6d16f8a5515cd49"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/engine.h"
+          },
+          "hashes": {
+            "sha-256": "685797dbd2e475a630a8d3e31275fd482fa027730734b523e94d959ce041041a"
+          }
+        }
+      ]
+    },
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::owner_thread_id_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::owner_thread_id_"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::type_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::type_"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::critical_section_init_phase_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::critical_section_init_phase_"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::critical_section_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::critical_section_"
+          }
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "此类函数不应 throw。声明它为 \"noexcept\" (f.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/gtest-matchers.h"
+                },
+                "region": {
+                  "startLine": 335,
+                  "startColumn": 3,
+                  "endLine": 335,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::MatcherBase<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>::{ctor}",
+                  "decoratedName": "??0?$MatcherBase@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@internal@testing@@IEAA@$$QEAV012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32215.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "198947db724d326600ee497f9a18be746efcad22ec72e91a28f35daa631a1b5a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/gtest-matchers.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c7086d0eaf3bd8d7d23c56466203aa88f14cf4375624d570620e50abea2bcbdb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/test/unittest.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "85d7378c28af3c5677863b0be63ccd61a3945419bb18d823903c337fee07a773"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/paramparser.h"
+          },
+          "hashes": {
+            "sha-256": "6a45d3be481c0722ccb44351349ebef934ab74fa6f16291ae6d16f8a5515cd49"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/engine.h"
+          },
+          "hashes": {
+            "sha-256": "685797dbd2e475a630a8d3e31275fd482fa027730734b523e94d959ce041041a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest.h"
+          },
+          "hashes": {
+            "sha-256": "ca270bafac253313b0dcd3ae3a45db766aab98a1534513e3f3d76ece458b81d0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-assertion-result.h"
+          },
+          "hashes": {
+            "sha-256": "9e5c5e6d3ff7d2325c434e4ae2622cea4f9aedba0c6dc3fca266cbf56d69f64e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-message.h"
+          },
+          "hashes": {
+            "sha-256": "a417441071dc0ca0158a3b07b30299ed69b22b883e62e042c046f42382a51e9c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/custom/gtest-port.h"
+          },
+          "hashes": {
+            "sha-256": "5e06747c9e8b86e9d841fabd61c2f045b2bb1133716f127be4a963ced1c44e01"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-port-arch.h"
+          },
+          "hashes": {
+            "sha-256": "fbb76e38297555877b35b1db28094c52487b87e511d344b53f2b1016b2335de3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-death-test.h"
+          },
+          "hashes": {
+            "sha-256": "ab4c290687921aa08a9eec43a939e6b936e180da5368aed9632c016d4d8bf421"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-death-test-internal.h"
+          },
+          "hashes": {
+            "sha-256": "d6a395fb1f0a1fa2f7099fd895ab684955ba515d023fa1799d3048712421e17c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-printers.h"
+          },
+          "hashes": {
+            "sha-256": "af1a368cc80869373d2fe741a6876506864d8dfb31e648fed5ef87a7b3677350"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-internal.h"
+          },
+          "hashes": {
+            "sha-256": "5ad83a9f48b61a011adaf8bb135a3f60209177c28b3b9294b9c576d191ca03c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-filepath.h"
+          },
+          "hashes": {
+            "sha-256": "544ce95d2e1e4b7ae17ee170f482aaa09e17d0056999c4ce7e7a6097c3a755cf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-string.h"
+          },
+          "hashes": {
+            "sha-256": "40cd1162db218bab9934ec55ba791c50b1f1d22b2b29ae56c303751afcdc6054"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-type-util.h"
+          },
+          "hashes": {
+            "sha-256": "2d55695a6b43cd37fc9b367e2f5adfff6c90e07b32f60a6bbfa42eba73a37748"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/custom/gtest-printers.h"
+          },
+          "hashes": {
+            "sha-256": "b95afda2426e8c4f09c11d3296d522fb336b248c0da7e078388db4bb072c2166"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-param-test.h"
+          },
+          "hashes": {
+            "sha-256": "e2b3b7e13fb2b42817f6da51eafc5cd83879d0d250ea81001943388e05168739"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-param-util.h"
+          },
+          "hashes": {
+            "sha-256": "66db7a8880ff97ddf7bdb08c74788b4c654f0c6a7fbeefd83eab06f52be0bdd1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-test-part.h"
+          },
+          "hashes": {
+            "sha-256": "16dbdeaf64967f74205d5cc5c246ec4eb35e262eb2879ac1a118434208ec73fe"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-typed-test.h"
+          },
+          "hashes": {
+            "sha-256": "e4607bf400b336cc1eb3a466826d1d9ba8af59f11ab2e737cc6f063e3659b52d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest_pred_impl.h"
+          },
+          "hashes": {
+            "sha-256": "85e850e735a42ebb5f9a01a018708c1c0b9b7d83c94b14b7d5d29512c00b6ffd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest_prod.h"
+          },
+          "hashes": {
+            "sha-256": "3c6301ef533db8686e474dd5a0de4d98a31cbb630e2273f712472d1be25aa261"
+          }
+        }
+      ]
+    },
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::owner_thread_id_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::owner_thread_id_"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::type_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::type_"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::critical_section_init_phase_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::critical_section_init_phase_"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "未初始化变量 testing::internal::Mutex::critical_section_。始终初始化成员变量(type.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+                },
+                "region": {
+                  "startLine": 1380,
+                  "startColumn": 3,
+                  "endLine": 1380,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::Mutex::{ctor}",
+                  "decoratedName": "??0Mutex@internal@testing@@QEAA@W4StaticConstructorSelector@012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "testing::internal::Mutex::critical_section_"
+          }
+        },
+        {
+          "ruleId": "C6011",
+          "message": {
+            "text": "取消对 NULL 指针“ans”的引用。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                },
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 5,
+                  "endLine": 46,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stringToCharStar",
+                  "decoratedName": "?stringToCharStar@@YAPEADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 41,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "“ans”可能为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 42,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 43,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 43,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "跳过此循环(假定“k<a.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "已取消对“ans”的引用，但可能仍为 NULL"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C6386",
+          "message": {
+            "text": "写入 \"ans\" 时缓冲区溢出。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                },
+                "region": {
+                  "startLine": 46,
+                  "startColumn": 5,
+                  "endLine": 46,
+                  "endColumn": 14
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "stringToCharStar",
+                  "decoratedName": "?stringToCharStar@@YAPEADV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "codeFlows": [
+            {
+              "threadFlows": [
+                {
+                  "locations": [
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 41,
+                            "startColumn": 11
+                          }
+                        },
+                        "message": {
+                          "text": "“ans”是一个 0 字节数组"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 42,
+                            "startColumn": 9
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 43,
+                            "startColumn": 12
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 43,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "进入此循环(假定“k<a.length()”)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 44,
+                            "startColumn": 16
+                          }
+                        }
+                      },
+                      "importance": "unimportant"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 43,
+                            "startColumn": 34
+                          }
+                        },
+                        "message": {
+                          "text": "“k”可能等于 1"
+                        }
+                      },
+                      "kinds": [
+                        "declaration"
+                      ],
+                      "importance": "essential"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 43,
+                            "startColumn": 19
+                          }
+                        },
+                        "message": {
+                          "text": "退出此循环(“k<a.length()”为 false)"
+                        }
+                      },
+                      "kinds": [
+                        "branch"
+                      ],
+                      "importance": "important"
+                    },
+                    {
+                      "location": {
+                        "physicalLocation": {
+                          "artifactLocation": {
+                            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                          },
+                          "region": {
+                            "startLine": 46,
+                            "startColumn": 12
+                          }
+                        },
+                        "message": {
+                          "text": "写入到“ans”无效(位于其可写范围之外)"
+                        }
+                      },
+                      "kinds": [
+                        "usage"
+                      ],
+                      "importance": "essential"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26451",
+          "message": {
+            "text": "算术溢出: 使用 4 字节值上的运算符 - ，然后将结果转换到 8 字节值。在调用运算符 - 之前将值强制转换为宽类型可避免溢出(io.2)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+                },
+                "region": {
+                  "startLine": 230,
+                  "startColumn": 26,
+                  "endLine": 230,
+                  "endColumn": 31
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "randomTestCmp",
+                  "decoratedName": "?randomTestCmp@@YAXPEAH@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "ruleId": "C26439",
+          "message": {
+            "text": "此类函数不应 throw。声明它为 \"noexcept\" (f.6)。"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/gtest-matchers.h"
+                },
+                "region": {
+                  "startLine": 335,
+                  "startColumn": 3,
+                  "endLine": 335,
+                  "endColumn": 3
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "testing::internal::MatcherBase<std::basic_string<char,std::char_traits<char>,std::allocator<char> > const &>::{ctor}",
+                  "decoratedName": "??0?$MatcherBase@AEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@internal@testing@@IEAA@$$QEAV012@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.35.32215.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/internal/gtest-port.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "198947db724d326600ee497f9a18be746efcad22ec72e91a28f35daa631a1b5a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/randomTest.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "86203ee1d13cb83be9b8498ba7912f0c32066b06f5454d8bdc8c817680b57211"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include/gtest/gtest-matchers.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c7086d0eaf3bd8d7d23c56466203aa88f14cf4375624d570620e50abea2bcbdb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/engine.h"
+          },
+          "hashes": {
+            "sha-256": "685797dbd2e475a630a8d3e31275fd482fa027730734b523e94d959ce041041a"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/include/paramparser.h"
+          },
+          "hashes": {
+            "sha-256": "6a45d3be481c0722ccb44351349ebef934ab74fa6f16291ae6d16f8a5515cd49"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest.h"
+          },
+          "hashes": {
+            "sha-256": "ca270bafac253313b0dcd3ae3a45db766aab98a1534513e3f3d76ece458b81d0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-assertion-result.h"
+          },
+          "hashes": {
+            "sha-256": "9e5c5e6d3ff7d2325c434e4ae2622cea4f9aedba0c6dc3fca266cbf56d69f64e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-message.h"
+          },
+          "hashes": {
+            "sha-256": "a417441071dc0ca0158a3b07b30299ed69b22b883e62e042c046f42382a51e9c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/custom/gtest-port.h"
+          },
+          "hashes": {
+            "sha-256": "5e06747c9e8b86e9d841fabd61c2f045b2bb1133716f127be4a963ced1c44e01"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-port-arch.h"
+          },
+          "hashes": {
+            "sha-256": "fbb76e38297555877b35b1db28094c52487b87e511d344b53f2b1016b2335de3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-death-test.h"
+          },
+          "hashes": {
+            "sha-256": "ab4c290687921aa08a9eec43a939e6b936e180da5368aed9632c016d4d8bf421"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-death-test-internal.h"
+          },
+          "hashes": {
+            "sha-256": "d6a395fb1f0a1fa2f7099fd895ab684955ba515d023fa1799d3048712421e17c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-printers.h"
+          },
+          "hashes": {
+            "sha-256": "af1a368cc80869373d2fe741a6876506864d8dfb31e648fed5ef87a7b3677350"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-internal.h"
+          },
+          "hashes": {
+            "sha-256": "5ad83a9f48b61a011adaf8bb135a3f60209177c28b3b9294b9c576d191ca03c3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-filepath.h"
+          },
+          "hashes": {
+            "sha-256": "544ce95d2e1e4b7ae17ee170f482aaa09e17d0056999c4ce7e7a6097c3a755cf"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-string.h"
+          },
+          "hashes": {
+            "sha-256": "40cd1162db218bab9934ec55ba791c50b1f1d22b2b29ae56c303751afcdc6054"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-type-util.h"
+          },
+          "hashes": {
+            "sha-256": "2d55695a6b43cd37fc9b367e2f5adfff6c90e07b32f60a6bbfa42eba73a37748"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/custom/gtest-printers.h"
+          },
+          "hashes": {
+            "sha-256": "b95afda2426e8c4f09c11d3296d522fb336b248c0da7e078388db4bb072c2166"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-param-test.h"
+          },
+          "hashes": {
+            "sha-256": "e2b3b7e13fb2b42817f6da51eafc5cd83879d0d250ea81001943388e05168739"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/internal/gtest-param-util.h"
+          },
+          "hashes": {
+            "sha-256": "66db7a8880ff97ddf7bdb08c74788b4c654f0c6a7fbeefd83eab06f52be0bdd1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-test-part.h"
+          },
+          "hashes": {
+            "sha-256": "16dbdeaf64967f74205d5cc5c246ec4eb35e262eb2879ac1a118434208ec73fe"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest-typed-test.h"
+          },
+          "hashes": {
+            "sha-256": "e4607bf400b336cc1eb3a466826d1d9ba8af59f11ab2e737cc6f063e3659b52d"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest_pred_impl.h"
+          },
+          "hashes": {
+            "sha-256": "85e850e735a42ebb5f9a01a018708c1c0b9b7d83c94b14b7d5d29512c00b6ffd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///d:/miao/school/buaa/junior(last)/se/pairprogramming/buaa_se_pairprogramming/src/googletest/include/gtest/gtest_prod.h"
+          },
+          "hashes": {
+            "sha-256": "3c6301ef533db8686e474dd5a0de4d98a31cbb630e2273f712472d1be25aa261"
+          }
+        }
+      ]
+    }
+  ]
+}

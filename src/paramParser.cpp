@@ -43,6 +43,11 @@ int *paramParser::parseParams(int argc, const char *argv[],
                         throw bugReport(PARAM_DUPLICATE);
                     } else {
                         param[curArg[1]] = 1;
+                        if (param['n'] && (param['w'] || param['c'])) {
+                            throw bugReport(PARAM_CONFLICT_N);
+                        } else if (param['w'] && param['c']) {
+                            throw bugReport(PARAM_CONFLICT_CW);
+                        }
                     }
                     if (i + 1 == argc) {
                         throw bugReport(FILE_MISSING);
@@ -190,6 +195,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
 }
 
 void paramParser::uniqueWords() {
+    tmpUniqueRawWord.clear();
     for (auto &rawWord: rawWords) {
         if (!tmpUniqueRawWord.count(rawWord)) {
             tmpUniqueRawWord.insert(rawWord);
@@ -209,18 +215,35 @@ void paramParser::uniqueWords() {
 
 void paramParser::parseWords(string words) {
     string curWord;
-    for (char c: words) {
-        if (isSingleLetter(c)) {
-            curWord += toLowercase(c);
+    for (char curChar: words) {
+        if (isSingleLetter(curChar)) {
+            curChar = toLowercase(curChar);
+            curWord += curChar;
         } else {
-            char *rawWord = (char *) malloc(curWord.size() + 1);
-            int k = 0;
-            for (k = 0; k < curWord.size(); k++) {
-                rawWord[k] = curWord[k];
+            // Divide word
+            if (curWord.length() > 0) {
+                char *rawWord = (char *) malloc(curWord.length() + 1);
+                int k = 0;
+                for (k = 0; k < curWord.length(); k++) {
+                    rawWord[k] = curWord[k];
+                }
+                rawWord[k] = 0;
+                rawWords.push_back(rawWord);
             }
-            rawWord[k] = 0;
-            rawWords.push_back(rawWord);
             curWord.clear();
         }
     }
+    // last word
+    if (curWord.length() > 0) {
+        char *rawWord = (char *) malloc(curWord.length() + 1);
+        int k = 0;
+        for (k = 0; k < curWord.length(); k++) {
+            rawWord[k] = curWord[k];
+        }
+        rawWord[k] = 0;
+        rawWords.push_back(rawWord);
+    }
+    curWord.clear();
+
+    uniqueWords();
 }
