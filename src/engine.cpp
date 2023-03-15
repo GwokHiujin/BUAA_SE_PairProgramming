@@ -17,7 +17,7 @@ using namespace std;
 
 vector<PII> graph[MAX_V][MAX_V];
 int topsortQueue[MAX_V], din[MAX_V], dist[MAX_E], topSortPath[MAX_E];
-int maxRingSize, maxPathSize;
+int maxRingSize;
 bool vis[MAX_E];
 unordered_map<char *, int> rawWordsSet;
 vector<int> path;
@@ -34,10 +34,6 @@ void init() {
     rawWordsSet.clear();
     resultVector.clear();
     memset(din, 0, sizeof(din));
-}
-
-void add(int a, int b, int c, int num) {
-    graph[a][b].push_back({c, num});
 }
 
 char *stringToCharPointer(string a) {
@@ -62,20 +58,10 @@ void buildGraph(int *options) {
             continue;
         }
         int weight = options[OP_C] ? strlen(rawWord) : 1;
-        add(rawWord[0] - 'a', rawWord[strlen(rawWord) - 1] - 'a', weight, rawWordsSet[rawWord]);
+        graph[rawWord[0] - 'a'][rawWord[strlen(rawWord) - 1] - 'a'].push_back({weight, rawWordsSet[rawWord]});
         //printf("%c %c %d %d\n", rawWord[0], rawWord[strlen(rawWord) - 1], weight, rawWordsSet[rawWord]);
         din[rawWord[strlen(rawWord) - 1] - 'a']++;
     }
-}
-
-bool checkSelfCircle() {
-    int cnt = 0;
-    for (int i = 0; i < 26; i++) {
-        if (graph[i][i].size() >= 2) {
-            cnt++;
-        }
-    }
-    return cnt < 1;
 }
 
 void deleteSelfCircle() {
@@ -155,7 +141,7 @@ void rebuildGraph(int *options) {
         for (int i = 0; i < 52; i++) {
             for (int j = 0; j < 52; j++) {
                 if (!graph[i][j].empty()) {
-                    printf("%d --> %d\n", i, j);
+                    //printf("%d --> %d\n", i, j);
                     din[j]++;
                 }
             }
@@ -164,9 +150,6 @@ void rebuildGraph(int *options) {
 }
 
 void dfsAllLinks(int s) {
-    if (resultVector.size() > 20000) {
-        return;
-    }
     if (path.size() >= 2) {
         string str;
         for (int i: path) {
@@ -249,11 +232,7 @@ void dp(int *options) {
     memset(topSortPath, -1, sizeof(topSortPath));
     if (options[OP_T]) {
         memset(dist, -0x3f, sizeof(dist));
-        for (int i = 0; i < 52; i++) {
-            if (i == options[OP_T] - 'a' || i == options[OP_T] - 'a' + 26) {
-                dist[i] = 0;
-            }
-        }
+        dist[options[OP_T] - 'a'] = dist[options[OP_T] - 'a' + 26] = 0;
     } else {
         memset(dist, 0, sizeof(dist));
     }
@@ -319,7 +298,7 @@ void dp(int *options) {
 }
 
 void getPath(int *options) {
-    printf("\n\n");
+    //printf("\n\n");
     path.clear();
     dp(options);
 
@@ -335,7 +314,6 @@ int engine(int *options, char *res[]) { // 0-25 a-z 26-end rawWords
     buildGraph(options);
 
     if (!options[OP_R]) {
-        checkSelfCircle();
         topSort();
     }
 

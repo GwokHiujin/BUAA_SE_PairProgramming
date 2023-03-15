@@ -55,7 +55,9 @@ void createData(int n, int *options) {
             int wordLen = rand() % 6 + 1;
             for (int j = 0; j < wordLen; j++) {
                 int s = rand() % 26;
-                str += (s + 'a');
+                int t = rand() % 2;
+                if (t) str += (s + 'a');
+                else str += (s + 'a');
             }
             if (!options[OP_R]) {
                 if (str.back() <= str.front()) {
@@ -95,7 +97,6 @@ void dfs(int t, int *options) {
 
 void bruteForce(int n, int *options) {
     int globalMaxAns = 0;
-    randomGlobalAns.clear();
     for (int i = 0; i < n; i++) {
         if (options[OP_J] == randomWords[i].front()) {
             continue;
@@ -166,7 +167,8 @@ void bruteForce(int n, int *options) {
 }
 
 void randomTestEngine(int n, int *options, string input) {
-    printf("options: %c %c %c\n", options[OP_H], options[OP_T], options[OP_J]);
+    printf("options:%d %d %d %c %c %c %d\n", options[OP_N], options[OP_W], options[OP_C], options[OP_H], options[OP_T],
+           options[OP_J], options[OP_R]);
     srand(time(0));
     memset(randH, -1, sizeof(randH));
     memset(randNe, 0, sizeof(randNe));
@@ -241,24 +243,24 @@ void randomTestCmp(int *options) {
         ans = realAns;
     } else {
 
-//    if (ans != randomGlobalAns.size()) {
-//        printf("    %-10s |        %-20s\n", "yours", "ans");
-//        printf("    %-10d |        %-20d\n", ans, randomGlobalAns.size());
+//        if (ans != randomGlobalAns.size()) {
+//            printf("    %-10s |        %-20s\n", "yours", "ans");
+//            printf("    %-10d |        %-20d\n", ans, randomGlobalAns.size());
 //
 //
-//        printf("------------------------------------------------------\n");
-//        printf("-----------------------ans----------------------------\n");
-//        printf("ans: %d\n", randomGlobalAns.size());
-//        for (auto &randomGlobalAn: randomGlobalAns) {
-//            printf("%s\n", randomGlobalAn.c_str());
+//            printf("------------------------------------------------------\n");
+//            printf("-----------------------ans----------------------------\n");
+//            printf("ans: %d\n", randomGlobalAns.size());
+//            for (auto &randomGlobalAn: randomGlobalAns) {
+//                printf("%s\n", randomGlobalAn.c_str());
+//            }
+//            printf("------------------------------------------------------\n");
+//            printf("-----------------------yours--------------------------\n");
+//            printf("ans: %d\n", ans);
+//            for (int i = 0; i < ans; i++) {
+//                printf("%s\n", randomResult[i]);
+//            }
 //        }
-//        printf("------------------------------------------------------\n");
-//        printf("-----------------------yours--------------------------\n");
-//        printf("ans: %d\n", ans);
-//        for (int i = 0; i < ans; i++) {
-//            printf("%s\n", randomResult[i]);
-//        }
-//    }
         ASSERT_EQ(ans, randomGlobalAns.size());
     }
     if (!options[OP_N]) {

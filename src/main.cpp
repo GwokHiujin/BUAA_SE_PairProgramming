@@ -1,14 +1,14 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <synchapi.h>
 #include <unordered_set>
 #include "include/paramParser.h"
 #include "include/engine.h"
 #include "include/output.h"
 #include "include/test.h"
-#include "api.h"
-#include "gtest/gtest.h"
+#include "include/api.h"
+#include "googletest/include/gtest/gtest.h"
+#include <synchapi.h>
 
 using namespace std;
 char *result[20005];
@@ -47,23 +47,26 @@ void test_gen_chain_char(char *words, char head, char tail, char prohibit,
     }
 }
 
+
+// parse
 TEST(Manual, T0) {
-    char *words1 = "a b \n@$%^&*";
+    char *words1 = "a B \n@$%^&*";
     char *ans1[10] = {};
     int ansLen = 0;
     test_gen_chain_all(words1, ans1, ansLen);
-    char *words2 = "words shah";
+    char *words2 = "words sHah";
     char *ans2[10] = {"words shah "};
     test_gen_chain_all(words2, ans2, 1);
 }
 
+// parse
 TEST(Manual, T1) {
-    char *words = "ast_bfd_132!4_s!dfg\n";
+    char *words = "ast_bFd_132!4_S!dfg\n";
     char *ans[10] = {"bfd dfg "};
     int ansLen = 1;
     test_gen_chain_all(words, ans, ansLen);
     get_execution_time();
-    char *words2 = "ab bc cd ac";
+    char *words2 = "ab bc cd aC";
     char *ans2[10] = {"ab bc ", "ab bc cd ", "ac cd ", "bc cd "};
     test_gen_chain_all(words2, ans2, 4);
 }
@@ -80,7 +83,7 @@ TEST(Manual, T2) {
 
 // -c
 TEST(Manual, T3) {
-    char *words = "ac cccdd ab bb be";
+    char *words = "ac cCcDd ab bb Be";
     char *ans[10] = {"ac", "cccdd"};
     int ansLen = 2;
     test_gen_chain_char(words, 0, 0, 0, false, ans, ansLen);
@@ -95,7 +98,6 @@ TEST(Manual, T4) {
     test_gen_chain_word(words, 0, 0, 0, true, ans, ansLen);
 }
 
-
 // -c -r -t
 TEST(Manual, T5) {
     char *words = "ab bc cd bdddd da\n";
@@ -106,7 +108,7 @@ TEST(Manual, T5) {
 
 // -w -r -h
 TEST(Manual, T6) {
-    char *words = "ab bc cd bd da\n";
+    char *words = "ab bc cD bd da\n";
     char *ans[10] = {"ab", "bc", "cd", "da"};
     int ansLen = 4;
     test_gen_chain_word(words, 'a', 0, 0, true, ans, ansLen);
@@ -122,7 +124,7 @@ TEST(Manual, T7) {
 
 // -w -h -t
 TEST(Manual, T8) {
-    char *words = "a ac ad d bc cd bd\n";
+    char *words = "a ac aD d bc cd bd\n";
     char *ans[10] = {"a", "ac", "cd", "d"};
     int ansLen = 4;
     test_gen_chain_word(words, 'a', 'd', 0, true, ans, ansLen);
@@ -146,7 +148,7 @@ TEST(Manual, T10) {
 
 // parseWordUnitTest -w -h -r
 TEST(Manual, T11) {
-    string input = "bbcdefg!hijklmn opq rst uvw xyz";
+    string input = "bbcdeFG!hijklmn opq rst uvw xyz";
     int argc = 6;
     char *argv[10] = {"Wordlist.exe", "-w", "input.txt", "-h", "a", "-r"};
     char *wordAns[10] = {"bbcdefg", "hijklmn", "opq", "rst", "uvw", "xyz"};
@@ -202,7 +204,7 @@ TEST(Manual, T15) {
 
 // selfCircle
 TEST(Manual, T16) {
-    char *words = "a aa@aaa\n";
+    char *words = "a AA@aAa\n";
     char *ans[10] = {"aaa", "aa", "a"};
     int ansLen = 3;
     test_gen_chain_char(words, 'a', 0, 0, true, ans, ansLen);
@@ -241,7 +243,7 @@ TEST(Manual, T19) {
 
 // repeated word
 TEST(Manual, T20) {
-    char *words = "ab ab aaa aaa bc cd#da";
+    char *words = "ab ab aAA aaa bc cd#da";
     char *ans[10] = {"aaa", "ab", "bc", "cd", "da"};
     int ansLen = 5;
     test_gen_chain_char(words, 'a', 0, 0, true, ans, ansLen);
@@ -819,6 +821,87 @@ TEST(Random, T33) {
     Sleep(1000);
     randomTestEngine(2, options, "a bb");
     randomTestCmp(options);
+}
+
+// random
+TEST(Random, T34) {
+    for (int i = 0; i < 30; i++) {
+        int a = rand() % 2, b = rand() % 2, c = rand() % 2;
+        while (a + b + c != 1) {
+            a = rand() % 2, b = rand() % 2, c = rand() % 2;
+        }
+        int options[8] = {0};
+        if (a) {
+            options[0] = 1;
+            int k = rand() % 30 + 20;
+            Sleep(1000);
+            randomTestEngine(k, options, "");
+            randomTestCmp(options);
+        } else {
+            int d = rand() % 2;
+            int e = rand() % 2;
+            int f = rand() % 2;
+            options[1] = b;
+            options[2] = c;
+            options[3] = (rand() % 26 + 'a') * d;
+            options[4] = (rand() % 26 + 'a') * e;
+            options[5] = (rand() % 26 + 'a') * f;
+            options[6] = rand() % 2;
+            Sleep(1000);
+            randomTestEngine(40, options, "");
+            //randomTestPrint();
+            randomTestCmp(options);
+            getResult();
+        }
+    }
+}
+
+// output
+TEST(Output, T0) {
+    int options[8] = {0, 1, 0, 0, 0, 0, 0, 0};
+    char *result[10] = {};
+    int ans = 0;
+    output(options, result, ans);
+}
+
+// output
+TEST(Output, T1) {
+    int options[8] = {0, 1, 0, 0, 0, 0, 0, 0};
+    char *result[10] = {"abc"};
+    int ans = 1;
+    output(options, result, ans);
+}
+
+// output
+TEST(Output, T2) {
+    int options[8] = {0, 1, 0, 0, 0, 0, 0, 0};
+    char *result[10] = {"abc", "cde"};
+    int ans = 2;
+    output(options, result, ans);
+}
+
+// output
+TEST(Output, T3) {
+    int options[8] = {1, 0, 0, 0, 0, 0, 0, 0};
+    char *result[10] = {};
+    int ans = 0;
+    output(options, result, ans);
+}
+
+// output
+TEST(Output, T4) {
+    int options[8] = {1, 0, 0, 0, 0, 0, 0, 0};
+    char *result[10] = {"abd", "dbk"};
+    int ans = 2;
+    output(options, result, ans);
+}
+
+// output
+TEST(Output, T5) {
+    int options[8] = {1, 0, 0, 0, 0, 0, 0, 0};
+    char *result[10] = {"abc cd ", "cde efg ", "a", "b", "c"};
+    int ans = 5;
+    output(options, result, ans);
 }
 
 int main(int argc, char *argv[]) {

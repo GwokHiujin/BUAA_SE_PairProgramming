@@ -77,6 +77,13 @@ build CMakeFiles/cmakeTest.dir/api.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/mi
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
   OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
 
+build CMakeFiles/cmakeTest.dir/output.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/output.cpp || cmake_object_order_depends_target_cmakeTest
+  DEP_FILE = CMakeFiles\cmakeTest.dir\output.cpp.obj.d
+  FLAGS = -g -std=gnu++14
+  INCLUDES = -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./googletest/include -ID:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/./include -isystem D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest/include -isystem D:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/googletest
+  OBJECT_DIR = CMakeFiles\cmakeTest.dir
+  OBJECT_FILE_DIR = CMakeFiles\cmakeTest.dir
+
 build CMakeFiles/cmakeTest.dir/test/unitTest.cpp.obj: CXX_COMPILER__cmakeTest_Debug D$:/miao/SCHOOL/BUAA/Junior(last)/SE/pairProgramming/BUAA_SE_PairProgramming/src/test/unitTest.cpp || cmake_object_order_depends_target_cmakeTest
   DEP_FILE = CMakeFiles\cmakeTest.dir\test\unitTest.cpp.obj.d
   FLAGS = -g -std=gnu++14
@@ -99,7 +106,7 @@ build CMakeFiles/cmakeTest.dir/test/randomTest.cpp.obj: CXX_COMPILER__cmakeTest_
 #############################################
 # Link the executable cmakeTest.exe
 
-build cmakeTest.exe: CXX_EXECUTABLE_LINKER__cmakeTest_Debug CMakeFiles/cmakeTest.dir/main.cpp.obj CMakeFiles/cmakeTest.dir/engine.cpp.obj CMakeFiles/cmakeTest.dir/paramParser.cpp.obj CMakeFiles/cmakeTest.dir/api.cpp.obj CMakeFiles/cmakeTest.dir/test/unitTest.cpp.obj CMakeFiles/cmakeTest.dir/test/randomTest.cpp.obj | lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a
+build cmakeTest.exe: CXX_EXECUTABLE_LINKER__cmakeTest_Debug CMakeFiles/cmakeTest.dir/main.cpp.obj CMakeFiles/cmakeTest.dir/engine.cpp.obj CMakeFiles/cmakeTest.dir/paramParser.cpp.obj CMakeFiles/cmakeTest.dir/api.cpp.obj CMakeFiles/cmakeTest.dir/output.cpp.obj CMakeFiles/cmakeTest.dir/test/unitTest.cpp.obj CMakeFiles/cmakeTest.dir/test/randomTest.cpp.obj | lib/libgtest.a lib/libgtest_main.a lib/libgtest.a || lib/libgtest.a lib/libgtest_main.a
   FLAGS = -g
   LINK_LIBRARIES = lib/libgtest.a  lib/libgtest_main.a  lib/libgtest.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\cmakeTest.dir
