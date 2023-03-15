@@ -63,6 +63,9 @@ TEST(Manual, T1) {
     int ansLen = 1;
     test_gen_chain_all(words, ans, ansLen);
     get_execution_time();
+    char *words2 = "ab bc cd ac";
+    char *ans2[10] = {"ab bc ", "ab bc cd ", "ac cd ", "bc cd "};
+    test_gen_chain_all(words2, ans2, 4);
 }
 
 // -w
