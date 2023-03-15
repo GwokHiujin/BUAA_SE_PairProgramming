@@ -35,9 +35,7 @@ int *paramParser::parseParams(int argc, const char *argv[],
                 case 'n':
                 case 'w':
                 case 'c':
-
                     param[curArg[1]] = 1;
-
                     break;
                 case 'r':
                     param_r = 1;
@@ -45,7 +43,6 @@ int *paramParser::parseParams(int argc, const char *argv[],
                 case 'h':
                 case 't':
                 case 'j': {
-
                     letter[curArg[1]] = 1;
                     // Lack of letter:
                     // i+1 reach the end of argv;

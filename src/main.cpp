@@ -48,17 +48,19 @@ void test_gen_chain_char(char *words, char head, char tail, char prohibit,
 }
 
 TEST(Manual, T0) {
-    char *words = "a b \n@$%^&*";
-    char *ans[10] = {};
+    char *words1 = "a b \n@$%^&*";
+    char *ans1[10] = {};
     int ansLen = 0;
-    test_gen_chain_all(words, ans, ansLen);
-    test_gen_chain_all("words hah", {}, 0);
+    test_gen_chain_all(words1, ans1, ansLen);
+    char *words2 = "words shah";
+    char *ans2[10] = {"words shah "};
+    test_gen_chain_all(words2, ans2, 1);
 }
 
 TEST(Manual, T1) {
-    char *words = "ast_bfw_132!4_s!dfg\n";
-    char *ans[10] = {};
-    int ansLen = 0;
+    char *words = "ast_bfd_132!4_s!dfg\n";
+    char *ans[10] = {"bfd dfg "};
+    int ansLen = 1;
     test_gen_chain_all(words, ans, ansLen);
     get_execution_time();
 }
@@ -70,6 +72,7 @@ TEST(Manual, T2) {
     int ansLen = 3;
     test_gen_chain_word(words, 0, 0, 0, false, ans, ansLen);
     get_execution_time();
+    test_gen_chain_word("ab ", 0, 0, 0, false, {}, 0);
 }
 
 // -c
@@ -78,6 +81,7 @@ TEST(Manual, T3) {
     char *ans[10] = {"ac", "cccdd"};
     int ansLen = 2;
     test_gen_chain_char(words, 0, 0, 0, false, ans, ansLen);
+    test_gen_chain_char("words gdfg", 0, 0, 0, false, {}, 0);
 }
 
 // -w -r
@@ -137,6 +141,7 @@ TEST(Manual, T10) {
     test_gen_chain_char(words, 'a', 'd', 'c', false, ans, ansLen);
 }
 
+// parseWordUnitTest -w -h -r
 TEST(Manual, T11) {
     string input = "bbcdefg!hijklmn opq rst uvw xyz";
     int argc = 6;
@@ -147,7 +152,40 @@ TEST(Manual, T11) {
     parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
 }
 
+// parseWordUnitTest -n
 TEST(Manual, T12) {
+    string input = "xx";
+    int argc = 3;
+    char *argv[10] = {"Wordlist.exe", "-n", "input.txt"};
+    char *wordAns[10] = {"xx"};
+    int wordAnsLen = 1;
+    int optAns[8] = {1, 0, 0, 0, 0, 0, 0, 0};
+    parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
+}
+
+// parseWordUnitTest -c -t
+TEST(Manual, T13) {
+    string input = "$%ab @@c  c!ccf #";
+    int argc = 5;
+    char *argv[10] = {"Wordlist.exe", "-c", "input.txt", "-t", "f"};
+    char *wordAns[10] = {"ab", "c", "ccf"};
+    int wordAnsLen = 3;
+    int optAns[8] = {0, 0, 1, 0, 'f', 0, 0, 0};
+    parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
+}
+
+// parseWordUnitTest -c -j -r -h
+TEST(Manual, T14) {
+    string input = "orz orz orz zso";
+    int argc = 8;
+    char *argv[10] = {"Wordlist.exe", "-c", "input.txt", "-r", "-j", "a", "-h", "o"};
+    char *wordAns[10] = {"orz", "zso"};
+    int wordAnsLen = 2;
+    int optAns[8] = {0, 0, 1, 'o', 0, 'a', 1, 0};
+    parseWordUnitTest(input, argc, argv, wordAns, wordAnsLen, optAns);
+}
+
+TEST(Manual, T15) {
     char *words = "a ac ad d ab abc cd bd\n";
     char *ans[10] = {"a", "ab", "bd", "d"};
     char *ansStr = "a\nab\nbd\nd\n";
@@ -160,15 +198,46 @@ TEST(Manual, T12) {
 }
 
 // selfCircle
-TEST(Manual, T13) {
+TEST(Manual, T16) {
     char *words = "a aa@aaa\n";
     char *ans[10] = {"aaa", "aa", "a"};
     int ansLen = 3;
     test_gen_chain_char(words, 'a', 0, 0, true, ans, ansLen);
 }
 
+// empty test_gen_chain_all
+TEST(Manual, T17) {
+    char *words = "";
+    char *ans[10] = {};
+    int ansLen = 0;
+    test_gen_chain_all(words, ans, ansLen);
+}
+
+// empty test_gen_chain_char
+TEST(Manual, T18) {
+    char *words = "";
+    char *ans[10] = {};
+    int ansLen = 0;
+    test_gen_chain_word(words, 0, 0, 0, false, ans, ansLen);
+    test_gen_chain_word(words, 'a', 0, 0, false, ans, ansLen);
+    test_gen_chain_word(words, 0, 'a', 0, false, ans, ansLen);
+    test_gen_chain_word(words, 0, 0, 'a', false, ans, ansLen);
+    test_gen_chain_word(words, 0, 0, 0, true, ans, ansLen);
+}
+
+// empty test_gen_chain_char
+TEST(Manual, T19) {
+    char *words = "";
+    char *ans[10] = {};
+    int ansLen = 0;
+    test_gen_chain_char(words, 'a', 0, 0, false, ans, ansLen);
+    test_gen_chain_char(words, 0, 'a', 0, false, ans, ansLen);
+    test_gen_chain_char(words, 0, 0, 'a', false, ans, ansLen);
+    test_gen_chain_char(words, 0, 0, 0, true, ans, ansLen);
+}
+
 // repeated word
-TEST(Manual, T14) {
+TEST(Manual, T20) {
     char *words = "ab ab aaa aaa bc cd#da";
     char *ans[10] = {"aaa", "ab", "bc", "cd", "da"};
     int ansLen = 5;
@@ -185,6 +254,9 @@ TEST(Random, T1) {
         randomTestCmp(options);
     }
     randomTestEngine(2, options, "a b");
+    randomTestCmp(options);
+
+    randomTestEngine(0, options, "");
     randomTestCmp(options);
 }
 
