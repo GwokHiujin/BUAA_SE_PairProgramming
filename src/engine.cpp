@@ -323,7 +323,7 @@ void getPath(int *options) {
     dp(options);
 
     for (int i = 1; i < path.size(); i++) {
-        resultVector.push_back(rawWords[graph[path[i-1]][path[i]].front().second]);
+        resultVector.push_back(rawWords[graph[path[i - 1]][path[i]].front().second]);
     }
 }
 
