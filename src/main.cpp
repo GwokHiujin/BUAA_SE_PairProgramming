@@ -16,7 +16,7 @@ vector<char *> rawWords;
 
 void test_gen_chain_all(const char *words, char *ans[], int ansLen) {
     char **testRes = (char **) malloc(20005);
-    int testLen = gen_chains_all(words, 0, testRes);
+    int testLen = gen_chains_all(words, testRes);
 
     for (int i = 0; i < testLen; i++) {
         printf("%s\n", testRes[i]);
@@ -30,7 +30,7 @@ void test_gen_chain_all(const char *words, char *ans[], int ansLen) {
 void test_gen_chain_word(char *words, char head, char tail, char prohibit,
                          bool enable_loop, char *ans[], int ansLen) {
     char **testRes = (char **) malloc(20005);
-    int testLen = gen_chain_word(words, 0, testRes, head, tail, prohibit, enable_loop);
+    int testLen = gen_chain_word(words, testRes, head, tail, prohibit, enable_loop);
     ASSERT_EQ(testLen, ansLen);
     for (int i = 0; i < ansLen; i++) {
         ASSERT_EQ(strcmp(ans[i], testRes[i]), 0);
@@ -40,7 +40,7 @@ void test_gen_chain_word(char *words, char head, char tail, char prohibit,
 void test_gen_chain_char(char *words, char head, char tail, char prohibit,
                          bool enable_loop, char *ans[], int ansLen) {
     char **testRes = (char **) malloc(20005);
-    int testLen = gen_chain_char(words, 0, testRes, head, tail, prohibit, enable_loop);
+    int testLen = gen_chain_char(words, testRes, head, tail, prohibit, enable_loop);
     ASSERT_EQ(testLen, ansLen);
     for (int i = 0; i < ansLen; i++) {
         ASSERT_EQ(strcmp(ans[i], testRes[i]), 0);

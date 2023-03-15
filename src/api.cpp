@@ -7,8 +7,7 @@ double timeCost;
 char *apiResult[20005];
 int apiLen = 0;
 
-extern "C" __declspec(dllexport) int gen_chains_all(const char *words, int len, char *result[]) {
-    len = 0;
+extern "C" __declspec(dllexport) int gen_chains_all(const char *words, char *result[]) {
     rawWords.clear();
     for (auto &i: apiResult) {
         i = nullptr;
@@ -20,22 +19,20 @@ extern "C" __declspec(dllexport) int gen_chains_all(const char *words, int len, 
     parser.parseWords(words);
     int options[8] = {0};
     options[OP_N] = 1;
-    len = engine(options, result);
+    apiLen = engine(options, result);
     clock_t t2 = clock();
     timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
 
 
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < apiLen; i++) {
         apiResult[i] = result[i];
     }
-    apiLen = len;
-    return len;
+    return apiLen;
 }
 
 extern "C" __declspec(dllexport) int
-gen_chain_word(const char *words, int len, char *result[], char head, char tail, char prohibit,
+gen_chain_word(const char *words, char *result[], char head, char tail, char prohibit,
                bool enable_loop) {
-    len = 0;
     rawWords.clear();
     for (auto &i: apiResult) {
         i = nullptr;
@@ -51,22 +48,21 @@ gen_chain_word(const char *words, int len, char *result[], char head, char tail,
     options[OP_T] = tail;
     options[OP_J] = prohibit;
     options[OP_R] = enable_loop;
-    len = engine(options, result);
+    apiLen = engine(options, result);
     clock_t t2 = clock();
     timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
 
 
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < apiLen; i++) {
         apiResult[i] = result[i];
     }
-    apiLen = len;
-    return len;
+    return apiLen;
 }
 
 extern "C" __declspec(dllexport) int
-gen_chain_char(const char *words, int len, char *result[], char head, char tail, char prohibit,
+gen_chain_char(const char *words, char *result[], char head, char tail, char prohibit,
                bool enable_loop) {
-    len = 0;
+    apiLen = 0;
     rawWords.clear();
     for (auto &i: apiResult) {
         i = nullptr;
@@ -82,17 +78,16 @@ gen_chain_char(const char *words, int len, char *result[], char head, char tail,
     options[OP_T] = tail;
     options[OP_J] = prohibit;
     options[OP_R] = enable_loop;
-    len = engine(options, result);
+    apiLen = engine(options, result);
 
     clock_t t2 = clock();
     timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
 
 
-    for (int i = 0; i < len; i++) {
+    for (int i = 0; i < apiLen; i++) {
         apiResult[i] = result[i];
     }
-    apiLen = len;
-    return len;
+    return apiLen;
 }
 
 extern "C" __declspec(dllexport) double get_execution_time() {
