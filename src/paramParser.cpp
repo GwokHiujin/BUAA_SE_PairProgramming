@@ -43,6 +43,11 @@ int *paramParser::parseParams(int argc, const char *argv[],
                         throw bugReport(PARAM_DUPLICATE);
                     } else {
                         param[curArg[1]] = 1;
+                        if (param['n'] && (param['w'] || param['c'])) {
+                            throw bugReport(PARAM_CONFLICT_N);
+                        } else if (param['w'] && param['c']) {
+                            throw bugReport(PARAM_CONFLICT_CW);
+                        }
                     }
                     if (i + 1 == argc) {
                         throw bugReport(FILE_MISSING);
