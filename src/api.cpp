@@ -26,6 +26,7 @@ extern "C" __declspec(dllexport) int gen_chains_all(const char *words) {
         timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
     } catch (bugReport &e) {
         e.errorReport();
+        return e.getErrorFlag();
     }
 
     return apiLen;
@@ -55,6 +56,7 @@ gen_chain_word(const char *words, char head, char tail, char prohibit, bool enab
         timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
     } catch (bugReport &e) {
         e.errorReport();
+        return e.getErrorFlag();
     }
 
     return apiLen;
@@ -84,6 +86,7 @@ gen_chain_char(const char *words, char head, char tail, char prohibit, bool enab
         timeCost = (double) (t2 - t1) / CLOCKS_PER_SEC;
     } catch (bugReport &e) {
         e.errorReport();
+        return e.getErrorFlag();
     }
 
     return apiLen;
