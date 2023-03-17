@@ -1,12 +1,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include <synchapi.h>
 #include "include/bugReport.h"
 #include "include/paramParser.h"
 #include "include/engine.h"
 #include "include/output.h"
-#include "include/test.h"
 
 using namespace std;
 char *result[20005];

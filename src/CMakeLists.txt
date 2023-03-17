@@ -4,6 +4,10 @@ cmake_minimum_required(VERSION 3.12)
 project(cmakeTest)
 set(CMAKE_CXX_STANDARD 14)
 #生成可执行程序 语法:add_executable(可执行程序名 要编译的cpp)
-add_executable(cmakeTest main.cpp engine.cpp bugReport.cpp paramParser.cpp output.cpp api.cpp test/unitTest.cpp test/randomTest.cpp)
+add_executable(cmakeTest main.cpp engine.cpp bugReport.cpp paramParser.cpp output.cpp)
 include_directories(./include)
+
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -O0")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O0")
+
 #add_library(cmakeTest SHARED main.cpp engine.cpp bugReport.cpp paramParser.cpp output.cpp api.cpp test/unitTest.cpp test/randomTest.cpp)
